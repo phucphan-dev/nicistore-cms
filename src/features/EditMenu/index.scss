@@ -1,0 +1,112 @@
+.t-editMenu {
+    background-color: $white;
+    border-radius: rem(12);
+    height: 100%;
+    border: 1px solid $anti-flash-white;
+    display: flex;
+    flex-direction: column;
+
+    &_titleWrapper {
+        padding: rem(16) rem(20);
+        flex: 1;
+    }
+
+    &_category {
+        font-weight: bold;
+        margin-right: rem(8);
+    }
+
+    &_language {
+        position: absolute;
+
+        &_select {
+            margin-top: rem(8) !important;
+            min-width: rem(150);
+        }
+    }
+
+    &_row {
+        border-top: 1px solid $anti-flash-white;
+        padding: rem(16);
+        height: 100%;
+        @include mobile-down {
+            height: auto;
+        }
+    }
+
+    &_input {
+        margin-top: rem(12);
+    }
+
+    .ant-col {
+        border-right: 1px solid $anti-flash-white;
+        @include mobile-down {
+            border-right: unset;
+        }
+
+        &:last-child {
+            border-right: unset;
+            @include mobile-down {
+                border-bottom: unset;
+            }
+        }
+    }
+
+    .ant-collapse-content {
+        background-color: $white !important;
+    }
+
+    .ant-collapse-arrow {
+        font-size: rem(18) !important;
+    }
+
+    &_heading {
+        .ant-typography {
+            @include desktop-up {
+                @include font-base(26, 32);
+            }
+
+            @include mobile-down {
+                @include font-base(24, 40);
+            }
+        }
+    }
+
+    &_menu {
+        &_title {
+            @include text-overflow(1);
+        }
+    }
+
+    .ant-tree {
+        height: auto;
+    }
+
+    .ant-typography {
+        color: $quartz;
+    }
+
+    .ant-typography-danger {
+        color: $red-orange;
+    }
+}
+
+.draggable-tree {
+    .ant-tree-node-content-wrapper.ant-tree-node-selected {
+        background-color: transparent;
+    }
+
+    .ant-tree-treenode {
+        padding-top: rem(7);
+        padding-bottom: rem(7);
+
+        &-selected {
+            background-color: rgba($yellow-green, 0.2);
+        }
+    }
+
+    .ant-tree-switcher {
+        align-self: center;
+        width: rem(16);
+    }
+}

@@ -1,0 +1,11 @@
+.p-notfound {
+    max-width: 80%;
+    margin: rem(80) auto;
+    text-align: center;
+
+    &_image {
+        max-width: rem(400);
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

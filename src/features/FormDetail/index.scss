@@ -1,0 +1,104 @@
+.renderFormField {
+    &_languageInput {
+        position: relative;
+    
+        &_menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transition: all $transition linear;
+            border-radius: rem(4);
+            background-color: $white;
+            box-shadow: rgb(33 33 52 / 20%) 0 3px 4px;
+    
+            &-open {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    &_dropdownSelect {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 rem(8) rem(4);
+
+        &_inputs {
+            flex: 1;
+        }
+    }
+
+    &_loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: rem(16) 0;
+    }
+}
+
+.p-forms {
+    &_content {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: rem(8);
+            height: 100%;
+            top: 0;
+            background-color: $spanish-gray;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+    }
+
+    &_fields {
+        position: relative;
+        margin: rem(48) auto 0;
+        width: rem(110);
+        text-align: center;
+        height: rem(40);
+        line-height: rem(40);
+        border-radius: rem(20);
+        background: $white;
+        z-index: 1;
+        margin-bottom: rem(16);
+        font-weight: bolder;
+        font-size: rem(16);
+    }
+
+    &_table {
+        tr {
+            vertical-align: top;
+    
+            td {
+                padding: rem(6) rem(12);
+    
+                &:first-child {
+                    text-transform: capitalize;
+                }
+    
+                p {
+                    font-size: rem(14);
+                    margin-bottom: 0;
+                    color: $black;
+                    font-weight: bold;
+                }
+
+                .success {
+                    color: $yellow-green;
+                }
+
+                .label {
+                    color: $gray;
+                }
+            }
+        }
+    }
+}

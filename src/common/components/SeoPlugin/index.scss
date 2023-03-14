@@ -1,0 +1,50 @@
+.seoPlugin {
+    $root: &;
+    position: relative;
+
+    &_sideBar {
+        background-color: #fff;
+        padding: rem(24) rem(16);
+        border-radius: rem(4);
+        box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+        margin-bottom: rem(8);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &-item {
+            @include adjust-flex(space-between, center);
+            margin-bottom: rem(12);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &_comment {
+        padding: rem(12) rem(16);
+        border: 1px solid $gainsboro;
+        background-color: $white;
+        margin-top: rem(8);
+        border-radius: rem(4);
+        max-height: rem(600);
+        overflow-y: auto;
+        @include scrollbars(8, $gainsboro, transparent);
+
+        &_author {
+            text-align: right;
+        }
+    }
+
+    &_btnGroup {
+        button {
+            margin-top: rem(8);
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}

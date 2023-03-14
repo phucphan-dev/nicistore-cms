@@ -1,0 +1,24 @@
+.t-unauthlayout {
+    position: relative;
+
+    &_row {
+        height: 100%;
+    }
+
+    &_background {
+        height: 30vh;
+        position: relative;
+        @include tablet-up {
+            height: 100vh;
+        }
+
+        img {
+            height: 100%;
+            left: 0;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.t-menuManagement {
+    &_input {
+        margin-top: rem(16);
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}

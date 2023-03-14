@@ -1,0 +1,100 @@
+.m-statusLabel {
+    $root: &;
+
+    &_wrapper {
+        display: inline-block;
+        padding: rem(6) rem(14);
+        border-radius: rem(4);
+
+        &-draft {
+            color: $sea-blue;
+            background-color: $alice-blue;
+        }
+
+        &-waiting {
+            color: $bronze;
+            background-color: $almond;
+        }
+
+        &-approved {
+            color: $deep-moss-green;
+            background-color: $honeydew;
+        }
+
+        &-bigger {
+            display: block;
+            padding: rem(16);
+            font-size: rem(16);
+            font-weight: 400;
+        }
+    }
+}
+
+.btn {
+    &-saveDraft {
+        color: $sea-blue !important;
+        border-color: $sea-blue !important;
+        background-color: $alice-blue !important;
+    }
+
+    &-sendApprove {
+        color: $bronze !important;
+        border-color: $bronze !important;
+        background-color: $almond !important;
+    }
+
+    &-approved {
+        color: $deep-moss-green !important;
+        border-color: $deep-moss-green !important;
+        background-color: $honeydew !important;
+    }
+}
+
+.m-statusLabel_handle {
+    $root: &;
+    display: inline-block;
+    padding: rem(6) rem(14);
+    border-radius: rem(4);
+
+    &-waiting {
+        color: $sea-blue;
+        background-color: $alice-blue;
+    }
+
+    &-processing {
+        color: $bronze;
+        background-color: $almond;
+    }
+
+    &-done {
+        color: $deep-moss-green;
+        background-color: $honeydew;
+    }
+
+    &-bigger {
+        display: block;
+        padding: rem(16);
+        font-size: rem(16);
+        font-weight: 400;
+    }
+
+    &_btn {
+        &-waiting {
+            color: $sea-blue !important;
+            border-color: $sea-blue !important;
+            background-color: $alice-blue !important;
+        }
+    
+        &-processing {
+            color: $bronze !important;
+            border-color: $bronze !important;
+            background-color: $almond !important;
+        }
+    
+        &-done {
+            color: $deep-moss-green !important;
+            border-color: $deep-moss-green !important;
+            background-color: $honeydew !important;
+        }
+    }
+}

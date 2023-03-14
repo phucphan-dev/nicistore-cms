@@ -1,0 +1,184 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(221, 221, 221);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: aliceblue;
+}
+
+.toolbar {
+    display: flex;
+    padding: 12px 4px;
+    align-items: center;
+    border-bottom: 1px solid rgba(221, 221, 221);
+}
+
+.toolbar.selected {
+    background-color: #f7f7f7;
+}
+
+.siderWrapper {
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    width: 17.143rem;
+    font-size: 12px;
+    border-right: 1px solid rgba(221, 221, 221);
+}
+
+.siderWrapper :global(.ant-spin-container) {
+    height: 100%;
+    overflow: auto;
+}
+
+.contentWrapper {
+    position: relative;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.contentWrapper :global(.ant-spin-container) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.contentBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 4px;
+}
+
+.contentBody {
+    position: relative;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.content.vertical {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    padding-bottom: 24px;
+}
+
+.contentHead {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.contentHead div {
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+
+.contentHead div::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 32px;
+    top: 5px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #9f9f9f;
+}
+
+.contentHead div::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 32px;
+    top: 12px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #9f9f9f;
+}
+
+.contentHead div:not(:last-child) {
+    border-right: 1px solid rgba(221, 221, 221);
+}
+
+.contentHead .name {
+    flex-grow: 1;
+    padding-left: 3.6rem;
+    margin-right: 16px;
+}
+
+.contentHead .name.descending::after {
+    border-top-color: #1f1f1f;
+}
+
+.contentHead .name.descending::before {
+    border-bottom-color: #9f9f9f;
+}
+
+.contentHead .name.ascending::after {
+    border-top-color: #9f9f9f;
+}
+
+.contentHead .name.ascending::before {
+    border-bottom-color: #1f1f1f;
+}
+
+.contentHead .date {
+    flex-basis: 18%;
+}
+
+.contentHead .date.descending::after {
+    border-top-color: #1f1f1f;
+}
+
+.contentHead .date.descending::before {
+    border-bottom-color: #9f9f9f;
+}
+
+.contentHead .date.ascending::after {
+    border-top-color: #9f9f9f;
+}
+
+.contentHead .date.ascending::before {
+    border-bottom-color: #1f1f1f;
+}
+
+.contentHead .size {
+    flex-basis: 14%;
+    margin-left: 16px;
+}
+
+.contentHead .size.descending::after {
+    border-top-color: #1f1f1f;
+}
+
+.contentHead .size.descending::before {
+    border-bottom-color: #9f9f9f;
+}
+
+.contentHead .size.ascending::after {
+    border-top-color: #9f9f9f;
+}
+
+.contentHead .size.ascending::before {
+    border-bottom-color: #1f1f1f;
+}

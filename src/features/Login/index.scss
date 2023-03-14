@@ -1,0 +1,15 @@
+.p-login {
+    @include un-authorized-layout;
+
+    &_recaptcha {
+        margin-top: rem(30);
+        display: flex;
+        justify-content: center;
+    }
+
+    &_language {
+        position: fixed;
+        top: rem(24);
+        right: rem(24);
+    }
+}

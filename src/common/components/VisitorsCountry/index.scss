@@ -1,0 +1,77 @@
+.t-visitorsCountry {
+    background: $white;
+    border-radius: rem(12);
+    padding: rem(16);
+    height: 100%;
+
+    &_header {
+        padding-bottom: rem(20);
+        border-bottom: 1px solid $azureish-white;
+        @include adjust-flex(space-between, center);
+
+        @include mobile-down {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &-date {
+            max-width: rem(256);
+            @include mobile-down {
+                margin-top: rem(8);
+            }
+        }
+    }
+
+    &_wrapMap {
+        padding: rem(16);
+        justify-content: space-between;
+    }
+
+    &_map {
+        position: relative;
+    }
+
+    .point {
+        width: 2.42%;
+        height: 1.14%;
+        position: absolute;
+        left: 10%;
+        top: 50%;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+
+        &.hn {
+            left: 46.3%;
+            top: 11.3%;
+            background: $medium-aquamarine;
+        }
+
+        &.dn {
+            top: 46.4%;
+            left: 72.4%;
+            background: $lavender-floral;
+        }
+
+        &.hcm {
+            top: 85.28%;
+            left: 61.3%;
+            background: $blueberry;
+        }
+    }
+
+    &_glossary {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+
+        > .ant-space:not(:first-child) {
+            margin-top: rem(16);
+        }
+
+        .ant-progress-bg {
+            height: rem(12) !important;
+            border-radius: rem(6) !important;
+        }
+    }
+}

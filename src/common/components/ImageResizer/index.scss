@@ -1,0 +1,58 @@
+
+.file {
+    cursor: pointer;
+    display: inline-block;
+    font-size: rem(14);
+    height: rem(40);
+    position: relative;
+
+    input {
+        margin: 0;
+        min-width: rem(10);
+        opacity: 0;
+    }
+
+    &-name {
+        left: rem(16);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+    &-custom {
+        background-color: $white;
+        border: 0.075rem solid $cool-black;
+        border-radius: 0.25rem;
+        color: $cool-black;
+        height: rem(40);
+        left: 0;
+        line-height: 1.5;
+        padding: rem(8) rem(16);
+        position: absolute;
+        right: 0;
+        top: 0;
+        user-select: none;
+        user-select: none;
+        user-select: none;
+        user-select: none;
+        z-index: 1;
+
+        &::before {
+            background-color: $cool-black;
+            border: 0.075rem solid $cool-black;
+            border-radius: 0 rem(4) rem(4) 0;
+            bottom: -0.075rem;
+            color: $white;
+            content: 'Browse';
+            display: block;
+            height: rem(40);
+            line-height: 1.5;
+            padding: rem(8) rem(16);
+            position: absolute;
+            right: -0.075rem;
+            top: -0.075rem;
+            z-index: 6;
+        }
+    }
+}

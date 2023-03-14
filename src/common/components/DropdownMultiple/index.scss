@@ -1,0 +1,19 @@
+.m-dropdownMultiple {
+    &_wraptab {
+        margin-top: rem(4);
+        display: flex;
+        max-width: 100%;
+    }
+
+    &_tab {
+        padding-top: rem(4) !important;
+        padding-bottom: rem(4) !important;
+    }
+
+    .m-dropdownMultiple_tab {
+        display: inline-flex;
+        max-width: 100%;
+        align-items: center;
+    }
+
+}

@@ -1,0 +1,48 @@
+.seoSection {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: rem(8);
+        height: 100%;
+        top: 0;
+        background-color: $spanish-gray;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 0;
+    }
+
+    &_label {
+        position: relative;
+        margin: rem(48) auto 0;
+        width: rem(110);
+        text-align: center;
+        height: rem(40);
+        line-height: rem(40);
+        border-radius: rem(20);
+        background: $white;
+        z-index: 1;
+        margin-bottom: rem(16);
+        font-weight: bolder;
+        font-size: rem(16);
+    }
+
+    &_input {
+        margin: rem(8) 0;
+    }
+
+    &_upload {
+        margin: rem(8) 0;
+
+        .ant-upload.ant-upload-select {
+            margin: rem(8) 0;
+        }
+    }
+
+    &_title {
+        &-error {
+            color: $red !important;
+        }
+    }
+}

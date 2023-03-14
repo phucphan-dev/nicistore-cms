@@ -1,0 +1,96 @@
+.t-activityLogsCard {
+    &_dot {
+        width: rem(20);
+        height: rem(20);
+        border-radius: 50%;
+        border: 1px solid $air-force-blue;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: '';
+            background-color: $air-force-blue;
+            width: rem(12);
+            height: rem(12);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &_avatar {
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &_title {
+        margin-top: rem(16);
+        text-transform: capitalize;
+    }
+    
+    &_panel {
+        margin-top: rem(8);
+        border-radius: rem(12);
+        padding: rem(12);
+        background-color: $white-smoke;
+    }
+}
+
+.t-activityLogs {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    &_header {
+        padding-bottom: rem(20);
+        border-bottom: 1px solid $azureish-white;
+        flex-shrink: 0;
+    }
+
+    &_timeline {
+        position: relative;
+        flex-grow: 1;
+        padding: rem(16) 0;
+        margin-top: rem(28);
+        @include scrollbars(10, $gainsboro, transparent);
+        overflow-y: auto;
+        min-height: rem(300);
+    }
+
+    &_list {
+        position: absolute;
+        height: 100%;
+        left: rem(30);
+        top: rem(28);
+        width: 90%;
+    }
+
+    .ant-timeline-item {
+        &-tail {
+            transform: translateX(-50%);
+            border-left: 1px dashed $air-force-blue;
+        }
+
+        &-label {
+            width: calc(100px - 12px) !important;
+            text-align: left !important;
+        }
+
+        &-tail {
+            left: 100px !important;
+        }
+
+        &-head {
+            left: 100px !important;
+            top: 18.5px;
+        }
+        
+        &-content {
+            left: calc(100px - 4px) !important;
+            width: calc(100% - 100px - 14px) !important;
+            top: -43.25px !important;
+        }
+    }
+}

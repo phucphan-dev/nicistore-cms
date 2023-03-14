@@ -1,0 +1,222 @@
+@use 'sass:math';
+
+@mixin text-overflow ($number: 2) {
+    display: flex;
+    -webkit-line-clamp: ($number);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin aspect-ratio($width: 1, $height: 1) {
+    padding-bottom: ($height / $width) * 100%;
+}
+
+@mixin transition($value) {
+    transition: $value;
+}
+
+@mixin scrollbars($size: 12,
+$thumb-color: $dim-gray,
+$track-color: $anti-flash-white,
+$border-radius-thumb: 5,
+$border-thumb: 2) {
+    &::-webkit-scrollbar {
+        width: rem($size);
+        height: rem($size);
+        margin-right: rem(10);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb-color;
+        border-radius: rem($border-radius-thumb);
+        border: rem($border-thumb) solid $track-color;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track-color;
+    }
+}
+
+@mixin font-base($font-size: 16, $line-height: 24) {
+    font-size: rem($font-size);
+    line-height: rem($line-height);
+}
+
+@mixin style-bg-color() {
+    &-bg-white {
+        background-color: $white;
+    }
+}
+
+@mixin style-font-weight() {
+    &-100 {
+        font-weight: 100;
+    }
+
+    &-200 {
+        font-weight: 200;
+    }
+
+    &-300 {
+        font-weight: 300;
+    }
+
+    &-400 {
+        font-weight: normal;
+    }
+
+    &-500 {
+        font-weight: 500;
+    }
+
+    &-600 {
+        font-weight: 600;
+    }
+
+    &-700 {
+        font-weight: bold;
+    }
+
+    &-800 {
+        font-weight: 800;
+    }
+
+    &-900 {
+        font-weight: 900;
+    }
+}
+
+@mixin style-general() {
+    &-uppercase {
+        text-transform: uppercase;
+    }
+
+    &-capitalize {
+        text-transform: capitalize;
+    }
+
+    &-underline {
+        text-decoration: underline;
+    }
+
+    &-italic {
+        font-style: italic;
+    }
+
+    &-center {
+        text-align: center;
+    }
+
+    &-justify {
+        text-align: justify;
+    }
+}
+
+@mixin reset-button {
+    appearance: none;
+    background-color: none;
+    border: 0;
+    outline: none;
+}
+
+@mixin list-style-none {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin adjust-flex($justify-content: center, $align-item: center) {
+    align-items: $align-item;
+    display: flex;
+    justify-content: $justify-content;
+}
+
+$colors-design: (
+    'white': $white,
+    'black': $black,
+);
+
+@mixin style-color {
+    @each $name, $color in $colors-design {
+        &-#{$name} {
+            color: $color;
+        }
+    }
+}
+
+@mixin un-authorized-layout {
+    position: relative;
+
+    &_form {
+        position: relative;
+        width: 100%;
+
+        &_input {
+            position: relative;
+
+            .ant-input-prefix {
+                margin-right: rem(18);
+            }
+            
+            .ant-form-item-explain-error {
+                @include font-base(14, 18);
+                color: $red;
+            }
+        }
+    }
+
+    &_logo {
+        margin: auto;
+        width: rem(200);
+
+        @include mobile-down {
+            max-width: rem(120);
+        }
+    }
+
+    &_context {
+        @include adjust-flex(center, center);
+        height: 100%;
+        padding-left: rem(16);
+        padding-right: rem(16);
+        @include mobile-up {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 80%;
+            width: rem(520);
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &_heading {
+        h2 {
+            color: $cool-black;
+            letter-spacing: 0.01em;
+            line-height: rem(44);
+            margin-bottom: 0;
+        }
+    }
+
+    &_desc {
+        .ant-typography {
+            @include font-base(16, 23);
+            color: $black;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+    }
+
+    &_link {
+        @include adjust-flex(center, center);
+        color: $eerie-black;
+        font-size: rem(12);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: rem(18);
+        
+        .ant-typography {
+            color: $yellow-green;
+        }
+    }
+}

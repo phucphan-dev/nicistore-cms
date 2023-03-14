@@ -1,0 +1,22 @@
+.m-modalConfirm {
+    background-color: $white;
+    font-size: rem(20);
+
+    &_close {
+        position: absolute;
+        top: rem(24);
+        right: rem(24);
+    }
+
+    &_content {
+        padding: rem(40) rem(16);
+        display: flex;
+        gap: rem(16);
+        align-items: center;
+    }
+
+    &_controls {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

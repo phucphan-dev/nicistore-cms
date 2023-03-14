@@ -1,0 +1,71 @@
+.a-image {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 100%;
+    position: relative;
+    transition: $transition-long ease;
+    width: 100%;
+
+    img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &-inherit {
+        img {
+            object-fit: inherit;
+        }
+    }
+  
+    &-initial {
+        img {
+            object-fit: initial;
+        }
+    }
+  
+    &-contain {
+        img {
+            object-fit: contain;
+        }
+    }
+
+    &-logo {
+        @include aspect-ratio(119, 80);
+    }
+
+    &-1x1 {
+        @include aspect-ratio(1, 1);
+    }
+
+    &-3x2 {
+        @include aspect-ratio(3, 2);
+    }
+
+    &-4x3 {
+        @include aspect-ratio(4, 3);
+    }
+
+    &-16x9 {
+        @include aspect-ratio(16, 9);
+    }
+
+    &-9x16 {
+        @include aspect-ratio(9, 16);
+    }
+
+    &-436x200 {
+        @include aspect-ratio(436, 200);
+    }
+
+    &-264x176 {
+        @include aspect-ratio(264, 176);
+    }
+    
+    &-206x438 {
+        @include aspect-ratio(206, 438);
+    }
+}

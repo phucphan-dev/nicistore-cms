@@ -1,0 +1,160 @@
+.t-pagetable {
+    position: relative;
+
+    &_head {
+        display: flex;
+        width: 100%;
+    }
+
+    &_wrap {
+        .ant-btn-icon-only {
+            width: 24px;
+            height: 24px;
+
+            > * {
+                font-size: 0.9em;
+            }
+        }
+
+        .ant-pagination-options {
+            .ant-select-selection-item {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .filterTable {
+        position: relative;
+
+        &_head {
+            background-color: $white;
+            padding: 0 rem(11);
+            cursor: pointer;
+            border-radius: rem(5);
+            border: rem(1) solid $spanish-gray;
+            height: rem(36);
+        }
+
+        &_options {
+            position: absolute;
+            background-color: $white;
+            padding: rem(11);
+            border-radius: rem(5);
+            z-index: 4;
+            min-width: rem(300);
+            margin-top: rem(4);
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: rgba($black, 0.1) 0 1px 4px;
+
+            .ant-select {
+                width: 100%;
+            }
+
+            .ant-btn {
+                width: 100%;
+            }
+
+            &-open {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    .filterTableColumn {
+        position: relative;
+        flex-shrink: 0;
+
+        &_head {
+            background-color: $white;
+            padding: 0 rem(11);
+            cursor: pointer;
+            border-radius: rem(5);
+            border: rem(1) solid $spanish-gray;
+            height: rem(36);
+        }
+
+        &_options {
+            position: absolute;
+            background-color: $white;
+            padding: rem(11);
+            border-radius: rem(5);
+            z-index: 4;
+            margin-top: rem(11);
+            opacity: 0;
+            visibility: hidden;
+            right: 0;
+            left: 0;
+            box-shadow: rgba($black, 0.1) 0 1px 4px;
+
+            .ant-space {
+                width: 100%;
+            }
+
+            &-open {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    .filtersDataTable {
+        transition: $transition linear;
+
+        &_tagList {
+            margin-top: rem(-8);
+
+            .edit-tag {
+                line-height: rem(32);
+                background: $honeydew;
+                color: $yellow-green;
+                padding-right: 12px;
+                padding-left: 12px;
+                border-radius: 4px;
+                border-style: solid;
+                border-width: 1px;
+                border-color: $honeydew;
+                font-weight: bold;
+                font-size: rem(14);
+                margin: rem(8) 0 0 rem(8);
+            }
+        }
+    }
+
+    .ant-pagination {
+        &-prev,
+        &-item,
+        &-next,
+        &-jump-next,
+        &-jump-prev {
+            order: 2;
+        }
+
+        &-options {
+            order: 1;
+            margin-right: auto;
+            margin-left: 0;
+        }
+    }
+
+    &_deleteRecordModal,
+    &_deleteLanguageModal {
+        .ant-modal-footer,
+        .ant-modal-confirm-btns {
+            flex-direction: row-reverse;
+            @include adjust-flex(flex-start, center);
+        }
+
+        .ant-btn + .ant-btn {
+            margin-left: 0;
+            margin-right: rem(8);
+        }
+    }
+
+    &_top_action {
+        display: flex;
+        gap: rem(12);
+    }
+}

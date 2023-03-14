@@ -1,0 +1,28 @@
+.t-keywords {
+    background: $white;
+    border-radius: rem(12);
+    padding: rem(16);
+
+    &_header {
+        padding-bottom: rem(20);
+        border-bottom: 1px solid $azureish-white;
+        flex-shrink: 0;
+        margin-bottom: rem(20);
+    }
+
+    &_list {
+        margin: rem(-8);
+        @include adjust-flex(flex-start, flex-start);
+        flex-wrap: wrap;
+
+        &-item {
+            padding: rem(8);
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+                transition: opacity $transition linear;
+            }
+        }
+    }
+}

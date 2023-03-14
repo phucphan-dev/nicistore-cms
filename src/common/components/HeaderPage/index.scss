@@ -1,0 +1,59 @@
+.t-headerPage {
+    $root: &;
+    background-color: transparent;
+    padding: rem(24) rem($main-wrapper-layout) rem(40);
+    transition: $transition;
+
+    @include max-desktop-down {
+        padding-left: rem($main-wrapper-layout-medium);
+        padding-right: rem($main-wrapper-layout-medium);
+    }
+    @include desktop-down {
+        padding-left: rem($main-wrapper-layout-small);
+        padding-right: rem($main-wrapper-layout-small);
+    }
+
+    &-fixed {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: var(--sidebar-width);
+        box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+        left: var(--sidebar-width);
+        box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+        z-index: $z-header;
+        background-color: $white;
+        padding: 0 rem(24);
+
+        #{$root} {
+            &_wrapper {
+                display: flex;
+                height: rem(64);
+                align-items: center;
+            }
+
+            &_content {
+                flex-grow: 1;
+                align-items: center;
+                margin-left: rem(16);
+            }
+        }
+    }
+
+    &_wrapper {
+        transition: $transition;
+        background-color: transparent;
+        height: fit-content;
+        padding: 0;
+        line-height: unset;
+    }
+
+    &_buttonBack {
+        padding: 0;
+    }
+
+    &_content {
+        display: flex;
+        justify-content: space-between;
+    }
+}

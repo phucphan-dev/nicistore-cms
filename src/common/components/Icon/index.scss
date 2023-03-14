@@ -1,0 +1,142 @@
+.a-icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    margin: auto;
+  
+    &-12 {
+        height: rem(12);
+        width: rem(12);
+    }
+  
+    &-13 {
+        height: rem(13);
+        width: rem(13);
+    }
+  
+    &-14 {
+        height: rem(14);
+        width: rem(14);
+    }
+  
+    &-16 {
+        height: rem(16);
+        width: rem(16);
+    }
+  
+    &-18 {
+        height: rem(18);
+        width: rem(18);
+    }
+  
+    &-20 {
+        height: rem(20);
+        width: rem(20);
+    }
+  
+    &-22 {
+        height: rem(22);
+        width: rem(22);
+    }
+  
+    &-24 {
+        height: rem(24);
+        width: rem(24);
+    }
+  
+    &-28 {
+        height: rem(28);
+        width: rem(28);
+    }
+  
+    &-30 {
+        height: rem(30);
+        width: rem(30);
+    }
+  
+    &-32 {
+        height: rem(32);
+        width: rem(32);
+    }
+  
+    &-40 {
+        height: rem(40);
+        width: rem(40);
+    }
+  
+    &-48 {
+        height: rem(48);
+        width: rem(48);
+    }
+  
+    &-60 {
+        height: rem(60);
+        width: rem(60);
+    }
+  
+    &-120 {
+        height: rem(120);
+        width: rem(120);
+  
+        @include mobile-down {
+            height: rem(60);
+            width: rem(60);
+        }
+    }
+  
+    &-100 {
+        height: rem(100);
+        width: rem(100);
+  
+        @include mobile-down {
+            height: rem(90);
+            width: rem(90);
+        }
+    }
+  
+    &-80 {
+        height: rem(80);
+        width: rem(80);
+    }
+  
+    &-vietnam {
+        background-image: url('~common/assets/icons/ic_vn_flag.svg');
+    }
+  
+    &-english {
+        background-image: url('~common/assets/icons/ic_en_flag.svg');
+    }
+
+    &-edit {
+        background-image: url('~common/assets/icons/ic_edit_draft.svg');
+    }
+
+    &-filter {
+        background-image: url('~common/assets/icons/ic_filter.svg');
+    }
+
+    &-duplicate {
+        background-image: url('~common/assets/icons/ic_duplicate.svg');
+    }
+
+    &-next {
+        background-image: url('~common/assets/icons/ic_next.svg');
+    }
+
+    &-nextBlue {
+        background-image: url('~common/assets/icons/ic_nextBlue.svg');
+    }
+
+    &-desktop {
+        background-image: url('~common/assets/icons/ic_desktop.svg');
+    }
+
+    &-tablet {
+        background-image: url('~common/assets/icons/ic_tablet.svg');
+    }
+
+    &-mobile {
+        background-image: url('~common/assets/icons/ic_mobile.svg');
+    }
+}

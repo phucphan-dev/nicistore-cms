@@ -1,0 +1,9 @@
+.role-table-cell {
+    td {
+        padding: rem(8) !important;
+
+        &:first-child {
+            padding-left: rem(24) !important;
+        }
+    }
+}

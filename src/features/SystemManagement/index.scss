@@ -1,0 +1,63 @@
+.p-system {
+    &_tabs {
+        height: 100%;
+        border-radius: rem(8);
+        overflow: hidden;
+
+        .ant-tabs-nav-list {
+            width: 100%;
+        }
+
+        .ant-tabs {
+            &-nav {
+                display: block !important;
+                width: rem(250);
+                background-color: $white;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    border-right: 1px solid #f0f0f0;
+                }
+
+                &-wrap {
+                    overflow: auto !important;
+                }
+            }
+
+            &-tab {
+                flex: 1;
+                margin-top: 0 !important;
+            }
+
+            &-content {
+                &-holder {
+                    position: relative;
+                    background-color: $white;
+                    border-left: 0 !important;
+                    margin-left: 0 !important;
+                }
+                position: absolute;
+                height: calc(100% - rem(32));
+                width: 100%;
+                padding: rem(16) rem(16) rem(16) 0;
+                overflow-y: auto;
+            }
+        }
+    }
+
+    &_general {
+        &_space {
+            width: 100%;
+        }
+
+        &_submit {
+            @include adjust-flex(flex-end); 
+        }
+
+    }
+}

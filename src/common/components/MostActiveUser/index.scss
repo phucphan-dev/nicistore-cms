@@ -1,0 +1,25 @@
+.t-mostActiveUser {
+    background: $white;
+    border-radius: rem(12);
+    padding: rem(16);
+
+    &_header {
+        padding-bottom: rem(20);
+        border-bottom: 1px solid $azureish-white;
+        flex-shrink: 0;
+        margin-bottom: rem(20);
+    }
+
+    &_list {
+        @include adjust-flex(flex-start, center);
+        @include scrollbars(4);
+        overflow-x: auto;
+        margin: 0 rem(-8);
+        padding-bottom: rem(8);
+
+        &-item {
+            padding: 0 rem(8);
+            cursor: pointer;
+        }
+    }
+}

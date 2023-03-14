@@ -1,0 +1,62 @@
+.p-pageTemplates { 
+    &_card {
+        $card: &;
+        overflow: hidden;
+        transition: all $transition linear;
+
+        .ant-card-body {
+            border-top: 1px solid $anti-flash-white;
+            padding: rem(16);
+        }
+
+        &_img .ant-image {
+            transition: all $transition linear;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            @include aspect-ratio(9, 16);
+
+            img {
+                height: 100%;
+                left: 0;
+                object-fit: contain;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }        
+        }
+
+        &_btnGroup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &_meta {
+            @include adjust-flex();
+            flex-direction: row-reverse;
+
+            .ant-card-meta-avatar {
+                padding-right: 0;
+                padding-left: rem(16);
+            }
+
+            .ant-card-meta-detail {
+                flex: 1;
+            }
+        }
+
+        &:hover {
+            box-shadow: 0 rem(7) rem(14) $black025,0 rem(5) rem(5) $black022;
+
+            #{$card}_btnGroup {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}

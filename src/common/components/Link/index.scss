@@ -1,0 +1,9 @@
+.a-link {
+    font-family: inherit;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.7;
+        transition: opacity $transition linear;
+    }
+}

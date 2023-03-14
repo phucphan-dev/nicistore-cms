@@ -1,0 +1,79 @@
+.a-input {
+    $root: &;
+    position: relative;
+    width: 100%;
+
+    &-search {
+        #{$root}_container {
+            @include adjust-flex();
+            background-color: $white;
+            border-radius: rem(5);
+            padding: 0 rem(16);
+            border: rem(1) solid $spanish-gray;
+            height: rem(36);
+            max-width: 0;
+            overflow: hidden;
+        }
+
+        #{$root}_input {
+            border: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: $transition linear;
+            background-color: transparent;
+            padding: 0;
+
+            &-show {
+                opacity: 1;
+                visibility: visible;
+                padding: 0 rem(11);
+            }
+            
+            &:focus {
+                box-shadow: none;
+                outline: none;
+                border: 0;
+            }
+        }
+    }
+
+    &-show {
+        #{$root}_container {
+            padding: 0 rem(12);
+            max-width: 100%;
+        }
+    }
+  
+    &_errorMessage {
+        @include font-base(12, 18);
+        color: $red;
+        margin-top: rem(4);
+        display: block;
+    }
+  
+    &_label {
+        margin-bottom: rem(8);
+    }
+
+    &_container {
+        position: relative;
+        transition: $transition linear;
+    }
+
+    &-bottomBorder {
+        #{$root}_container {
+            border-bottom: 1px solid $spanish-gray !important;
+        }
+
+        #{$root}_input {
+            border: 0 !important;
+
+            &::placeholder {
+                @include font-base(12, 18);
+                color: $spanish-gray;
+                font-weight: 500;
+            }
+        }
+    }
+}
+

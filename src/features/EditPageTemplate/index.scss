@@ -1,0 +1,295 @@
+.p-editPageTemplate {
+    $root: &;
+    position: relative;
+
+    .ant-upload-picture-card-wrapper {
+        .ant-upload-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ant-upload-list-picture-card-container {
+            width: rem(230);
+            height: rem(200);
+        }
+
+        .ant-upload.ant-upload-select-picture-card {
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            border: 0;
+        }
+    }
+
+    &_sideBar {
+        background-color: #fff;
+        padding: rem(24) rem(16);
+        border-radius: rem(4);
+        box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+        margin-bottom: rem(8);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &-item {
+            @include adjust-flex(space-between, center);
+            margin-bottom: rem(12);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &_comment {
+        padding: rem(12) rem(16);
+        border: 1px solid $gainsboro;
+        background-color: $glitter;
+        margin-top: rem(8);
+        border-radius: rem(4);
+    }
+
+    &_btnGroup {
+        button {
+            margin-top: rem(8);
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &_block {
+        overflow: hidden;
+    }
+
+    &_blockItem {
+        position: relative;
+        margin-bottom: rem(12);
+        background-color: transparent;
+        border: 0;
+
+        &:first-child {
+            margin-top: rem(12);
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: rem(8);
+            height: 100%;
+            top: 100%;
+            background-color: $gainsboro;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &:last-child,
+        &:only-child {
+            &::before {
+                width: 0;
+                height: 0;
+            }
+        }
+    }
+
+    &_blockHeader {
+        @include adjust-flex(space-between, center);
+        flex: 1;
+    }
+
+    &_switch {
+        @include adjust-flex(flex-start, flex-start);
+
+        .ant-switch {
+            background-image: unset;
+            background: $sunset-orange;
+        }
+
+        .ant-switch-checked {
+            background: $emerald;
+        }
+    }
+
+    &_switchLabel {
+        color: $sunset-orange;
+        margin-left: rem(4);
+
+        &-checked {
+            color: $emerald;
+        }
+    }
+
+    &_seoBox {
+        margin: rem(12) 0;
+        @include adjust-flex(flex-start, flex-start);
+        flex-direction: column;
+
+        &-title {
+            color: $medium-blue;
+            font-size: rem(18);
+        }
+
+        &-url {
+            color: $la-salle-green;
+        }
+
+        &-description {
+            color: $davys-grey2;
+            @include font-base(13, 18);
+
+            span {
+                color: $gray;
+            }
+        }
+
+        &-checked {
+            box-shadow: rgb(32 33 36 / 28%) 0 1px 6px;
+            border-radius: rem(8);
+            background-color: $white;
+            padding: rem(16);
+            #{$root}_seoBox-url {
+                color: $davys-grey2;
+                order: 1;
+            }
+            #{$root}_seoBox-title {
+                order: 2;
+            }
+            #{$root}_seoBox-description {
+                order: 3;
+                @include font-base(14, 20);
+
+                span {
+                    display: none;
+                }
+            }
+        }
+
+    }
+
+    .t-detailpage_input {
+        margin: rem(8) 0;
+    }
+
+    .t-detailpage_upload {
+        margin: rem(8) 0;
+
+        .ant-upload.ant-upload-select {
+            margin: rem(8) 0;
+        }
+    }
+
+    &_mediaSocial {
+        margin: rem(12) 0;
+    }
+
+    &_thumbnailBox {
+        border-radius: rem(10);
+        border: rem(1) solid $glitter;
+        max-width: rem(436);
+        margin: 0 auto;
+
+        &-img {
+            position: relative;
+            @include aspect-ratio(436, 200);
+        }
+
+        &-content {
+            padding: rem(16);
+        }
+
+        &-url {
+            color: $davys-grey;
+        }
+    }
+
+    .t-repeatersection {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: rem(8);
+            height: 100%;
+            top: 0;
+            background-color: $spanish-gray;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        &-loading {
+            min-height: rem(60);
+        }
+
+        &_label {
+            position: relative;
+            margin: rem(48) auto 0;
+            width: rem(110);
+            text-align: center;
+            height: rem(40);
+            line-height: rem(40);
+            border-radius: rem(20);
+            background: $white;
+            z-index: 1;
+            margin-bottom: rem(16);
+            font-weight: bolder;
+            font-size: rem(16);
+        }
+
+        &_collapse {
+            position: relative;
+            background-color: transparent;
+            border: 0;
+
+            // .ant-collapse-item {
+            //     margin-top: rem(16);
+            //     box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+            //     transition: $transition;
+            //     border: 1px solid rgb(33 33 52 / 10%);
+            //     background-color: $white-smoke;
+            //     border-radius: rem(8) !important;
+            //     position: relative;
+            //     z-index: 1;
+            // }
+
+            // .ant-collapse {
+            //     border: 0;
+            // }
+        }
+    }
+}
+
+.o-validString {
+    $root: &;
+    @include adjust-flex(flex-start, center);
+    margin-bottom: rem(8);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &_icon {
+        width: rem(16);
+        height: rem(16);
+        background-color: $bronze;
+        border-radius: 50%;
+    }
+
+    &_text {
+        margin-left: rem(8);
+    }
+
+    &-isValid {
+        #{$root}_icon {
+            background-color: $amazon;
+        }
+    }
+}

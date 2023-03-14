@@ -1,0 +1,68 @@
+.m-subjectCounter {
+    $root: &;
+    position: relative;
+    transition: all linear $transition;
+    width: 100%;
+    background-color: var(--background);
+    padding-top: 100%;
+    border-radius: rem(12);
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 rem(1) rem(2) rem(-2) #00000029, 0 rem(3) rem(6) #0000001f, 0 rem(5) rem(12) rem(4) #00000017;
+    }
+
+    &_wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: rem(20);
+    }
+    
+    &_title {
+        @include font-base(14, 17);
+        color: $white;
+    }
+
+    &_number {
+        color: $white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include font-base(28, 34);
+        @include tablet-down {
+            @include font-base(23, 32);
+        }
+    
+        @include mobile-down {
+            @include font-base(20, 28);
+        }
+    }
+
+    &_button {
+        border-radius: rem(20);
+        height: rem(36);
+        padding: rem(2);
+        width: 100%;
+        color: $white;
+        @include adjust-flex();
+        @include reset-button();
+
+        &:hover {
+            #{$root}_button_icon {
+                margin-left: rem(16);
+            }
+        }
+
+        &_icon {
+            transform: translateX(20px);
+            transition: $transition;
+        }
+    }
+}

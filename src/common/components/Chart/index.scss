@@ -1,0 +1,117 @@
+.o-chart {
+    $root: &;
+
+    &_title {
+        font-weight: bold;
+        text-transform: uppercase;
+        @include font-base(16,28);
+    }
+
+    &_panel {
+        min-width: rem(450);
+        @include small-mobile {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &.empty {
+            min-width: auto;
+        }
+    }
+
+    &_legendCustom {
+        display: flex;
+
+        &_item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            p {
+                color: $taupe-gray;
+            }
+        }
+
+        &_container {
+            display: flex;
+            padding: 0;
+            align-items: center;
+            width: 100%;
+            margin: rem(20) 0 0;
+        }
+    }
+
+    &-doughnut {
+        @include adjust-flex(flex-start, center);
+        #{$root}_legendCustom {
+            justify-content: space-between;
+        }
+        #{$root}_legendCustom_container {
+            display: block;
+            padding-left: rem(32);
+            @include mobile-down {
+                margin-bottom: rem(24);
+            }
+            border-left: 1px solid $gainsboro;
+        }
+        #{$root}_legendCustom_item {
+            align-items: flex-start;
+            margin-bottom: rem(20);
+            @include mobile-down {
+                margin-bottom: rem(12);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            span {
+                color: $taupe-gray;
+                @include font-base(14, 20);
+                margin-top: rem(3);
+            }
+
+            p {
+                color: $black;
+                @include font-base(20, 20);
+                font-weight: 600;
+                margin-top: rem(4);
+            }
+        }
+        #{$root}_legendCustom_box {
+            display: inline-block;
+            margin-right: rem(10);
+            height: rem(16);
+            width: rem(16);
+            border-radius: 50%;
+        }
+    }
+
+    &-bar {
+        #{$root}_legendCustom_box {
+            display: inline-block;
+            width: rem(30);
+            height: rem(16);
+            border-radius: 2px;
+            margin-right: 4px;
+        }
+        #{$root}_legendCustom_item {
+            margin-right: 12px;
+
+            p {
+                @include font-base(11, 18);
+                font-weight: 700;
+            }
+        }
+        #{$root}_legendCustom_container {
+            justify-content: center;
+        }
+    }
+
+    &-line {
+        #{$root}_panel {
+            transform: translateX(-10px);
+        }
+    }
+}

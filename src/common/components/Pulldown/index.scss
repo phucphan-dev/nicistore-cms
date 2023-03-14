@@ -1,0 +1,182 @@
+.m-pulldown {
+    $root: &;
+    position: relative;
+
+    &_header {
+        align-items: center;
+        background: $white;
+        border: 1px solid $gainsboro;
+        border-radius: rem(4);
+        cursor: pointer;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+
+        #{$root}-sm & {
+            max-height: rem(48);
+        }
+
+        #{$root}-md & {
+            max-height: rem(55);
+        }
+
+        #{$root}-lg & {
+            max-height: rem(60);
+        }
+
+        &_content {
+            align-items: center;
+            display: flex;
+            flex-grow: 1;
+            height: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            #{$root}-normal & {
+                color: $eerie-black;
+                @include font-base(17, 23);
+            }
+
+            #{$root}-sm & {
+                @include font-base(16, 22);
+                padding: rem(16) rem(24) rem(16);
+            }
+
+            #{$root}-md & {
+                padding: rem(16) rem(24) rem(16);
+            }
+
+            #{$root}-lg & {
+                padding: rem(11) rem(12);
+            }
+
+            span {
+                @include text-overflow(1);
+            }
+        }
+    }
+
+    &-disabled {
+        #{$root}_header {
+            cursor: auto;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    }
+
+    &_placeholder {
+        #{$root}-normal & {
+            color: $eerie-black;
+            @include font-base(16, 24);
+        }
+
+        #{$root}-sm & {
+            @include font-base(16, 22);
+        }
+    }
+
+    &_fn {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+
+        #{$root}-normal & {
+            margin-right: rem(16);
+        }
+    }
+
+    &_arrow {
+        display: block;
+        height: rem(20);
+        position: relative;
+        width: rem(20);
+        border-radius: rem(5);
+
+        &::after {
+            background-position: center !important;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: $transition;
+            width: 100%;
+
+            #{$root}-normal & {
+                background: url('~common/assets/icons/ic_caret_down_gray.svg') no-repeat;
+            }
+        }
+
+        &.opened {
+            &::after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &_clear {
+        margin-right: rem(3);
+        padding: rem(6);
+        position: relative;
+
+        &::after {
+            background: $dim-gray;
+            content: '';
+            height: rem(14);
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: rem(1);
+            margin-right: rem(3);
+        }
+    }
+
+    &_wrapper {
+        background: $white;
+        margin-top: rem(4);
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+    }
+
+    &_list {
+        border: 1px solid $gainsboro;
+        color: $dim-gray;
+        margin: 0;
+        max-height: rem(161);
+        overflow-y: auto;
+        padding: 0;
+        @include font-base(17, 23);
+
+        #{$root}-normal & {
+            // @include scroll-bars(4, $languid-lavender, transparent, 4, 2);
+        }
+    }
+
+    &_item {
+        cursor: pointer;
+        list-style: none;
+        padding: rem(11) rem(12);
+        transition: all $transition linear;
+        white-space: normal;
+
+        &:first-child {
+            margin-top: rem(4);
+        }
+
+        &:hover {
+            #{$root}-normal & {
+                background-color: rgba($gainsboro, 0.6);
+                color: $dim-gray;
+            }
+        }
+
+        &.none {
+            color: $dim-gray;
+            text-align: center;
+        }
+    }
+}

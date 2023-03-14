@@ -1,0 +1,22 @@
+.t-redirectManagement {
+    &_createModal_form,
+    &_updateModal_form {
+        @include adjust-flex(flex-start, flex-start);
+        margin: rem(-8);
+
+        @include mobile-down {
+            display: block;
+        }
+    }
+
+    &_createModal_input,
+    &_updateModal_input {
+        padding: rem(8);
+        flex: 1;
+    }
+
+    &_createModal_checkbox,
+    &_updateModal_checkbox {
+        margin-top: rem(8);
+    }
+}

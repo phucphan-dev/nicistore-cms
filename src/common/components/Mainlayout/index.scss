@@ -1,0 +1,91 @@
+.t-mainlayout {
+    &_sidebar {
+        &_header {
+            align-items: center;
+            background: $white;
+            display: flex;
+            height: rem(64);
+            padding: 0 rem(20);
+
+            .ant-image {
+                flex-shrink: 0;
+            }
+        }
+
+        &_branch {
+            color: $cool-black;
+            font-size: rem(16) !important;
+            margin-bottom: 0 !important;
+            margin-left: rem(8);
+            opacity: 1;
+            transition: $transition;
+
+            &-hidden {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        &_menu {
+            padding-top: rem(26);
+            padding-bottom: rem(26);
+            height: calc(100% - 4rem);
+        }
+    }
+
+    &_hamburger {
+        &:hover,
+        &:focus {
+            border-color: $cool-black;
+            color: $cool-black;
+        }
+    }
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+
+        &_item {
+            align-items: center;
+            display: flex;
+
+            .ant-space-item {
+                align-items: center;
+                display: flex;
+            }
+        }
+    }
+
+    &_content {
+        padding: 0 0 rem(48);
+        height: 100vh;
+        max-height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        @include scrollbars();
+    }
+
+    &_wrapper {
+        position: relative;
+        flex-grow: 1;
+        margin-left: rem($main-wrapper-layout);
+        margin-right: rem($main-wrapper-layout);
+        margin-top: rem(88);
+
+        @include max-desktop-down {
+            margin-left: rem($main-wrapper-layout-medium);
+            margin-right: rem($main-wrapper-layout-medium);
+        }
+
+        @include desktop-down {
+            margin-left: rem($main-wrapper-layout-small);
+            margin-right: rem($main-wrapper-layout-small);
+        }
+  
+        .ant-spin-nested-loading,
+        .ant-spin-container {
+            height: 100%;
+        }
+    }
+}

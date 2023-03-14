@@ -1,0 +1,202 @@
+.p-home {
+    padding: rem(40) rem(20);
+    @include mobile-down {
+        padding: rem(32) rem(16);
+    }
+
+    &_userLabel {
+        border-radius: rem(12);
+        padding: rem(12) rem(20);
+        background-color: $lavender;
+        margin-bottom: rem(40);
+        @include tablet-down {
+            margin-bottom: rem(32);
+        }
+        @include mobile-down {
+            margin-bottom: rem(16);
+        }
+    }
+
+    &_filter {
+        @include adjust-flex(space-between, center);
+        @include mobile-down {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &_select {
+            @include adjust-flex(flex-start, center);
+
+            &-wrapper {
+                margin-left: rem(20);
+                @include mobile-down {
+                    margin-left: rem(12);
+                }
+            }
+        }
+
+        &-datePicker {
+            max-width: rem(256);
+            @include mobile-down {
+                margin-top: rem(8);
+            }
+        }
+    }
+
+    &_spin {
+        height: 100%;
+    }
+
+    &_chart {
+        background: $white;
+        border-radius: rem(12);
+        padding: rem(16);
+
+        .o-chart {
+            overflow-x: auto;
+        }
+
+        .o-chart_legendCustom_container {
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+            margin-left: rem(-20);
+            margin-right: rem(-20);
+            padding-left: rem(54);
+
+            @include mobile-down {
+                padding-left: rem(32);
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                padding-bottom: rem(16);
+            }
+
+            p {
+                display: none;
+            }
+
+            span {
+                @include font-base(14, 20);
+                font-weight: 500;
+                color: $raisin-black;
+            }
+        }
+
+        .o-chart_legendCustom_item {
+            padding: 0 rem(20);
+        }
+
+        .o-chart_legendCustom_box {
+            width: rem(12);
+            height: rem(12);
+            border-radius: 50%;
+        }
+
+        .o-chart_legendCustom_item {
+            @include mobile-down {
+                margin-bottom: rem(8);
+
+                &:first-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            &:first-child {
+                .o-chart_legendCustom_box {
+                    border-radius: unset;
+                    height: rem(3);
+                }
+
+            }
+        }
+    }
+
+    &-pageViewList {
+        @include adjust-flex(space-between, center);
+        margin-bottom: rem(28);
+        @include tablet-down {
+            margin-bottom: rem(16);
+        }
+
+        @include mobile-down {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &-filter {
+            @include adjust-flex(flex-start, center);
+            @include mobile-down {
+                margin-top: rem(8);
+            }
+        }
+
+        &-item {
+            background-color: $white;
+            border-radius: rem(6);
+            padding: rem(6) rem(24);
+            cursor: pointer;
+            @include font-base(14, 20);
+            font-weight: 500;
+            color: $eerie-black;
+
+            &:hover,
+            &-active {
+                background-color: $anti-flash-white;
+                transition: opacity $transition linear;
+
+            }
+        }
+    }
+
+    &_rateList {
+        @include adjust-flex(flex-start, center);
+
+        &-item {
+            @include font-base(14, 20);
+            font-weight: 600;
+            margin-left: rem(8);
+
+            &-increase {
+                color: $medium-aquamarine;
+            }
+
+            &-decrease {
+                color: $red-orange;
+            }
+        }
+    }
+
+    &_pageTitle {
+        .a-link {
+            color: $persian-blue;
+        }
+    }
+
+
+    &_triangle {
+        width: 0;
+        height: 0;
+        border-left: rem(5) solid transparent;
+        border-right: rem(5) solid transparent;
+        border-bottom: rem(5) solid $medium-aquamarine;
+
+        &-decrease {
+            transform: rotate(180deg);
+            border-bottom-color: $red-orange;
+        }
+    }
+
+    &_right {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &_activities {
+        flex-grow: 1;
+        margin-bottom: rem(16);
+    }
+
+    &_keywords {
+        flex-shrink: 0;
+    }
+}

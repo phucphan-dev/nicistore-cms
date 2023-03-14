@@ -1,0 +1,123 @@
+.o-selectFile {
+    $root: &;
+
+    &_wrapper {
+        padding: rem(16);
+        border: 1px solid $gray-x11;
+        border-radius: rem(8);
+
+        &.multiple {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            min-height: rem(190);
+            gap: rem(16);
+
+            #{$root}_imgWrapper {
+                width: rem(190);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+
+    &_content {
+        max-width: 100%;
+        @include adjust-flex();
+
+        &_draggable {
+            flex: 1;
+            min-width: 0;
+        }
+
+        &_add {
+            flex: 0 0 rem(190);
+        }
+    }
+
+    &_dnd {
+        &_droppable {
+            display: flex;
+            padding: rem(8);
+            overflow: auto;
+            @include scrollbars(8, $gainsboro, transparent);
+        }
+
+        &_draggable {
+            margin: 0 rem(8) 0 0;
+            user-select: none;
+        }
+    }
+
+    &_imgWrapper {
+        position: relative;
+        height: rem(190);
+        overflow: hidden;
+        
+        .ant-image {
+            position: absolute;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: rem(8);
+            overflow: hidden;
+
+            img {
+                object-fit: cover;
+                width: auto;
+                height: 100%;
+            }
+        }
+    }
+
+    &_btnGroup {
+        position: absolute;
+        bottom: rem(8);
+        left: 50%;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        transition: $transition all ease;
+        transform: translateX(-50%);
+
+        .ant-btn {
+            width: rem(32);
+            height: rem(32);
+            padding: rem(4);
+            margin: 0 rem(8);
+            background-color: $white;
+            border: 1px solid $gray-x11;
+            transition: $transition;
+
+            .anticon {
+                transition: $transition;
+            }
+
+            &:hover {
+                border-color: $cool-black;
+                background-color: $white;
+
+                .anticon {
+                    color: $cool-black !important;
+                }
+            }
+
+            &:focus {
+                border-color: $cool-black;
+                background-color: $white;
+            }
+        }
+    }
+
+    &_empty {
+        height: 100%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+    }
+}

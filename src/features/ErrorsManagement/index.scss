@@ -1,0 +1,57 @@
+.p-errorManagement {
+    $root: &;
+    position: relative;
+
+    .t-repeatersection {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: rem(8);
+            height: 100%;
+            top: 0;
+            background-color: $spanish-gray;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        &-loading {
+            min-height: rem(60);
+        }
+
+        &_label {
+            position: relative;
+            margin: rem(48) auto 0;
+            width: rem(100);
+            text-align: center;
+            height: rem(40);
+            line-height: rem(40);
+            border-radius: rem(20);
+            background: $white;
+            z-index: 1;
+        }
+
+        &_collapse {
+            position: relative;
+            background-color: transparent;
+            border: 0;
+
+            // .ant-collapse-item {
+            //     margin-top: rem(16);
+            //     box-shadow: rgb(33 33 52 / 10%) 0 1px 4px;
+            //     transition: $transition;
+            //     border: 1px solid rgb(33 33 52 / 10%);
+            //     background-color: $white-smoke;
+            //     border-radius: rem(8) !important;
+            //     position: relative;
+            //     z-index: 1;
+            // }
+
+            // .ant-collapse {
+            //     border: 0;
+            // }
+        }
+    }
+}

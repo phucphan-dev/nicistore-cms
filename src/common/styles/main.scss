@@ -1,0 +1,83 @@
+html,
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    overflow-x: hidden;
+
+    @include max-desktop-down {
+        font-size: 12px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; //issue click in mobile flash background highligh
+}
+
+button {
+    &:focus {
+        outline: none;
+    }
+}
+
+p {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+[role='button'],
+button {
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input {
+    word-break: normal;
+}
+
+.hidden-animation {
+    visibility: hidden;
+}
+
+.overflow-hidden {
+    height: 100vh;
+}
+
+.text {
+    &-uppercase {
+        text-transform: uppercase;
+    }
+
+    &-lowercase {
+        text-transform: lowercase;
+    }
+
+    &-capitalize {
+        text-transform: capitalize;
+    }
+
+    &_center {
+        text-align: center;
+    }
+}
+
+.btn-center {
+    display: block !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center-absolute {
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+}
