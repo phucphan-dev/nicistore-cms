@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -25,29 +26,34 @@ const useInitialRender = () => {
   useDidMount(async () => {
     try {
       const token = getAccessToken();
-      await dispatch(getSystemInitialAction()).unwrap().then(async (data) => {
-        if (token) {
-          await dispatch(getProfileAction()).unwrap().then(async () => {
-            const payload = await verifyToken(token, data.passportPublicKey || '');
-            if (payload) {
-              dispatch(setRoles(payload.scopes as string[]));
-              dispatch(getAdvancedFilterAction());
-              if (location.pathname === '/login') {
-                navigator('/');
-              }
-            } else {
-              removeAccessToken();
-              removeRefreshAccessToken();
-              navigator('/login');
-            }
-            setIsDone(true);
-          }).catch(() => {
-            expiredAction();
-          });
-        } else {
-          expiredAction();
+      // await dispatch(getSystemInitialAction()).unwrap().then(async () => {
+      if (token) {
+        // await dispatch(getProfileAction()).unwrap().then(async () => {
+        //   const payload = await verifyToken(token, data.passportPublicKey || '');
+        //   if (payload) {
+        //     dispatch(setRoles(payload.scopes as string[]));
+        //     dispatch(getAdvancedFilterAction());
+        //     if (location.pathname === '/login') {
+        //       navigator('/');
+        //     }
+        //   } else {
+        //     removeAccessToken();
+        //     removeRefreshAccessToken();
+        //     navigator('/login');
+        //   }
+        //   setIsDone(true);
+        // }).catch(() => {
+        //   expiredAction();
+        // });
+        await dispatch(getProfileAction()).unwrap();
+        if (location.pathname === '/login') {
+          navigator('/');
         }
-      });
+        setIsDone(true);
+      } else {
+        expiredAction();
+      }
+      //   });
     } catch {
       expiredAction();
     }

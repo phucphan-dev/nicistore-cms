@@ -30,7 +30,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   const rolesUser = useAppSelector((state) => state.auth.roles);
   const token = getAccessToken();
 
-  const activeRoles: ActiveRoles = useMemo(() => (rolesUser.includes('*') ? ({
+  const activeRoles: ActiveRoles = useMemo(() => ((rolesUser.includes('*') || !roles) ? ({
     roleIndex: true,
     roleCreate: true,
     roleUpdate: true,

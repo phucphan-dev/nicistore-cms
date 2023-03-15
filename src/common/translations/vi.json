@@ -150,7 +150,12 @@
     "contactProblem": "Vấn đề",
     "emailTemplate": "Email template",
     "forms": "Quản lý Form",
-    "staticBlocks": "Static Blocks"
+    "staticBlocks": "Static Blocks",
+    "product": "Sản phẩm",
+    "productList": "Danh sách",
+    "productCategories": "Danh mục",
+    "productColor": "Màu sắc",
+    "productSize": "Kích thước"
   },
   "role": {
     "index": "Xem danh sách",

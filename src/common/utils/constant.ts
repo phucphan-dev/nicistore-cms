@@ -141,6 +141,16 @@ export const ROUTE_PATHS = {
   /* STATIC BLOCK */
   STATIC_BLOCK_MANAGEMENT: '/static-block-management',
   STATIC_BLOCK_DETAIL: '/static-block-detail',
+
+  /* Extends */
+  PRODUCT_MANAGEMENT: '/products',
+  PRODUCT_DETAIL: '/product-detail',
+  PRODUCT_CATEGORIES_MANAGEMENT: '/product-categories',
+  PRODUCT_CATEGORIES_DETAIL: '/product-categories-detail',
+  PRODUCT_COLORS_MANAGEMENT: '/product-color',
+  PRODUCT_COLORS_DETAIL: '/product-color-detail',
+  PRODUCT_SIZES_MANAGEMENT: '/product-size',
+  PRODUCT_SIZES_DETAIL: '/product-size-detail',
 };
 
 export const videoTypes: OptionType[] = [

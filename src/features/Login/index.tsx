@@ -41,22 +41,22 @@ const Login: React.FC = () => {
     async (data: LoginFormTypes) => loginService({
       email: data.email,
       password: data.password,
-      ggRecaptchaToken: data.token || '',
-      otpCode: data.otpCode
+      // ggRecaptchaToken: data.token || '',
+      // otpCode: data.otpCode
     }),
     {
       onSuccess: async (data) => {
-        const payload = await verifyToken(data.accessToken, systemData?.passportPublicKey || '');
-        if (payload) {
-          dispatch(setRoles(payload.scopes as string[]));
-          setAccessToken(data.accessToken);
-          setRefreshToken(data.refreshToken);
-          await dispatch(getProfileAction()).unwrap()
-            .then(() => navigate((state as { from?: string })?.from || '/')).catch(() => {
-              message.error('Đã có lỗi xảy ra!');
-            });
-          await dispatch(getAdvancedFilterAction()).unwrap();
-        }
+        // const payload = await verifyToken(data.accessToken, systemData?.passportPublicKey || '');
+        // if (payload) {
+        // dispatch(setRoles(payload.scopes as string[]));
+        setAccessToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
+        await dispatch(getProfileAction()).unwrap()
+          .then(() => navigate((state as { from?: string })?.from || '/')).catch(() => {
+            message.error('Đã có lỗi xảy ra!');
+          });
+        // await dispatch(getAdvancedFilterAction()).unwrap();
+        // }
         setLoading(false);
       },
       onError: (errors: ErrorResponse[]) => {
@@ -86,12 +86,12 @@ const Login: React.FC = () => {
 
   const loginAsync = async (data: LoginFormTypes) => {
     setLoading(true);
-    recaptchaToken.current?.reset();
-    const token = await recaptchaToken.current?.executeAsync();
+    // recaptchaToken.current?.reset();
+    // const token = await recaptchaToken.current?.executeAsync();
 
-    if (token) {
-      await mutateAsync({ ...data, token });
-    }
+    // if (token) {
+    await mutateAsync({ ...data });
+    // }
   };
 
   /* Render */
@@ -102,13 +102,13 @@ const Login: React.FC = () => {
         isLoading={loading}
         onSubmit={loginAsync}
       />
-      <ReCAPTCHA
+      {/* <ReCAPTCHA
         ref={recaptchaToken}
         size="invisible"
         theme="light"
         badge="bottomright"
         sitekey={systemData?.googleRecaptchaKey || ''}
-      />
+      /> */}
     </>
   );
 };

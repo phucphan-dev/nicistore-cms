@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { LockOutlined, MailOutlined, QrcodeOutlined } from '@ant-design/icons';
 import {
   Button, Checkbox, Select, Typography,
@@ -8,7 +9,7 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import logoImg from 'common/assets/images/logo.png';
+import logoImg from 'common/assets/images/logo.svg';
 import backgroundImg from 'common/assets/images/signin_bg.jpg';
 import Form from 'common/components/Form';
 import Icon from 'common/components/Icon';
@@ -115,7 +116,7 @@ const LoginUI: React.FC<LoginProps> = ({
                 )}
               />
             </div>
-            <div className="u-mt-24">
+            {/* <div className="u-mt-24">
               <div className="u-ml-12">
                 <Checkbox
                   checked={isTFA}
@@ -147,7 +148,7 @@ const LoginUI: React.FC<LoginProps> = ({
                   />
                 </div>
               )}
-            </div>
+            </div> */}
             <div className="p-login_form_submit u-mt-20">
               <Button
                 block

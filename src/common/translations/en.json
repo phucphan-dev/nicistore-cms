@@ -150,7 +150,12 @@
     "contactProblem": "Contact Problems",
     "emailTemplate": "Email template",
     "forms": "Form Management",
-    "staticBlocks": "Static Blocks"
+    "staticBlocks": "Static Blocks",
+    "product": "Products",
+    "productList": "List",
+    "productCategories": "Categories",
+    "productColor": "Colors",
+    "productSize": "Sizes"
   },
   "role": {
     "index": "View list",

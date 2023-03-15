@@ -14,7 +14,7 @@ import {
 
 const loginService = async (params: LoginParamsTypes): Promise<LoginResponseTypes> => {
   const res = await axiosInstance.post('auth/login', params);
-  return res.data.data;
+  return res.data;
 };
 
 export const refreshTokenService = async (): Promise<LoginResponseTypes> => {

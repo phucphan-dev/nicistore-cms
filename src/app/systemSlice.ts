@@ -20,6 +20,25 @@ const initialState: SystemState = {
   showModalError: false,
   defaultWebsiteLanguage: 'vi',
   languageOptions: [],
+  initialData: {
+    websiteLocales: {
+      vi: {
+        isDefault: true,
+        active: true,
+        text: 'Vietnamese'
+      }
+    },
+    media: {},
+    paginationOptions: {
+      numbersOfRows: [{
+        numbers: 10,
+        isDefault: true
+      }]
+    },
+    importTemplates: {
+      redirect: ''
+    }
+  }
 };
 
 export const getSystemInitialAction = createAsyncThunk<

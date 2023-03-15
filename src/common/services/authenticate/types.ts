@@ -1,8 +1,8 @@
 export type LoginParamsTypes = {
   email: string;
   password: string;
-  ggRecaptchaToken: string;
-  otpCode?: string;
+  // ggRecaptchaToken: string;
+  // otpCode?: string;
 };
 
 export type UserInfoTypes = {
