@@ -656,5 +656,8 @@
     "configLocale": "ngôn ngữ",
     "configSeoGeneral": "thông tin SEO",
     "with": "với"
+  },
+  "product": {
+    "stock": "Tồn kho"
   }
 }

@@ -7,6 +7,8 @@ import ProductColorsDetail from 'extends/ProductColors/Detail';
 import ProductColorsManagement from 'extends/ProductColors/Management';
 import ProductSizesDetail from 'extends/ProductSizes/Detail';
 import ProductSizesManagement from 'extends/ProductSizes/Management';
+import ProductDetail from 'extends/Products/Detail';
+import ProductManagement from 'extends/Products/Management';
 import ActivityLogsManagement from 'features/ActivityLogsManagement';
 import BannerManagement from 'features/BannerManagement';
 import CMSTranslationsManagement from 'features/CMSTranslationsManagement';
@@ -494,13 +496,13 @@ const routes: RouteProps[] = [
     id: 38,
     name: 'ProductList',
     path: ROUTE_PATHS.PRODUCT_MANAGEMENT,
-    element: PageManagement,
+    element: ProductManagement,
   },
   {
     id: 39,
     name: 'ProductDetail',
     path: ROUTE_PATHS.PRODUCT_DETAIL,
-    element: PageManagement,
+    element: ProductDetail,
   },
   {
     id: 39,

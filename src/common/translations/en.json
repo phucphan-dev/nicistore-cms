@@ -656,5 +656,8 @@
     "configLocale": "language",
     "configSeoGeneral": "SEO information",
     "with": "with"
+  },
+  "product": {
+    "stock": "Stock"
   }
 }
