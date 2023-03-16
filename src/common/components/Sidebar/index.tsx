@@ -128,29 +128,26 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, collapsed, handleCollapsed
     </Menu>
   );
 
-  const renderMenuSub = (menu: MenuItem) => {
-    const hasChildren = menu.items?.some(((item) => item.role && roles.includes(item.role)));
-    if ((!hasChildren && !isAdmin) || !menu.items) {
-      return null;
-    }
-    return (
-      <Menu.SubMenu
-        title={t(menu.title)}
-        icon={menu.icon}
-        key={menu.key}
-      >
-        {menu.items.map((item) => (
-          !item.role || isAdmin || (item.role && roles.includes(item.role))) && (
-            <Menu.Item key={item.key}>
-              <Link to={item.path || ''}>
-                <span>{t(item.title)}</span>
-              </Link>
-            </Menu.Item>
-          ))}
-      </Menu.SubMenu>
-    );
-  };
-
+  // const hasChildren = menu.items?.some(((item) => item.role && roles.includes(item.role)));
+  // if ((!hasChildren && !isAdmin) || !menu.items) {
+  //   return null;
+  // }
+  const renderMenuSub = (menu: MenuItem) => (
+    <Menu.SubMenu
+      title={t(menu.title)}
+      icon={menu.icon}
+      key={menu.key}
+    >
+      {menu.items?.map((item) => (
+        !item.role || isAdmin || (item.role && roles.includes(item.role))) && (
+          <Menu.Item key={item.key}>
+            <Link to={item.path || ''}>
+              <span>{t(item.title)}</span>
+            </Link>
+          </Menu.Item>
+        ))}
+    </Menu.SubMenu>
+  );
   return (
     <div className="sideBar_wrapper">
       <Menu

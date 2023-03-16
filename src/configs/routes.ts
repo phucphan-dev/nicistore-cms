@@ -1,6 +1,12 @@
 import roles from './roles';
 
 import { ROUTE_PATHS } from 'common/utils/constant';
+import ProductCategoriesDetail from 'extends/ProductCategories/Detail';
+import ProductCategoriesManagement from 'extends/ProductCategories/Management';
+import ProductColorsDetail from 'extends/ProductColors/Detail';
+import ProductColorsManagement from 'extends/ProductColors/Management';
+import ProductSizesDetail from 'extends/ProductSizes/Detail';
+import ProductSizesManagement from 'extends/ProductSizes/Management';
 import ActivityLogsManagement from 'features/ActivityLogsManagement';
 import BannerManagement from 'features/BannerManagement';
 import CMSTranslationsManagement from 'features/CMSTranslationsManagement';
@@ -482,6 +488,55 @@ const routes: RouteProps[] = [
       update: roles.STATIC_BLOCK_UPDATE,
       create: roles.STATIC_BLOCK_STORE
     }
+  },
+  /* Extends */
+  {
+    id: 38,
+    name: 'ProductList',
+    path: ROUTE_PATHS.PRODUCT_MANAGEMENT,
+    element: PageManagement,
+  },
+  {
+    id: 39,
+    name: 'ProductDetail',
+    path: ROUTE_PATHS.PRODUCT_DETAIL,
+    element: PageManagement,
+  },
+  {
+    id: 39,
+    name: 'ProductCategories',
+    path: ROUTE_PATHS.PRODUCT_CATEGORIES_MANAGEMENT,
+    element: ProductCategoriesManagement,
+  },
+  {
+    id: 40,
+    name: 'ProductCategoriesDetail',
+    path: ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL,
+    element: ProductCategoriesDetail,
+  },
+  {
+    id: 41,
+    name: 'ProductColors',
+    path: ROUTE_PATHS.PRODUCT_COLORS_MANAGEMENT,
+    element: ProductColorsManagement,
+  },
+  {
+    id: 42,
+    name: 'ProductColorsDetail',
+    path: ROUTE_PATHS.PRODUCT_COLORS_DETAIL,
+    element: ProductColorsDetail,
+  },
+  {
+    id: 41,
+    name: 'ProductSizes',
+    path: ROUTE_PATHS.PRODUCT_SIZES_MANAGEMENT,
+    element: ProductSizesManagement,
+  },
+  {
+    id: 42,
+    name: 'ProductSizeDetail',
+    path: ROUTE_PATHS.PRODUCT_SIZES_DETAIL,
+    element: ProductSizesDetail,
   },
 ];
 

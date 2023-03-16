@@ -106,7 +106,8 @@
     "downloadSampleFile": "Tải tập tin mẫu",
     "outOf": "trên",
     "create301Redirect": "Tạo 301 Redirect",
-    "edit301Redirect": "Chỉnh sửa 301 Redirect"
+    "edit301Redirect": "Chỉnh sửa 301 Redirect",
+    "edit": "Chỉnh sửa"
   },
   "login": {
     "title": "ĐĂNG NHẬP ĐỂ QUẢN LÝ HỆ THỐNG",
@@ -150,7 +151,12 @@
     "contactProblem": "Vấn đề",
     "emailTemplate": "Email template",
     "forms": "Quản lý Form",
-    "staticBlocks": "Static Blocks"
+    "staticBlocks": "Static Blocks",
+    "product": "Sản phẩm",
+    "productList": "Danh sách",
+    "productCategories": "Danh mục",
+    "productColor": "Màu sắc",
+    "productSize": "Kích thước"
   },
   "role": {
     "index": "Xem danh sách",

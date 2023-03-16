@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Card,
   Space,
@@ -202,10 +203,10 @@ const SeoSection = forwardRef<SeoSectionActionProps, SeoSectionProps>(({
               >
                 <Space direction="vertical" size={12} style={{ width: '100%' }}>
                   <SeoDataForm />
-                  <Divider />
+                  {/* <Divider /> */}
                   <div className="seoSection_social">
-                    <MediaSocialForm method={seoMethod} socialList={socialList} />
-                    <Divider />
+                    {/* <MediaSocialForm method={seoMethod} socialList={socialList} />
+                    <Divider /> */}
                     <MetaDataForm />
                   </div>
                 </Space>

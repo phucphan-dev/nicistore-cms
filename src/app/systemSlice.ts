@@ -19,7 +19,31 @@ interface SystemState {
 const initialState: SystemState = {
   showModalError: false,
   defaultWebsiteLanguage: 'vi',
-  languageOptions: [],
+  languageOptions: [{ label: 'Vietnamese', value: 'vi' }, { label: 'English', value: 'en' }],
+  initialData: {
+    websiteLocales: {
+      vi: {
+        isDefault: true,
+        active: true,
+        text: 'Vietnamese'
+      },
+      en: {
+        isDefault: false,
+        active: true,
+        text: 'English'
+      }
+    },
+    media: {},
+    paginationOptions: {
+      numbersOfRows: [{
+        numbers: 10,
+        isDefault: true
+      }]
+    },
+    importTemplates: {
+      redirect: ''
+    }
+  }
 };
 
 export const getSystemInitialAction = createAsyncThunk<

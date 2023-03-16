@@ -153,7 +153,7 @@ const PageTable = <T extends any>({
         {enableLocale ? (
           <Space size={10}>
             <Button
-              disabled={!roles?.roleUpdate}
+              // disabled={!roles?.roleUpdate}
               icon={<EditOutlined />}
               onClick={
                 () => handleEditPage && handleEditPage(data.id, data.code, allowLocale)
@@ -161,7 +161,7 @@ const PageTable = <T extends any>({
             />
             {!tableProps?.noDeleteLanguage && (
               <Button
-                disabled={!roles?.roleDelete}
+                // disabled={!roles?.roleDelete}
                 icon={<DeleteOutlined />}
                 onClick={() => {
                   Modal.confirm({
@@ -186,7 +186,7 @@ const PageTable = <T extends any>({
           </Space>
         ) : (
           <Button
-            disabled={!roles?.roleCreate}
+            // disabled={!roles?.roleCreate}
             icon={<PlusOutlined />}
             onClick={
               () => handleCreatePage && handleCreatePage(data.id, data.code, allowLocale)
@@ -223,7 +223,7 @@ const PageTable = <T extends any>({
       align: 'center',
       render: (_name: string, data: any) => (
         <Button
-          disabled={!roles?.roleDelete}
+          // disabled={!roles?.roleDelete}
           icon={<DeleteOutlined />}
           onClick={() => {
             Modal.confirm({
