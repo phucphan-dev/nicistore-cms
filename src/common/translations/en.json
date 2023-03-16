@@ -106,7 +106,8 @@
     "downloadSampleFile": "Download sample file",
     "outOf": "out of",
     "create301Redirect": "Create 301 Redirect",
-    "edit301Redirect": "Edit 301 Redirect"
+    "edit301Redirect": "Edit 301 Redirect",
+    "edit": "Edit"
   },
   "login": {
     "title": "LOG IN TO MANAGE SYSTEM",

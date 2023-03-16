@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Typography,
   Row,
@@ -15,7 +16,7 @@ const MetaDataForm: React.FC = () => {
   return (
     <div className="seoSection_metaData">
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={24}>
           <div className="seoSection_input">
             <Typography.Text strong>
               {t('system.keywords')}
@@ -36,7 +37,7 @@ const MetaDataForm: React.FC = () => {
             />
           </div>
         </Col>
-        <Col span={12}>
+        {/* <Col span={12}>
           <div className="seoSection_input">
             <Typography.Text strong>
               Meta Robots
@@ -54,9 +55,9 @@ const MetaDataForm: React.FC = () => {
               )}
             />
           </div>
-        </Col>
+        </Col> */}
       </Row>
-      <div className="seoSection_input">
+      {/* <div className="seoSection_input">
         <Typography.Text strong>
           Structured Data
         </Typography.Text>
@@ -114,7 +115,7 @@ const MetaDataForm: React.FC = () => {
             </div>
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 };

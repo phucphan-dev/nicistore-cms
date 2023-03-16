@@ -106,7 +106,8 @@
     "downloadSampleFile": "Tải tập tin mẫu",
     "outOf": "trên",
     "create301Redirect": "Tạo 301 Redirect",
-    "edit301Redirect": "Chỉnh sửa 301 Redirect"
+    "edit301Redirect": "Chỉnh sửa 301 Redirect",
+    "edit": "Chỉnh sửa"
   },
   "login": {
     "title": "ĐĂNG NHẬP ĐỂ QUẢN LÝ HỆ THỐNG",

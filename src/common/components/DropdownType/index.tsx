@@ -22,7 +22,9 @@ export enum DropDownType {
 export type DropdownTypeKey = keyof typeof DropDownType;
 
 export type DropdownElementProps = {
-  type: DropdownTypeKey;
+  options?: OptionType[];
+  name?: string;
+  type?: DropdownTypeKey;
   locale: string;
   isValueSlug?: boolean;
   placeholder?: string;
@@ -36,7 +38,8 @@ export type DropdownElementProps = {
   multiple?: {
     allowClear?: boolean;
     defaultValue?: any;
-  }
+  },
+  error?: string;
 };
 
 export function getDropdownTypeKey(value: string) {
@@ -44,8 +47,10 @@ export function getDropdownTypeKey(value: string) {
 }
 
 export const DropdownElement: React.FC<DropdownElementProps> = ({
+  name,
   type,
-  size = 'large',
+  options,
+  size,
   locale,
   isValueSlug,
   placeholder,
@@ -56,11 +61,12 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
   hasAllOption,
   isGetOption,
   multiple,
+  error,
 }) => {
-  const dropdownType = useMemo(() => (DropDownType[type] || ''), [type]);
+  const dropdownType = useMemo(() => (type ? DropDownType[type] || '' : ''), [type]);
   const [txtSearch, setTxtSearch] = useState('');
   const [searchDebounce, setSearchDebounce] = useState('');
-  const [options, setOptions] = useState<OptionType[]>([]);
+  const [optionsData, setOptionsData] = useState<OptionType[]>(options || []);
 
   useDebounce(() => {
     setSearchDebounce(txtSearch);
@@ -68,9 +74,10 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
 
   const {
     data: dropdownList,
+    isLoading,
     fetchNextPage,
   } = useInfiniteQuery(
-    [`dropdown-${dropdownType}`, { locale, searchDebounce }],
+    [`dropdown-${dropdownType}${name ? `-${name}` : ''}`, { locale, searchDebounce }],
     ({ pageParam = 1 }) => getDropdownCodeDataService({
       locale,
       type: dropdownType,
@@ -81,6 +88,7 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
       }
     }),
     {
+      enabled: !!type,
       getNextPageParam: (lastPage) => (lastPage.meta.page + 1 <= lastPage.meta.totalPages
         ? lastPage.meta.page + 1
         : undefined),
@@ -88,7 +96,9 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
   );
 
   const { setNode } = useScrollInfinite(() => {
-    fetchNextPage();
+    if (type) {
+      fetchNextPage();
+    }
   });
 
   useEffect(() => {
@@ -97,52 +107,73 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
       ...current.data.map((val) => ({
         label: val.text,
         value: isValueSlug ? val.slug : val.id,
-      })).filter((val) => ((filterParams ? val.value.toString() !== filterParams : true)
-        && (searchDebounce
-          ? val.label.toLowerCase().includes(searchDebounce.toLowerCase()) : true)))], []);
-      setOptions((hasAllOption && !searchDebounce) ? [{ label: 'Tất cả', value: null }, ...data] : data);
+      })).filter((val) => ((filterParams ? val.value.toString() !== filterParams : true)))], []);
+      setOptionsData((hasAllOption && !searchDebounce) ? [{ label: 'Tất cả', value: null }, ...data] : data);
     }
   }, [dropdownList, filterParams, hasAllOption, isValueSlug, searchDebounce]);
 
+  useEffect(() => {
+    if (options) {
+      setOptionsData(options.filter((
+        item
+      ) => item.label.toLowerCase().includes(searchDebounce.toLowerCase())));
+    }
+  }, [options, searchDebounce]);
+
   return (
-    <Select
-      className="u-mt-8"
-      size={size}
-      style={{ width: '100%' }}
-      placeholder={placeholder}
-      value={value}
-      onChange={(val) => {
-        if (isGetOption) {
-          onChange(options.find((item) => item.value === val));
-        } else {
-          onChange(val);
+    <>
+      <Select
+        className="u-mt-8"
+        size={size}
+        style={{ width: '100%' }}
+        placeholder={placeholder}
+        value={value}
+        onChange={(val) => {
+          if (isGetOption) {
+            onChange(optionsData.find((item) => item.value === val));
+          } else {
+            onChange(val);
+          }
+          if (multiple) {
+            setTxtSearch('');
+          }
+        }}
+        {...multiple && {
+          mode: 'multiple',
+          allowClear: multiple.allowClear,
+          defaultValue: multiple.defaultValue,
+        }}
+        dropdownMatchSelectWidth={false}
+        getPopupContainer={(trigger) => trigger.parentElement}
+        defaultActiveFirstOption={false}
+        showSearch={isShowSearch}
+        filterOption={false}
+        onSearch={(val) => isShowSearch && setTxtSearch(val)}
+        onClear={() => setTxtSearch('')}
+        allowClear
+        loading={isLoading}
+      >
+        {
+          optionsData.map(
+            (option, idx) => (idx === optionsData.length - 3 ? (
+              <Select.Option label={option.label} value={option.value} key={`option-${type}-${idx.toString()}`}>
+                <div ref={(ref) => setNode(ref)}>{option.label}</div>
+              </Select.Option>
+            ) : (
+              <Select.Option label={option.label} value={option.value} key={`option-${type}-${idx.toString()}`}>
+                {option.label}
+              </Select.Option>
+            ))
+          )
         }
-      }}
-      {...multiple && {
-        mode: 'multiple',
-        allowClear: multiple.allowClear,
-        defaultValue: multiple.defaultValue,
-      }}
-      dropdownMatchSelectWidth={false}
-      getPopupContainer={(trigger) => trigger.parentElement}
-      defaultActiveFirstOption={false}
-      showSearch={isShowSearch}
-      filterOption={false}
-      onSearch={(val) => isShowSearch && setTxtSearch(val)}
-    >
-      {
-        options.map(
-          (option, idx) => (idx === options.length - 3 ? (
-            <Select.Option label={option.label} value={option.value} key={`option-${type}-${idx.toString()}`}>
-              <div ref={(ref) => setNode(ref)}>{option.label}</div>
-            </Select.Option>
-          ) : (
-            <Select.Option label={option.label} value={option.value} key={`option-${type}-${idx.toString()}`}>
-              {option.label}
-            </Select.Option>
-          ))
-        )
-      }
-    </Select>
+      </Select>
+      {error && (
+        <span
+          className="a-input_errorMessage"
+        >
+          {error}
+        </span>
+      )}
+    </>
   );
 };

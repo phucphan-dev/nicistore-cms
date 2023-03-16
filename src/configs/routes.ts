@@ -1,7 +1,12 @@
 import roles from './roles';
 
 import { ROUTE_PATHS } from 'common/utils/constant';
+import ProductCategoriesDetail from 'extends/ProductCategories/Detail';
 import ProductCategoriesManagement from 'extends/ProductCategories/Management';
+import ProductColorsDetail from 'extends/ProductColors/Detail';
+import ProductColorsManagement from 'extends/ProductColors/Management';
+import ProductSizesDetail from 'extends/ProductSizes/Detail';
+import ProductSizesManagement from 'extends/ProductSizes/Management';
 import ActivityLogsManagement from 'features/ActivityLogsManagement';
 import BannerManagement from 'features/BannerManagement';
 import CMSTranslationsManagement from 'features/CMSTranslationsManagement';
@@ -489,7 +494,7 @@ const routes: RouteProps[] = [
     id: 38,
     name: 'ProductList',
     path: ROUTE_PATHS.PRODUCT_MANAGEMENT,
-    element: ProductCategoriesManagement,
+    element: PageManagement,
   },
   {
     id: 39,
@@ -501,37 +506,37 @@ const routes: RouteProps[] = [
     id: 39,
     name: 'ProductCategories',
     path: ROUTE_PATHS.PRODUCT_CATEGORIES_MANAGEMENT,
-    element: PageManagement,
+    element: ProductCategoriesManagement,
   },
   {
     id: 40,
     name: 'ProductCategoriesDetail',
     path: ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL,
-    element: PageManagement,
+    element: ProductCategoriesDetail,
   },
   {
     id: 41,
     name: 'ProductColors',
     path: ROUTE_PATHS.PRODUCT_COLORS_MANAGEMENT,
-    element: PageManagement,
+    element: ProductColorsManagement,
   },
   {
     id: 42,
     name: 'ProductColorsDetail',
     path: ROUTE_PATHS.PRODUCT_COLORS_DETAIL,
-    element: PageManagement,
+    element: ProductColorsDetail,
   },
   {
     id: 41,
     name: 'ProductSizes',
     path: ROUTE_PATHS.PRODUCT_SIZES_MANAGEMENT,
-    element: PageManagement,
+    element: ProductSizesManagement,
   },
   {
     id: 42,
     name: 'ProductSizeDetail',
     path: ROUTE_PATHS.PRODUCT_SIZES_DETAIL,
-    element: PageManagement,
+    element: ProductSizesDetail,
   },
 ];
 

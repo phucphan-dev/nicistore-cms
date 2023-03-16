@@ -1,7 +1,8 @@
+/* Categories */
 export type ProductCategoryItemTypes = {
   categoryData: {
     id: number;
-    parentId: number | null;
+    parentId?: number;
     status: number;
     createdAt: string;
     updatedAt: string;
@@ -12,7 +13,8 @@ export type ProductCategoryItemTypes = {
       name: string;
       slug: string;
     }
-  }
+  };
+  seoData?: SeoDataTypes;
 };
 
 export type CreateUpdateProductCategoryTypes = {
@@ -28,4 +30,42 @@ export type CreateUpdateProductCategoryTypes = {
     }
   };
   seoData?: SeoDataTypes;
+};
+
+/* Colors */
+
+export type ProductColorItemTypes = {
+  id: number;
+  displayOrder: number;
+  code: string;
+  name: string;
+  status: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateUpdateProductColorTypes = {
+  status: number;
+  display_order: number;
+  code: string;
+  name: string;
+};
+
+/* Sizes */
+
+export type ProductSizeItemTypes = {
+  id: number;
+  displayOrder: number;
+  code: string;
+  name: string;
+  status: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateUpdateProductSizeTypes = {
+  status: number;
+  display_order: number;
+  code: string;
+  name: string;
 };

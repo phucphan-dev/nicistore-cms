@@ -1,5 +1,7 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Typography } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  Button, message, Modal, Space, Typography
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,38 +12,33 @@ import { useAppSelector } from 'app/store';
 import HeaderPage from 'common/components/HeaderPage';
 import PageTable from 'common/components/PageTable';
 import StatusLabel from 'common/components/StatusLabel';
-import { deleteProductCategoriesService, getAllProductCategories } from 'common/services/products';
-import { ProductCategoryItemTypes } from 'common/services/products/types';
+import { deleteProductSizesService, getAllProductSizes } from 'common/services/products';
+import { ProductSizeItemTypes } from 'common/services/products/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { formatDateTime } from 'common/utils/functions';
 
-export type ProductCategoryTypes = {
+export type ProductSizesTypes = {
   id: number;
   name: string;
-  category?: number[];
+  code: string;
   createdAt: string;
   updatedAt: string;
   status: number;
-  locale: ProductCategoryItemTypes['translations'];
 };
 
-const convertProductCategory = (data: ProductCategoryItemTypes[]): ProductCategoryTypes[] => {
+const convertProductSizes = (data: ProductSizeItemTypes[]): ProductSizesTypes[] => {
   if (!data.length) return [];
   return data.map((val) => ({
-    id: val.categoryData.id,
-    name: val.translations.vi ? val.translations.vi.name : val.translations.en.name,
-    status: val.categoryData.status,
-    createdAt: val.categoryData.createdAt,
-    updatedAt: val.categoryData.createdAt,
-    locale: Object.fromEntries(
-      Object
-        .entries(val.translations)
-        .map(([k, o]) => [k, { ...o, id: val.categoryData.id }])
-    )
+    id: val.id,
+    name: val.name,
+    code: val.code,
+    status: val.status,
+    createdAt: val.createdAt,
+    updatedAt: val.createdAt,
   }));
 };
 
-const ProductCategoriesManagement: React.FC = () => {
+const ProductSizesManagement: React.FC = () => {
   /* Hooks */
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -57,19 +54,19 @@ const ProductCategoriesManagement: React.FC = () => {
   const [currentView, setCurrentView] = useState(defaultPageSize);
   const [keyword, setKeyword] = useState('');
 
-  const queryKey = ['product-category-getall', keyword, currentPage, currentView];
+  const queryKey = ['product-size-getall', keyword, currentPage, currentView];
 
   /* Queries */
-  const { data: productCategories, isLoading } = useQuery(
+  const { data: productSizes, isLoading } = useQuery(
     queryKey,
-    () => getAllProductCategories({
+    () => getAllProductSizes({
       keyword, page: currentPage, limit: currentView
     }),
   );
 
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
-    ['faq-delete'],
-    async (ids: number[]) => deleteProductCategoriesService({ ids }),
+    ['size-delete'],
+    async (ids: number[]) => deleteProductSizesService({ ids }),
     {
       onSuccess: () => {
         message.success(t('message.deleteSuccess'));
@@ -83,15 +80,15 @@ const ProductCategoriesManagement: React.FC = () => {
   );
 
   /* Datas */
-  const categoriesData = useMemo(() => {
-    if (productCategories) {
-      return convertProductCategory(productCategories.data);
+  const sizesData = useMemo(() => {
+    if (productSizes) {
+      return convertProductSizes(productSizes.data);
     }
     return [];
-  }, [productCategories]);
+  }, [productSizes]);
 
   /* Variables */
-  const columns: ColumnsType<ProductCategoryTypes> = [
+  const columns: ColumnsType<ProductSizesTypes> = [
     {
       title: 'ID',
       key: 'id',
@@ -99,10 +96,10 @@ const ProductCategoriesManagement: React.FC = () => {
       align: 'center',
       fixed: 'left',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => a.id - b.id,
+        compare: (a: ProductSizesTypes, b: ProductSizesTypes) => a.id - b.id,
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_name: string, data: ProductCategoryTypes) => (
+      render: (_name: string, data: ProductSizesTypes) => (
         <Typography.Text>
           {data.id}
         </Typography.Text>
@@ -115,17 +112,34 @@ const ProductCategoriesManagement: React.FC = () => {
       key: 'name',
       sorter: {
         compare: (
-          a: ProductCategoryTypes,
-          b: ProductCategoryTypes
+          a: ProductSizesTypes,
+          b: ProductSizesTypes
         ) => a.name.localeCompare(b.name)
       },
       sortDirections: ['descend', 'ascend'],
       render: (_: string, data: any) => (
         <Typography.Text
-          onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_SIZES_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
           {data.name}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: t('system.code'),
+      dataIndex: 'code',
+      key: 'code',
+      sorter: {
+        compare: (
+          a: ProductSizesTypes,
+          b: ProductSizesTypes
+        ) => a.code.localeCompare(b.code)
+      },
+      sortDirections: ['descend', 'ascend'],
+      render: (_: string, data: any) => (
+        <Typography.Text>
+          {data.code}
         </Typography.Text>
       ),
     },
@@ -134,7 +148,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'status',
       key: 'status',
       width: 160,
-      render: (_name: string, data: ProductCategoryTypes) => (
+      render: (_name: string, data: ProductSizesTypes) => (
         <StatusLabel status={data.status} />
       ),
     },
@@ -143,7 +157,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: ProductSizesTypes, b: ProductSizesTypes) => {
           const aDate = new Date(a.createdAt);
           const bDate = new Date(b.createdAt);
           return Number(aDate) - Number(bDate);
@@ -163,7 +177,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: ProductSizesTypes, b: ProductSizesTypes) => {
           const aDate = new Date(a.updatedAt);
           const bDate = new Date(b.updatedAt);
           return Number(aDate) - Number(bDate);
@@ -178,10 +192,45 @@ const ProductCategoriesManagement: React.FC = () => {
         </Typography.Text>
       ),
     },
+    {
+      title: t('system.action'),
+      key: 'action',
+      width: 100,
+      align: 'center',
+      render: (_name: string, data: ProductSizesTypes) => (
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_SIZES_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            onClick={() => {
+              Modal.confirm({
+                className: 't-pagetable_deleteRecordModal',
+                autoFocusButton: 'cancel',
+                title: t('message.confirmDeleteRecord'),
+                okText: t('system.ok'),
+                cancelText: t('system.cancel'),
+                cancelButtonProps: {
+                  type: 'primary',
+                },
+                okButtonProps: {
+                  type: 'default',
+                },
+                onOk: () => {
+                  deleteMutate([data.id]);
+                },
+              });
+            }}
+          />
+        </Space>
+      ),
+    },
   ];
 
   /* Functions */
-  const onDelete = async (data: ProductCategoryTypes[], lang?: string) => {
+  const onDelete = async (data: ProductSizesTypes[], lang?: string) => {
     if (lang === 'all' || lang === 'allRow') {
       deleteMutate(data.map((val) => val.id));
     }
@@ -202,7 +251,7 @@ const ProductCategoriesManagement: React.FC = () => {
         fixed
         title={t('sidebar.productCategories')}
         rightHeader={(
-          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
+          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_SIZES_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
             <PlusOutlined />
             {t('system.create')}
           </Button>
@@ -214,20 +263,21 @@ const ProductCategoriesManagement: React.FC = () => {
           handleSearch={setKeyword}
           isLoading={isLoading || deleteLoading}
           handleEditPage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
+            navigate(`${ROUTE_PATHS.PRODUCT_SIZES_DETAIL}?id=${id}&locale=${locale}`);
           }}
           handleCreatePage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
+            navigate(`${ROUTE_PATHS.PRODUCT_SIZES_DETAIL}?id=${id}&locale=${locale}`);
           }}
           tableProps={{
-            initShowColumns: ['id', 'name', 'status'],
+            initShowColumns: ['id', 'name', 'code', 'status', 'action'],
             columns,
-            pageData: categoriesData,
+            pageData: sizesData,
             currentPage,
+            noBaseCol: true,
             pageSize: currentView,
             handleSetCurrentPage,
             handleSetCurrentView,
-            total: productCategories?.meta.total || 1,
+            total: productSizes?.meta.total || 1,
             noDeleteLanguage: true,
           }}
           statusDataTable={{
@@ -239,4 +289,4 @@ const ProductCategoriesManagement: React.FC = () => {
   );
 };
 
-export default ProductCategoriesManagement;
+export default ProductSizesManagement;
