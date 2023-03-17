@@ -109,22 +109,22 @@ const routes: RouteProps[] = [
     name: 'Files Management',
     path: ROUTE_PATHS.FILE_MANAGEMENT,
     element: FilesManagement,
-    roles: {
-      index: roles.FOLDER_VIEWALL,
-      other: [
-        roles.FOLDER_STORE,
-        roles.FOLDER_UPDATE,
-        roles.FOLDER_DESTROY,
-        roles.FOLDER_GETITEMS,
-        roles.FILE_DESTROY,
-        roles.FILE_UPDATE,
-        roles.FILE_UPLOAD,
-        roles.TRASH_EMPTY,
-        roles.TRASH_INDEX,
-        roles.TRASH_RESTORE,
-        roles.TRASH_FORCEDELETE,
-      ]
-    }
+    // roles: {
+    //   index: roles.FOLDER_VIEWALL,
+    //   other: [
+    //     roles.FOLDER_STORE,
+    //     roles.FOLDER_UPDATE,
+    //     roles.FOLDER_DESTROY,
+    //     roles.FOLDER_GETITEMS,
+    //     roles.FILE_DESTROY,
+    //     roles.FILE_UPDATE,
+    //     roles.FILE_UPLOAD,
+    //     roles.TRASH_EMPTY,
+    //     roles.TRASH_INDEX,
+    //     roles.TRASH_RESTORE,
+    //     roles.TRASH_FORCEDELETE,
+    //   ]
+    // }
   },
   {
     id: 5,

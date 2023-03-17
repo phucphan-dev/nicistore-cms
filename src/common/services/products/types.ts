@@ -44,6 +44,7 @@ export type ProductItemTypes = {
     thumbnail: string;
     galleries: string[];
     price: number;
+    priceInit: number;
     sale_percent: number;
     createdAt: string;
     updatedAt: string;
@@ -83,6 +84,7 @@ export type CreateUpdateProductTypes = {
   thumbnail: string;
   galleries: string[];
   price: number;
+  priceInit: number;
   sale_percent: number;
   categories: number[];
   colors: number[];

@@ -20,8 +20,8 @@ export const DEFAULT_QUERY_OPTION = {
 };
 
 export const URL_CONST = {
-  MEDIA_FILE_UPLOAD_CHUNK: 'api/v1/media-files/upload-chunk',
-  MEDIA_FILE_MERGE_CHUNK: 'api/v1/media-files/merge-chunk'
+  MEDIA_FILE_UPLOAD_CHUNK: `${process.env.REACT_APP_API_BASE_URL}medias/upload-chunk`,
+  MEDIA_FILE_MERGE_CHUNK: `${process.env.REACT_APP_API_BASE_URL}medias/merge-chunk`
 };
 
 export const TARGET_LIST_OPTIONS = [

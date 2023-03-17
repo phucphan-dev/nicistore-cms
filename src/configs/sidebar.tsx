@@ -97,13 +97,12 @@ const menuSidebar: MenuItem[] = [
   //     },
   //   ],
   // },
-  // {
-  //   key: 'file',
-  //   title: 'sidebar.file',
-  //   icon: <FileOutlined />,
-  //   path: ROUTE_PATHS.FILE_MANAGEMENT,
-  //   role: roles.FOLDER_VIEWALL
-  // },
+  {
+    key: 'file',
+    title: 'sidebar.file',
+    icon: <FileOutlined />,
+    path: ROUTE_PATHS.FILE_MANAGEMENT,
+  },
   // {
   //   key: 'menu',
   //   title: 'sidebar.menu',

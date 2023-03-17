@@ -42,6 +42,7 @@ type ProductFormTypes = {
   totalInit: number;
   stock: number;
   price: number;
+  priceInit: number;
   sale_percent: number;
   thumbnail: string;
   galleries: string[];
@@ -62,6 +63,7 @@ const defaultValues = {
   thumbnail: '',
   galleries: [],
   price: 0,
+  priceInit: 0,
   sale_percent: 0,
   categories: [],
   colors: [],
@@ -77,6 +79,7 @@ const productDetailSchema = yup.object().shape({
   displayOrder: yup.number().required('Nhập thứ tự hiển thị'),
   thumbnail: yup.string().required('Chọn hình đại diện'),
   price: yup.number().required('Nhập giá'),
+  priceInit: yup.number().required('Nhập giá nhập hàng'),
 });
 
 const ProductDetail: React.FC = () => {
@@ -175,6 +178,7 @@ const ProductDetail: React.FC = () => {
       thumbnail: formData.thumbnail,
       galleries: formData.galleries,
       price: formData.price,
+      priceInit: formData.priceInit,
       sale_percent: formData.sale_percent,
       categories: formData.categories,
       colors: formData.colors,
@@ -236,7 +240,7 @@ const ProductDetail: React.FC = () => {
         name, slug, short_description, description
       } = productData.translations[currentLang];
       const {
-        display_order, sku, totalInit, stock, galleries, thumbnail, price, sale_percent
+        display_order, sku, totalInit, stock, galleries, thumbnail, price, sale_percent, priceInit
       } = productData.productData;
       const objDefault: ProductFormTypes = {
         name,
@@ -251,6 +255,7 @@ const ProductDetail: React.FC = () => {
         galleries,
         thumbnail,
         price,
+        priceInit,
         sale_percent,
         categories: productData.categories.map((item) => item.id),
         colors: productData.colors.map((item) => item.id),
@@ -357,7 +362,7 @@ const ProductDetail: React.FC = () => {
                       <Col span={24}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.short_description')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -378,9 +383,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={24}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('newsDetail.displayOrder')}
+                            {t('product.description')}
                           </Typography.Text>
                           <Typography.Text strong type="danger">
                             {' '}
@@ -414,9 +419,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.status')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -425,7 +430,7 @@ const ProductDetail: React.FC = () => {
                             render={({ field }) => (
                               <DropdownElement
                                 options={statusDummy}
-                                placeholder={`${t('system.select')} ${t('faqCategoryDetail.parentCategory')}`}
+                                placeholder={`${t('system.select')} ${t('product.status')}`}
                                 locale={currentLang}
                                 filterParams={idParams.toString()}
                                 value={field.value}
@@ -436,9 +441,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('newsDetail.displayOrder')}
+                            {t('product.displayOrder')}
                           </Typography.Text>
                           <Typography.Text strong type="danger">
                             {' '}
@@ -470,7 +475,7 @@ const ProductDetail: React.FC = () => {
                       <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.sku')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -494,7 +499,7 @@ const ProductDetail: React.FC = () => {
                       <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('newsDetail.displayOrder')}
+                            {t('product.categories')}
                           </Typography.Text>
                           <Typography.Text strong type="danger">
                             {' '}
@@ -506,7 +511,7 @@ const ProductDetail: React.FC = () => {
                               field: { value, onChange },
                             }) => (
                               <DropdownElement
-                                type="newsCategory"
+                                type="productCategories"
                                 placeholder="Please select"
                                 locale="vi"
                                 value={value}
@@ -521,9 +526,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('newsDetail.displayOrder')}
+                            {t('product.colors')}
                           </Typography.Text>
                           <Typography.Text strong type="danger">
                             {' '}
@@ -535,7 +540,7 @@ const ProductDetail: React.FC = () => {
                               field: { value, onChange },
                             }) => (
                               <DropdownElement
-                                type="newsCategory"
+                                type="colors"
                                 placeholder="Please select"
                                 locale="vi"
                                 value={value}
@@ -550,9 +555,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('newsDetail.displayOrder')}
+                            {t('product.sizes')}
                           </Typography.Text>
                           <Typography.Text strong type="danger">
                             {' '}
@@ -564,7 +569,7 @@ const ProductDetail: React.FC = () => {
                               field: { value, onChange },
                             }) => (
                               <DropdownElement
-                                type="newsCategory"
+                                type="sizes"
                                 placeholder="Please select"
                                 locale="vi"
                                 value={value}
@@ -582,10 +587,10 @@ const ProductDetail: React.FC = () => {
                   </Card>
                   <Card type="inner">
                     <Row gutter={16}>
-                      <Col span={12}>
+                      <Col span={8}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.totalInit')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -607,10 +612,35 @@ const ProductDetail: React.FC = () => {
                           />
                         </div>
                       </Col>
-                      <Col span={12}>
+                      <Col span={8}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.priceInit')}
+                            {' '}
+                          </Typography.Text>
+                          <Controller
+                            name="priceInit"
+                            control={method.control}
+                            render={({
+                              field: { value, onChange },
+                              fieldState: { error },
+                            }) => (
+                              <Input
+                                className="u-mt-8"
+                                type="number"
+                                value={value}
+                                onChange={onChange}
+                                error={error?.message}
+                                size="large"
+                              />
+                            )}
+                          />
+                        </div>
+                      </Col>
+                      <Col span={8}>
+                        <div className="p-editPageTemplate_input">
+                          <Typography.Text strong>
+                            {t('product.stock')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -633,9 +663,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.price')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -658,9 +688,9 @@ const ProductDetail: React.FC = () => {
                         </div>
                       </Col>
                       <Col span={12}>
-                        <div className="p-editPageTemplate_input">
+                        <div className="p-editPageTemplate_input u-mt-16">
                           <Typography.Text strong>
-                            {t('faqCategoryDetail.parentCategory')}
+                            {t('product.salePercent')}
                             {' '}
                           </Typography.Text>
                           <Controller
@@ -706,7 +736,7 @@ const ProductDetail: React.FC = () => {
                               title={(
                                 <>
                                   <Typography.Text strong>
-                                    {t('newsDetail.thumbnail')}
+                                    {t('product.thumbnail')}
                                     {' '}
                                   </Typography.Text>
                                   <Typography.Text strong type="danger">
@@ -726,14 +756,14 @@ const ProductDetail: React.FC = () => {
                         )}
                       />
                     </div>
-                    <div className="p-editPageTemplate_input">
+                    <div className="p-editPageTemplate_input u-mt-16">
                       <Controller
                         name="galleries"
                         render={({
                           field: { value, onChange },
                         }) => (
                           <SelectMultipleFile
-                            title="Galeries"
+                            title={t('product.galeries')}
                             value={value}
                             handleSelect={(data) => {
                               onChange(data);
@@ -755,30 +785,6 @@ const ProductDetail: React.FC = () => {
                 <div className="u-mb-16">
                   <StatusLabel status={status} bigger />
                 </div>
-                <Card className="u-mb-16">
-                  <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                    <div className="p-editPageTemplate_input">
-                      <Typography.Text strong>
-                        {t('faqCategoryDetail.parentCategory')}
-                        {' '}
-                      </Typography.Text>
-                      <Controller
-                        name="status"
-                        control={method.control}
-                        render={({ field }) => (
-                          <DropdownElement
-                            options={statusDummy}
-                            placeholder={`${t('system.select')} ${t('faqCategoryDetail.parentCategory')}`}
-                            locale={currentLang}
-                            filterParams={idParams.toString()}
-                            value={field.value}
-                            onChange={field.onChange}
-                          />
-                        )}
-                      />
-                    </div>
-                  </Space>
-                </Card>
                 <ManagementInfo
                   classNameCustom="u-mt-16"
                   createdDate={productData ? moment(productData.productData.createdAt).fromNow() : ''}

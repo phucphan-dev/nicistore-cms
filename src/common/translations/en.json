@@ -658,6 +658,20 @@
     "with": "with"
   },
   "product": {
-    "stock": "Stock"
+    "stock": "Stoke",
+    "short_description": "Short Description",
+    "description": "Description",
+    "status": "Status",
+    "displayOrder": "Display Order",
+    "sku": "SKU",
+    "categories": "Categories",
+    "colors": "Colors",
+    "sizes": "Sizes",
+    "totalInit": "Total init",
+    "price": "Price",
+    "priceInit": "Price init",
+    "salePercent": "Sale percent (%)",
+    "thumbnail": "Thumbnail",
+    "galeries": "Galeries"
   }
 }
