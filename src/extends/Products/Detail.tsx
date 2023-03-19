@@ -365,6 +365,9 @@ const ProductDetail: React.FC = () => {
                             {t('product.short_description')}
                             {' '}
                           </Typography.Text>
+                          <Typography.Text strong type="danger">
+                            *
+                          </Typography.Text>
                           <Controller
                             name="short_description"
                             defaultValue=""
@@ -462,7 +465,7 @@ const ProductDetail: React.FC = () => {
                                 value={value}
                                 onChange={onChange}
                                 error={error?.message}
-                                size="large"
+                                size="middle"
                               />
                             )}
                           />
@@ -490,7 +493,7 @@ const ProductDetail: React.FC = () => {
                                 value={value}
                                 onChange={onChange}
                                 error={error?.message}
-                                size="large"
+                                size="middle"
                               />
                             )}
                           />
