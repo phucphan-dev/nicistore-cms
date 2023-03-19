@@ -7,7 +7,7 @@ import {
 const getDropdownCodeDataService = async (
   params: DropdownCodeParamsTypes
 ): Promise<APIPaginationResponse<DropdownDataType[]>> => {
-  const res = await axiosInstance.get(`no-permission/dropdown/${params.type}`, { params: { ...params.filter, locale: params.locale } });
+  const res = await axiosInstance.get(`dropdowns/${params.type}`, { params: { ...params.filter, locale: params.locale } });
   return res.data;
 };
 

@@ -7,6 +7,8 @@ import ProductColorsDetail from 'extends/ProductColors/Detail';
 import ProductColorsManagement from 'extends/ProductColors/Management';
 import ProductSizesDetail from 'extends/ProductSizes/Detail';
 import ProductSizesManagement from 'extends/ProductSizes/Management';
+import ProductDetail from 'extends/Products/Detail';
+import ProductManagement from 'extends/Products/Management';
 import ActivityLogsManagement from 'features/ActivityLogsManagement';
 import BannerManagement from 'features/BannerManagement';
 import CMSTranslationsManagement from 'features/CMSTranslationsManagement';
@@ -107,22 +109,22 @@ const routes: RouteProps[] = [
     name: 'Files Management',
     path: ROUTE_PATHS.FILE_MANAGEMENT,
     element: FilesManagement,
-    roles: {
-      index: roles.FOLDER_VIEWALL,
-      other: [
-        roles.FOLDER_STORE,
-        roles.FOLDER_UPDATE,
-        roles.FOLDER_DESTROY,
-        roles.FOLDER_GETITEMS,
-        roles.FILE_DESTROY,
-        roles.FILE_UPDATE,
-        roles.FILE_UPLOAD,
-        roles.TRASH_EMPTY,
-        roles.TRASH_INDEX,
-        roles.TRASH_RESTORE,
-        roles.TRASH_FORCEDELETE,
-      ]
-    }
+    // roles: {
+    //   index: roles.FOLDER_VIEWALL,
+    //   other: [
+    //     roles.FOLDER_STORE,
+    //     roles.FOLDER_UPDATE,
+    //     roles.FOLDER_DESTROY,
+    //     roles.FOLDER_GETITEMS,
+    //     roles.FILE_DESTROY,
+    //     roles.FILE_UPDATE,
+    //     roles.FILE_UPLOAD,
+    //     roles.TRASH_EMPTY,
+    //     roles.TRASH_INDEX,
+    //     roles.TRASH_RESTORE,
+    //     roles.TRASH_FORCEDELETE,
+    //   ]
+    // }
   },
   {
     id: 5,
@@ -494,13 +496,13 @@ const routes: RouteProps[] = [
     id: 38,
     name: 'ProductList',
     path: ROUTE_PATHS.PRODUCT_MANAGEMENT,
-    element: PageManagement,
+    element: ProductManagement,
   },
   {
     id: 39,
     name: 'ProductDetail',
     path: ROUTE_PATHS.PRODUCT_DETAIL,
-    element: PageManagement,
+    element: ProductDetail,
   },
   {
     id: 39,

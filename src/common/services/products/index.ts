@@ -4,7 +4,8 @@ import {
   CreateUpdateProductCategoryTypes,
   CreateUpdateProductColorTypes,
   CreateUpdateProductSizeTypes,
-  ProductCategoryItemTypes, ProductColorItemTypes, ProductSizeItemTypes
+  CreateUpdateProductTypes,
+  ProductCategoryItemTypes, ProductColorItemTypes, ProductItemTypes, ProductSizeItemTypes
 } from './types';
 
 /* Categories */
@@ -37,6 +38,38 @@ export const updateProductCategoryByIdService = async (
   params: CreateUpdateProductCategoryTypes
 ): Promise<void> => {
   await axiosInstance.put(`product-categories/${id}`, params);
+};
+
+/* Products */
+export const getAllProductService = async (params?: BaseFilterParams):
+  Promise<APIPaginationResponse<ProductItemTypes[]>> => {
+  const res = await axiosInstance.get('products', { params });
+  return res.data;
+};
+
+export const createProductService = async (
+  params: CreateUpdateProductTypes
+) => {
+  const res = await axiosInstance.post('products', params);
+  return res.data.data;
+};
+
+export const deleteProductService = async (params: { ids: number[] })
+  : Promise<void> => {
+  await axiosInstance.delete('products', { data: params });
+};
+
+export const getProductByIdService = async (id: number)
+  : Promise<ProductItemTypes> => {
+  const res = await axiosInstance.get(`products/${id}`);
+  return res.data.data;
+};
+
+export const updateProductByIdService = async (
+  id: number,
+  params: CreateUpdateProductTypes
+): Promise<void> => {
+  await axiosInstance.put(`products/${id}`, params);
 };
 
 /* Colors */

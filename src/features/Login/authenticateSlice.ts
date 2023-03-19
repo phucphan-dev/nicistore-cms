@@ -10,7 +10,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   profileData: undefined,
-  roles: [],
+  roles: ['*'],
 };
 
 export const getProfileAction = createAsyncThunk<

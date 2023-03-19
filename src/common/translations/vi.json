@@ -656,5 +656,22 @@
     "configLocale": "ngôn ngữ",
     "configSeoGeneral": "thông tin SEO",
     "with": "với"
+  },
+  "product": {
+    "stock": "Tồn kho",
+    "short_description": "Mô tả ngắn",
+    "description": "Mô tả",
+    "status": "Trạng thái",
+    "displayOrder": "Thứ tự hiển thị",
+    "sku": "SKU",
+    "categories": "Danh mục",
+    "colors": "Màu sắc",
+    "sizes": "Kích thước",
+    "totalInit": "Số lượng nhập hàng",
+    "price": "Giá",
+    "priceInit": "Giá nhập hàng",
+    "salePercent": "Giảm giá (%)",
+    "thumbnail": "Hình đại diện",
+    "galeries": "Hình ảnh"
   }
 }

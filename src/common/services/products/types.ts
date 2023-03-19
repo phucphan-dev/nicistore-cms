@@ -32,6 +32,76 @@ export type CreateUpdateProductCategoryTypes = {
   seoData?: SeoDataTypes;
 };
 
+/* Products */
+export type ProductItemTypes = {
+  productData: {
+    id: number;
+    status: number;
+    display_order: number;
+    sku?: string;
+    totalInit: number;
+    stock: number;
+    thumbnail: string;
+    galleries: string[];
+    price: number;
+    priceInit: number;
+    sale_percent: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+  categories: {
+    id: number;
+    name: string;
+    slug: string;
+  }[],
+  colors: {
+    id: number;
+    name: string;
+    code: string;
+  }[],
+  sizes: {
+    id: number;
+    name: string;
+    code: string;
+  }[],
+  translations: {
+    [language: string]: {
+      name: string;
+      slug: string;
+      short_description: string;
+      description: string;
+    }
+  };
+  seoData?: SeoDataTypes;
+};
+
+export type CreateUpdateProductTypes = {
+  status: number;
+  display_order: number;
+  sku?: string;
+  totalInit: number;
+  stock: number;
+  thumbnail: string;
+  galleries: string[];
+  price: number;
+  priceInit: number;
+  sale_percent: number;
+  categories: number[];
+  colors: number[];
+  sizes: number[];
+  translations?: {
+    [key: string]: {
+      productData: {
+        name: string;
+        slug: string;
+        short_description: string;
+        description: string;
+      }
+    }
+  };
+  seo?: SeoDataTypes;
+};
+
 /* Colors */
 
 export type ProductColorItemTypes = {

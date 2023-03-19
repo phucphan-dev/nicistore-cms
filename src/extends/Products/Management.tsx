@@ -10,38 +10,39 @@ import { useAppSelector } from 'app/store';
 import HeaderPage from 'common/components/HeaderPage';
 import PageTable from 'common/components/PageTable';
 import StatusLabel from 'common/components/StatusLabel';
-import { deleteProductCategoriesService, getAllProductCategories } from 'common/services/products';
-import { ProductCategoryItemTypes } from 'common/services/products/types';
+import { deleteProductService, getAllProductService } from 'common/services/products';
+import { ProductItemTypes } from 'common/services/products/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { formatDateTime } from 'common/utils/functions';
 
-export type ProductCategoryTypes = {
+export type ProductTypes = {
   id: number;
   name: string;
-  category?: number[];
+  stock: number;
   createdAt: string;
   updatedAt: string;
   status: number;
-  locale: ProductCategoryItemTypes['translations'];
+  locale: ProductItemTypes['translations'];
 };
 
-const convertProductCategory = (data: ProductCategoryItemTypes[]): ProductCategoryTypes[] => {
+const convertProduct = (data: ProductItemTypes[]): ProductTypes[] => {
   if (!data.length) return [];
   return data.map((val) => ({
-    id: val.categoryData.id,
+    id: val.productData.id,
     name: val.translations.vi ? val.translations.vi.name : val.translations.en.name,
-    status: val.categoryData.status,
-    createdAt: val.categoryData.createdAt,
-    updatedAt: val.categoryData.createdAt,
+    stock: val.productData.stock,
+    status: val.productData.status,
+    createdAt: val.productData.createdAt,
+    updatedAt: val.productData.createdAt,
     locale: Object.fromEntries(
       Object
         .entries(val.translations)
-        .map(([k, o]) => [k, { ...o, id: val.categoryData.id }])
+        .map(([k, o]) => [k, { ...o, id: val.productData.id }])
     )
   }));
 };
 
-const ProductCategoriesManagement: React.FC = () => {
+const ProductManagement: React.FC = () => {
   /* Hooks */
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -57,19 +58,19 @@ const ProductCategoriesManagement: React.FC = () => {
   const [currentView, setCurrentView] = useState(defaultPageSize);
   const [keyword, setKeyword] = useState('');
 
-  const queryKey = ['product-category-getall', keyword, currentPage, currentView];
+  const queryKey = ['product-getall', keyword, currentPage, currentView];
 
   /* Queries */
-  const { data: productCategories, isLoading } = useQuery(
+  const { data: products, isLoading } = useQuery(
     queryKey,
-    () => getAllProductCategories({
+    () => getAllProductService({
       keyword, page: currentPage, limit: currentView
     }),
   );
 
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
-    ['product-category-delete'],
-    async (ids: number[]) => deleteProductCategoriesService({ ids }),
+    ['product-delete'],
+    async (ids: number[]) => deleteProductService({ ids }),
     {
       onSuccess: () => {
         message.success(t('message.deleteSuccess'));
@@ -83,15 +84,15 @@ const ProductCategoriesManagement: React.FC = () => {
   );
 
   /* Datas */
-  const categoriesData = useMemo(() => {
-    if (productCategories) {
-      return convertProductCategory(productCategories.data);
+  const productData = useMemo(() => {
+    if (products) {
+      return convertProduct(products.data);
     }
     return [];
-  }, [productCategories]);
+  }, [products]);
 
   /* Variables */
-  const columns: ColumnsType<ProductCategoryTypes> = [
+  const columns: ColumnsType<ProductTypes> = [
     {
       title: 'ID',
       key: 'id',
@@ -99,10 +100,10 @@ const ProductCategoriesManagement: React.FC = () => {
       align: 'center',
       fixed: 'left',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => a.id - b.id,
+        compare: (a: ProductTypes, b: ProductTypes) => a.id - b.id,
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_name: string, data: ProductCategoryTypes) => (
+      render: (_name: string, data: ProductTypes) => (
         <Typography.Text>
           {data.id}
         </Typography.Text>
@@ -115,17 +116,36 @@ const ProductCategoriesManagement: React.FC = () => {
       key: 'name',
       sorter: {
         compare: (
-          a: ProductCategoryTypes,
-          b: ProductCategoryTypes
+          a: ProductTypes,
+          b: ProductTypes
         ) => a.name.localeCompare(b.name)
       },
       sortDirections: ['descend', 'ascend'],
       render: (_: string, data: any) => (
         <Typography.Text
-          onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
           {data.name}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: t('product.stock'),
+      dataIndex: 'stock',
+      key: 'stock',
+      sorter: {
+        compare: (
+          a: ProductTypes,
+          b: ProductTypes
+        ) => a.stock - b.stock
+      },
+      sortDirections: ['descend', 'ascend'],
+      render: (_: string, data: any) => (
+        <Typography.Text
+          style={{ color: '#4a4a4a', cursor: 'pointer' }}
+        >
+          {data.stock}
         </Typography.Text>
       ),
     },
@@ -134,7 +154,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'status',
       key: 'status',
       width: 160,
-      render: (_name: string, data: ProductCategoryTypes) => (
+      render: (_name: string, data: ProductTypes) => (
         <StatusLabel status={data.status} />
       ),
     },
@@ -143,7 +163,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: ProductTypes, b: ProductTypes) => {
           const aDate = new Date(a.createdAt);
           const bDate = new Date(b.createdAt);
           return Number(aDate) - Number(bDate);
@@ -163,7 +183,7 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: ProductTypes, b: ProductTypes) => {
           const aDate = new Date(a.updatedAt);
           const bDate = new Date(b.updatedAt);
           return Number(aDate) - Number(bDate);
@@ -181,7 +201,7 @@ const ProductCategoriesManagement: React.FC = () => {
   ];
 
   /* Functions */
-  const onDelete = async (data: ProductCategoryTypes[], lang?: string) => {
+  const onDelete = async (data: ProductTypes[], lang?: string) => {
     if (lang === 'all' || lang === 'allRow') {
       deleteMutate(data.map((val) => val.id));
     }
@@ -202,7 +222,7 @@ const ProductCategoriesManagement: React.FC = () => {
         fixed
         title={t('sidebar.productCategories')}
         rightHeader={(
-          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
+          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
             <PlusOutlined />
             {t('system.create')}
           </Button>
@@ -214,20 +234,20 @@ const ProductCategoriesManagement: React.FC = () => {
           handleSearch={setKeyword}
           isLoading={isLoading || deleteLoading}
           handleEditPage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
+            navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?id=${id}&locale=${locale}`);
           }}
           handleCreatePage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
+            navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?id=${id}&locale=${locale}`);
           }}
           tableProps={{
-            initShowColumns: ['id', 'name', 'status'],
+            initShowColumns: ['id', 'name', 'stock', 'status'],
             columns,
-            pageData: categoriesData,
+            pageData: productData,
             currentPage,
             pageSize: currentView,
             handleSetCurrentPage,
             handleSetCurrentView,
-            total: productCategories?.meta.total || 1,
+            total: products?.meta.total || 1,
             noDeleteLanguage: true,
           }}
           statusDataTable={{
@@ -239,4 +259,4 @@ const ProductCategoriesManagement: React.FC = () => {
   );
 };
 
-export default ProductCategoriesManagement;
+export default ProductManagement;

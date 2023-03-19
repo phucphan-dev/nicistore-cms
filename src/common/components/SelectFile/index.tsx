@@ -22,9 +22,9 @@ import {
   getItemStyle, getListStyle, reorder, StrictModeDroppable
 } from './functions';
 
-import { useAppSelector } from 'app/store';
+// import { useAppSelector } from 'app/store';
 import { mappingURLToExternal } from 'common/utils/functions';
-import roles from 'configs/roles';
+// import roles from 'configs/roles';
 import ModalFinder from 'features/FilesManagement/ModalFinder';
 
 interface SelectFileProps {
@@ -53,15 +53,15 @@ const SelectFile: React.FC<SelectFileProps> = ({
   handleSelect,
 }) => {
   const { t } = useTranslation();
-  const rolesUser = useAppSelector((state) => state.auth.roles);
+  // const rolesUser = useAppSelector((state) => state.auth.roles);
   const [open, setOpen] = useState(false);
   const [fileUrl, setFileUrl] = useState(value);
   useEffect(() => {
     setFileUrl(value);
   }, [value]);
-  if (!rolesUser.includes('*') && !rolesUser.includes(roles.FOLDER_VIEWALL)) {
-    return null;
-  }
+  // if (!rolesUser.includes('*') && !rolesUser.includes(roles.FOLDER_VIEWALL)) {
+  //   return null;
+  // }
   return (
     <div className="o-selectFile">
       <Typography.Text strong>
@@ -208,7 +208,7 @@ export const SelectMultipleFile: React.FC<SelectMultipleFileProps> = ({
 }) => {
   /* Hooks */
   const { t } = useTranslation();
-  const rolesUser = useAppSelector((state) => state.auth.roles);
+  // const rolesUser = useAppSelector((state) => state.auth.roles);
 
   /* Refs */
   const initRef = useRef(false);
@@ -285,9 +285,9 @@ export const SelectMultipleFile: React.FC<SelectMultipleFileProps> = ({
     </div>
   ), [files, handleDelete]);
 
-  if (!rolesUser.includes(roles.FOLDER_VIEWALL)) {
-    return null;
-  }
+  // if (!rolesUser.includes(roles.FOLDER_VIEWALL)) {
+  //   return null;
+  // }
 
   return (
     <div className="o-selectFile">
