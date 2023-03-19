@@ -76,7 +76,6 @@ const productDetailSchema = yup.object().shape({
   short_description: yup.string().required('Nhập mô tả ngắn'),
   description: yup.string().required('Nhập mô tả'),
   status: yup.number().required('Chọn trạng thái'),
-  displayOrder: yup.number().required('Nhập thứ tự hiển thị'),
   thumbnail: yup.string().required('Chọn hình đại diện'),
   price: yup.number().required('Nhập giá'),
   priceInit: yup.number().required('Nhập giá nhập hàng'),

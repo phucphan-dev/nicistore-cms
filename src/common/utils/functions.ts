@@ -133,53 +133,76 @@ export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export const formatDateYYYYMMDD = (date?: any) => {
+  if (!date) return '';
+  const dateFormat = typeof (date) === 'string' ? new Date(date) : date;
+  let day: string | number = moment(dateFormat).date();
+  let month: string | number = moment(dateFormat).month() + 1;
+  if (day < 10) {
+    day = `0${day}`;
+  }
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  return `${moment(dateFormat).year()}-${month}-${day}`;
+};
+
+export const formatDateHHMMSS = () => {
+  const dateFormat = new Date();
+  let hours: string | number = dateFormat.getHours();
+  let minutes: string | number = dateFormat.getMinutes();
+  let seconds: string | number = dateFormat.getSeconds();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+  return `${hours}${minutes}${seconds}`;
+};
+
 export const getImageURL = (imgUrl?: string) => `${BASE_URL || ''}${imgUrl || ''}`;
 
-export const compressImage = (
-  url: string,
-): Promise<{
-  dataUrl: string,
-}> => {
-  let resolver = (data: any) => data;
-  const imager = document.createElement('img');
-  imager.src = url;
+export const generateImageFileName = () => `OREO_SCAN_BILL_${formatDateYYYYMMDD()}_${formatDateHHMMSS()}.jpeg`;
+
+export const compressImage = async (url: string): Promise<string> => {
   const canvas = document.createElement('canvas');
-  imager.onload = () => {
-    const maxWidth = 100;
-    const maxHeight = 100;
 
-    const imgwidth = imager.width;
-    const imgheight = imager.height;
-    let ratio = Math.min(maxWidth / imgwidth, maxHeight / imgheight);
-    if (ratio > 1) {
-      ratio = 1;
-    }
-
-    const newWidth = imgwidth * ratio;
-    const newHeight = imgheight * ratio;
-    canvas.width = newWidth;
-    canvas.height = newHeight;
-    canvas.getContext('2d')?.drawImage(
-      imager,
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-    );
-    canvas.toBlob(
-      (b) => {
-        if (b) {
-          const result = {
-            dataUrl: URL.createObjectURL(b),
-          };
-          resolver(result);
-        }
-      },
-    );
-  };
-  return new Promise((resolve) => {
-    resolver = resolve;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return '';
+  }
+  const image = new Image();
+  image.src = url;
+  await new Promise((resolve) => {
+    image.onload = resolve;
   });
+
+  const maxSize = 100;
+  let { width, height } = image;
+  if (width > height) {
+    if (width > maxSize) {
+      height *= maxSize / width;
+      width = maxSize;
+    }
+  } else if (height > maxSize) {
+    width *= maxSize / height;
+    height = maxSize;
+  }
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(image, 0, 0, width, height);
+  canvas.toBlob((b) => {
+    if (b) {
+      const fileResize = new File([b], generateImageFileName(), { type: 'image/jpeg' });
+      return URL.createObjectURL(fileResize);
+    }
+    return '';
+  }, 'image/jpeg');
+  return '';
 };
 
 export const formatDateDDMMYYYY = (date?: string | Date) => {
@@ -194,19 +217,6 @@ export const formatDateDDMMYYYY = (date?: string | Date) => {
     month = `0${month}`;
   }
   return `${day}-${month}-${dateFormat.getFullYear()}`;
-};
-export const formatDateYYYYMMDD = (date?: any) => {
-  if (!date) return '';
-  const dateFormat = typeof (date) === 'string' ? new Date(date) : date;
-  let day: string | number = moment(dateFormat).date();
-  let month: string | number = moment(dateFormat).month() + 1;
-  if (day < 10) {
-    day = `0${day}`;
-  }
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  return `${moment(dateFormat).year()}-${month}-${day}`;
 };
 
 export function numberWithPrefix(x?: number, prefix?: string) {

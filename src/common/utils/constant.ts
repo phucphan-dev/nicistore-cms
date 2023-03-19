@@ -1,9 +1,9 @@
 const LOCAL_STORAGE = {
-  ACCESS_TOKEN: 'ONECMS_AccessToken',
-  REFRESH_TOKEN: 'ONECMS_RefreshToken',
-  ABILITIES: 'ONECMS_Abilities',
-  LANGUAGE: 'ONECMS_Language',
-  PREVIEW_DATA: 'ONECMS_PreviewData'
+  ACCESS_TOKEN: 'NICICMS_AccessToken',
+  REFRESH_TOKEN: 'NICICMS_RefreshToken',
+  ABILITIES: 'NICICMS_Abilities',
+  LANGUAGE: 'NICICMS_Language',
+  PREVIEW_DATA: 'NICICMS_PreviewData'
 };
 
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -20,8 +20,8 @@ export const DEFAULT_QUERY_OPTION = {
 };
 
 export const URL_CONST = {
-  MEDIA_FILE_UPLOAD_CHUNK: `${process.env.REACT_APP_API_BASE_URL}medias/upload-chunk`,
-  MEDIA_FILE_MERGE_CHUNK: `${process.env.REACT_APP_API_BASE_URL}medias/merge-chunk`
+  MEDIA_FILE_UPLOAD_CHUNK: `${process.env.REACT_APP_API_BASE_URL}media-files/upload-chunk`,
+  MEDIA_FILE_MERGE_CHUNK: `${process.env.REACT_APP_API_BASE_URL}media-files/merge-chunk`
 };
 
 export const TARGET_LIST_OPTIONS = [

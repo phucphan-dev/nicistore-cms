@@ -172,6 +172,7 @@ const services = {
     }
     const dataFilter = targetId && targetId !== -1 ? data
       .filter((d) => d.parentId === targetId) : data;
+
     return {
       content: dataFilter.map(({
         id, name, isDirectory,
