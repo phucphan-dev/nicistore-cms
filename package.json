@@ -2,6 +2,7 @@
   "name": "nici-store",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cms.nicistore.online",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ckeditor/ckeditor5-alignment": "^35.1.0",
@@ -91,6 +92,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "gh-pages": "^5.0.0",
     "hygen": "^6.2.0",
     "import-glob-loader": "^1.1.0",
     "less": "^4.1.3",
@@ -117,7 +119,9 @@
     "gen:feature": "hygen features new",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "predeploy": "npm run build",
+    "deploy": "yarn run build && echo 'cms.nicistore.online' > ./build/CNAME && gh-pages -d build"
   },
   "browserslist": {
     "production": [
