@@ -1,9 +1,10 @@
 import React from 'react';
 import {
+  FieldValues,
   FormProvider, SubmitHandler, useForm, UseFormReturn,
 } from 'react-hook-form';
 
-interface FormInterface<T> {
+interface FormInterface<T extends FieldValues> {
   method: UseFormReturn<T>;
   submitForm: SubmitHandler<T>;
   children?: React.ReactNode;
@@ -11,7 +12,7 @@ interface FormInterface<T> {
 export type UseFormProps = ReturnType<typeof useForm>;
 
 // eslint-disable-next-line react/prefer-stateless-function
-class Form<T> extends React.Component<FormInterface<T>> {
+class Form<T extends FieldValues> extends React.Component<FormInterface<T>> {
   render() {
     const {
       method, submitForm, children,
