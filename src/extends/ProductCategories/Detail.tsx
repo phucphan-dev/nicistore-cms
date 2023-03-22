@@ -311,7 +311,7 @@ const ProductCategoriesDetail: React.FC = () => {
                             control={method.control}
                             render={({ field }) => (
                               <DropdownElement
-                                type="faqCategory"
+                                type="productCategories"
                                 placeholder={`${t('system.select')} ${t('faqCategoryDetail.parentCategory')}`}
                                 locale={currentLang}
                                 filterParams={idParams.toString()}
@@ -344,7 +344,7 @@ const ProductCategoriesDetail: React.FC = () => {
                                 value={value}
                                 onChange={onChange}
                                 error={error?.message}
-                                size="large"
+                                size="middle"
                               />
                             )}
                           />

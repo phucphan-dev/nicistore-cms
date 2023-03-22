@@ -283,7 +283,7 @@ const ProductSizesDetail: React.FC = () => {
                                 value={value}
                                 onChange={onChange}
                                 error={error?.message}
-                                size="large"
+                                size="middle"
                               />
                             )}
                           />
