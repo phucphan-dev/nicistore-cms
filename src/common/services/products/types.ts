@@ -18,9 +18,9 @@ export type ProductCategoryItemTypes = {
 };
 
 export type CreateUpdateProductCategoryTypes = {
-  parent_id?: number;
+  parentId?: number;
   status?: number;
-  display_order?: number;
+  displayOrder?: number;
   translations?: {
     [key: string]: {
       categoryData: {
@@ -37,15 +37,16 @@ export type ProductItemTypes = {
   productData: {
     id: number;
     status: number;
-    display_order: number;
-    sku?: string;
-    totalInit: number;
+    displayOrder: number;
+    code: string;
     stock: number;
+    totalInit: number;
     thumbnail: string;
     galleries: string[];
     price: number;
     priceInit: number;
-    sale_percent: number;
+    salePercent: number;
+    featured: boolean;
     createdAt: string;
     updatedAt: string;
   };
@@ -54,47 +55,58 @@ export type ProductItemTypes = {
     name: string;
     slug: string;
   }[],
-  colors: {
-    id: number;
-    name: string;
-    code: string;
+  colorSize: {
+    color: {
+      id: number;
+      name: string;
+      code: string;
+    },
+    size: {
+      id: number;
+      name: string;
+      code: string;
+    },
+    quantity: number;
   }[],
-  sizes: {
-    id: number;
-    name: string;
-    code: string;
-  }[],
+  relatedIds: number[];
   translations: {
     [language: string]: {
       name: string;
       slug: string;
-      short_description: string;
+      shortDescription: string;
       description: string;
     }
   };
   seoData?: SeoDataTypes;
 };
 
+export type ProductColorSizeTypes = {
+  sizeId: number | null;
+  colorId: number | null;
+  quantity: number;
+};
+
 export type CreateUpdateProductTypes = {
   status: number;
-  display_order: number;
-  sku?: string;
-  totalInit: number;
+  displayOrder: number;
+  code: string;
+  featured: boolean;
   stock: number;
+  totalInit: number;
   thumbnail: string;
   galleries: string[];
   price: number;
   priceInit: number;
-  sale_percent: number;
+  salePercent: number;
   categories: number[];
-  colors: number[];
-  sizes: number[];
+  colorSize: ProductColorSizeTypes[];
+  relatedIds: number[];
   translations?: {
-    [key: string]: {
+    [language: string]: {
       productData: {
         name: string;
         slug: string;
-        short_description: string;
+        shortDescription: string;
         description: string;
       }
     }
@@ -116,7 +128,7 @@ export type ProductColorItemTypes = {
 
 export type CreateUpdateProductColorTypes = {
   status: number;
-  display_order: number;
+  displayOrder: number;
   code: string;
   name: string;
 };
@@ -135,7 +147,7 @@ export type ProductSizeItemTypes = {
 
 export type CreateUpdateProductSizeTypes = {
   status: number;
-  display_order: number;
+  displayOrder: number;
   code: string;
   name: string;
 };

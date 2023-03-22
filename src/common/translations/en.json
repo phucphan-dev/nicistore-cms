@@ -672,6 +672,8 @@
     "priceInit": "Price init",
     "salePercent": "Sale percent (%)",
     "thumbnail": "Thumbnail",
-    "galeries": "Galeries"
+    "galeries": "Galeries",
+    "quantity": "Quantity",
+    "code": "Product code"
   }
 }

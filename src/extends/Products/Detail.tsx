@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { SaveOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,6 +15,8 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as yup from 'yup';
 
+import ColorSizeNestedArray from './NestedProductColorSize';
+
 import { useAppSelector } from 'app/store';
 import { statusDummy } from 'common/assets/dummyData/system';
 import { DropdownElement } from 'common/components/DropdownType';
@@ -27,55 +30,61 @@ import SeoSection, { SeoSectionActionProps } from 'common/components/SeoSection'
 import { SeoFormTypes } from 'common/components/SeoSection/types';
 import StatusLabel from 'common/components/StatusLabel';
 import { createProductService, getProductByIdService, updateProductByIdService, } from 'common/services/products';
-import { CreateUpdateProductTypes } from 'common/services/products/types';
+import { CreateUpdateProductTypes, ProductColorSizeTypes } from 'common/services/products/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { generateSlug } from 'common/utils/functions';
 
-type ProductFormTypes = {
+export type ProductFormTypes = {
   name: string;
   slug: string;
-  short_description: string;
+  shortDescription: string;
   description: string;
   status: number;
-  display_order: number;
-  sku?: string;
-  totalInit: number;
+  displayOrder: number;
+  code: string;
+  featured: boolean;
   stock: number;
-  price: number;
-  priceInit: number;
-  sale_percent: number;
+  totalInit: number;
   thumbnail: string;
   galleries: string[];
+  price: number;
+  priceInit: number;
+  salePercent: number;
   categories: number[];
-  colors: number[];
-  sizes: number[];
+  colorSize: ProductColorSizeTypes[];
+  relatedIds: number[];
 };
 
-const defaultValues = {
+const defaultValues: ProductFormTypes = {
   name: '',
   slug: '',
-  short_description: '',
+  shortDescription: '',
   description: '',
   status: 1,
-  display_order: 1,
-  totalInit: 0,
+  displayOrder: 1,
+  code: '',
+  featured: false,
   stock: 0,
+  totalInit: 0,
   thumbnail: '',
   galleries: [],
   price: 0,
   priceInit: 0,
-  sale_percent: 0,
+  salePercent: 0,
   categories: [],
-  colors: [],
-  sizes: [],
+  colorSize: [],
+  relatedIds: []
 };
 
 const productDetailSchema = yup.object().shape({
   name: yup.string().required('Nhập tiêu đề'),
   slug: yup.string().required('Nhập đường dẫn'),
-  short_description: yup.string().required('Nhập mô tả ngắn'),
+  shortDescription: yup.string().required('Nhập mô tả ngắn'),
   description: yup.string().required('Nhập mô tả'),
   status: yup.number().required('Chọn trạng thái'),
+  displayOrder: yup.number().required('Nhập thứ tự hiển thị'),
+  code: yup.string().required('Nhập mã sản phẩm'),
+  totalInit: yup.number().required('Nhập số lượng nhập hàng'),
   thumbnail: yup.string().required('Chọn hình đại diện'),
   price: yup.number().required('Nhập giá'),
   priceInit: yup.number().required('Nhập giá nhập hàng'),
@@ -170,24 +179,25 @@ const ProductDetail: React.FC = () => {
 
     const params: CreateUpdateProductTypes = {
       status: formData.status,
-      display_order: formData.display_order,
-      sku: formData.sku,
-      totalInit: formData.totalInit,
+      displayOrder: formData.displayOrder,
+      code: formData.code,
+      featured: formData.featured,
       stock: formData.stock,
+      totalInit: formData.totalInit,
       thumbnail: formData.thumbnail,
       galleries: formData.galleries,
       price: formData.price,
       priceInit: formData.priceInit,
-      sale_percent: formData.sale_percent,
+      salePercent: formData.salePercent,
       categories: formData.categories,
-      colors: formData.colors,
-      sizes: formData.sizes,
+      colorSize: formData.colorSize,
+      relatedIds: formData.relatedIds,
       translations: {
         [currentLang]: {
           productData: {
             name: formData.name,
             slug: formData.slug,
-            short_description: formData.short_description,
+            shortDescription: formData.shortDescription,
             description: formData.description
           },
         }
@@ -236,29 +246,32 @@ const ProductDetail: React.FC = () => {
     if (productData && productData.translations[currentLang]) {
       setStatus(productData.productData.status);
       const {
-        name, slug, short_description, description
+        name, slug, shortDescription, description
       } = productData.translations[currentLang];
       const {
-        display_order, sku, totalInit, stock, galleries, thumbnail, price, sale_percent, priceInit
+        displayOrder, code, totalInit, stock,
+        galleries, thumbnail, price, salePercent, priceInit, featured,
       } = productData.productData;
       const objDefault: ProductFormTypes = {
         name,
         slug,
-        short_description,
+        shortDescription,
         description,
         status: productData.productData.status,
-        display_order,
-        sku,
-        totalInit,
+        displayOrder,
+        code,
+        featured,
         stock,
-        galleries,
+        totalInit,
         thumbnail,
+        galleries,
         price,
         priceInit,
-        sale_percent,
+        salePercent,
         categories: productData.categories.map((item) => item.id),
-        colors: productData.colors.map((item) => item.id),
-        sizes: productData.sizes.map((item) => item.id),
+        colorSize: productData.colorSize.map((item) => (
+          { colorId: item.color.id, sizeId: item.size.id, quantity: item.quantity })),
+        relatedIds: productData.relatedIds
       };
       method.reset(objDefault);
     } else {
@@ -368,7 +381,7 @@ const ProductDetail: React.FC = () => {
                             *
                           </Typography.Text>
                           <Controller
-                            name="short_description"
+                            name="shortDescription"
                             defaultValue=""
                             render={({
                               field: { value, onChange },
@@ -420,56 +433,6 @@ const ProductDetail: React.FC = () => {
                           />
                         </div>
                       </Col>
-                      <Col span={12}>
-                        <div className="p-editPageTemplate_input u-mt-16">
-                          <Typography.Text strong>
-                            {t('product.status')}
-                            {' '}
-                          </Typography.Text>
-                          <Controller
-                            name="status"
-                            control={method.control}
-                            render={({ field }) => (
-                              <DropdownElement
-                                options={statusDummy}
-                                placeholder={`${t('system.select')} ${t('product.status')}`}
-                                locale={currentLang}
-                                filterParams={idParams.toString()}
-                                value={field.value}
-                                onChange={field.onChange}
-                              />
-                            )}
-                          />
-                        </div>
-                      </Col>
-                      <Col span={12}>
-                        <div className="p-editPageTemplate_input u-mt-16">
-                          <Typography.Text strong>
-                            {t('product.displayOrder')}
-                          </Typography.Text>
-                          <Typography.Text strong type="danger">
-                            {' '}
-                            *
-                          </Typography.Text>
-                          <Controller
-                            name="display_order"
-                            control={method.control}
-                            render={({
-                              field: { value, onChange },
-                              fieldState: { error },
-                            }) => (
-                              <Input
-                                className="u-mt-8"
-                                type="number"
-                                value={value}
-                                onChange={onChange}
-                                error={error?.message}
-                                size="middle"
-                              />
-                            )}
-                          />
-                        </div>
-                      </Col>
                     </Row>
                   </Card>
                   <Card type="inner">
@@ -477,11 +440,11 @@ const ProductDetail: React.FC = () => {
                       <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
-                            {t('product.sku')}
+                            {t('product.code')}
                             {' '}
                           </Typography.Text>
                           <Controller
-                            name="sku"
+                            name="code"
                             control={method.control}
                             render={({
                               field: { value, onChange },
@@ -527,63 +490,8 @@ const ProductDetail: React.FC = () => {
                           />
                         </div>
                       </Col>
-                      <Col span={12}>
-                        <div className="p-editPageTemplate_input u-mt-16">
-                          <Typography.Text strong>
-                            {t('product.colors')}
-                          </Typography.Text>
-                          <Typography.Text strong type="danger">
-                            {' '}
-                            *
-                          </Typography.Text>
-                          <Controller
-                            name="colors"
-                            render={({
-                              field: { value, onChange },
-                            }) => (
-                              <DropdownElement
-                                type="colors"
-                                placeholder="Please select"
-                                locale="vi"
-                                value={value}
-                                onChange={onChange}
-                                multiple={{
-                                  allowClear: true,
-                                  defaultValue: []
-                                }}
-                              />
-                            )}
-                          />
-                        </div>
-                      </Col>
-                      <Col span={12}>
-                        <div className="p-editPageTemplate_input u-mt-16">
-                          <Typography.Text strong>
-                            {t('product.sizes')}
-                          </Typography.Text>
-                          <Typography.Text strong type="danger">
-                            {' '}
-                            *
-                          </Typography.Text>
-                          <Controller
-                            name="sizes"
-                            render={({
-                              field: { value, onChange },
-                            }) => (
-                              <DropdownElement
-                                type="sizes"
-                                placeholder="Please select"
-                                locale="vi"
-                                value={value}
-                                onChange={onChange}
-                                multiple={{
-                                  allowClear: true,
-                                  defaultValue: []
-                                }}
-                              />
-                            )}
-                          />
-                        </div>
+                      <Col span={24}>
+                        <ColorSizeNestedArray control={method.control} />
                       </Col>
                     </Row>
                   </Card>
@@ -696,7 +604,7 @@ const ProductDetail: React.FC = () => {
                             {' '}
                           </Typography.Text>
                           <Controller
-                            name="sale_percent"
+                            name="salePercent"
                             control={method.control}
                             render={({
                               field: { value, onChange },
@@ -786,6 +694,56 @@ const ProductDetail: React.FC = () => {
               <Col xxl={6} xl={8} lg={8}>
                 <div className="u-mb-16">
                   <StatusLabel status={status} bigger />
+                </div>
+                <div className="u-mt-16">
+                  <Card>
+                    <div className="p-editPageTemplate_input">
+                      <Typography.Text strong>
+                        {t('product.status')}
+                        {' '}
+                      </Typography.Text>
+                      <Controller
+                        name="status"
+                        control={method.control}
+                        render={({ field }) => (
+                          <DropdownElement
+                            options={statusDummy}
+                            placeholder={`${t('system.select')} ${t('product.status')}`}
+                            locale={currentLang}
+                            filterParams={idParams.toString()}
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        )}
+                      />
+                    </div>
+                    <div className="p-editPageTemplate_input u-mt-16">
+                      <Typography.Text strong>
+                        {t('product.displayOrder')}
+                      </Typography.Text>
+                      <Typography.Text strong type="danger">
+                        {' '}
+                        *
+                      </Typography.Text>
+                      <Controller
+                        name="displayOrder"
+                        control={method.control}
+                        render={({
+                          field: { value, onChange },
+                          fieldState: { error },
+                        }) => (
+                          <Input
+                            className="u-mt-8"
+                            type="number"
+                            value={value}
+                            onChange={onChange}
+                            error={error?.message}
+                            size="middle"
+                          />
+                        )}
+                      />
+                    </div>
+                  </Card>
                 </div>
                 <ManagementInfo
                   classNameCustom="u-mt-16"

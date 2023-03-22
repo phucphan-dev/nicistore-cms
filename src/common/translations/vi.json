@@ -672,6 +672,8 @@
     "priceInit": "Giá nhập hàng",
     "salePercent": "Giảm giá (%)",
     "thumbnail": "Hình đại diện",
-    "galeries": "Hình ảnh"
+    "galeries": "Hình ảnh",
+    "quantity": "Số lượng",
+    "code": "Mã sản phẩm"
   }
 }

@@ -138,8 +138,8 @@ const ProductCategoriesDetail: React.FC = () => {
     const dataSeoForm = await seoSectionRef.current?.handleForm();
 
     const params: CreateUpdateProductCategoryTypes = {
-      display_order: formData.displayOrder,
-      parent_id: formData.parentId,
+      displayOrder: formData.displayOrder,
+      parentId: formData.parentId,
       status: formData.status,
       translations: {
         [currentLang]: {
