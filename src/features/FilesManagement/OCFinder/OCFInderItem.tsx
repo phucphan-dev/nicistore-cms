@@ -28,7 +28,7 @@ import { videoRegex } from '../services';
 import styles from './item.module.css';
 
 import useClickOutside from 'common/hooks/useClickOutside';
-import { compressImage, numberWithPrefix } from 'common/utils/functions';
+import { getImageURL, numberWithPrefix } from 'common/utils/functions';
 
 export interface OCFinderData {
   id: number;
@@ -90,11 +90,6 @@ const formatBytes = (bytes: number, decimals = 2) => {
 
 const preventDefault: React.MouseEventHandler = (e) => e.preventDefault();
 
-const resizeImage = async (imgSrc: string) => {
-  const { dataUrl } = await compressImage(imgSrc);
-  return dataUrl;
-};
-
 export default function OCFInderItem({
   id, name, isDirectory, date, size, type, thumbnail, isCreate,
   active,
@@ -126,8 +121,7 @@ export default function OCFInderItem({
   useEffect(() => {
     (async () => {
       if (thumbnail) {
-        const dataUrl = await resizeImage(thumbnail);
-        setImgSrc(dataUrl);
+        setImgSrc(getImageURL(thumbnail));
       } else {
         setImgSrc('');
       }

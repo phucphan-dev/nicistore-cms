@@ -116,7 +116,7 @@ const ProductSizesDetail: React.FC = () => {
     const formData = method.getValues();
 
     const params: CreateUpdateProductSizeTypes = {
-      display_order: formData.displayOrder,
+      displayOrder: formData.displayOrder,
       status: formData.status,
       code: formData.code,
       name: formData.name
@@ -283,7 +283,7 @@ const ProductSizesDetail: React.FC = () => {
                                 value={value}
                                 onChange={onChange}
                                 error={error?.message}
-                                size="large"
+                                size="middle"
                               />
                             )}
                           />
