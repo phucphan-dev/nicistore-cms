@@ -3,7 +3,7 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  Button, Card, Col, message, Row, Space, Spin, Typography
+  Button, Card, Checkbox, Col, message, Row, Space, Spin, Typography
 } from 'antd';
 import moment from 'moment';
 import React, {
@@ -32,7 +32,7 @@ import StatusLabel from 'common/components/StatusLabel';
 import { createProductService, getProductByIdService, updateProductByIdService, } from 'common/services/products';
 import { CreateUpdateProductTypes, ProductColorSizeTypes } from 'common/services/products/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
-import { generateSlug } from 'common/utils/functions';
+import { generateSlug, renderValue } from 'common/utils/functions';
 
 export type ProductFormTypes = {
   name: string;
@@ -46,7 +46,7 @@ export type ProductFormTypes = {
   stock: number;
   totalInit: number;
   thumbnail: string;
-  galleries: string[];
+  galleries: SelectImageData[];
   price: number;
   priceInit: number;
   salePercent: number;
@@ -112,6 +112,12 @@ const ProductDetail: React.FC = () => {
   );
   const [confirm, setConfirm] = useState<string | undefined>(undefined);
 
+  const colorSizeWatch = method.watch('colorSize');
+  const stockWatch = useMemo(() => colorSizeWatch.reduce((
+    prev: number,
+    curr
+  ) => prev + curr.quantity, 0), [colorSizeWatch]);
+
   /* Queries */
   const { data: productData, isLoading } = useQuery(
     ['getProductDetail', currentLang, idParams],
@@ -164,6 +170,7 @@ const ProductDetail: React.FC = () => {
     return {
       seoTitle: seoData?.title || '',
       seoIntro: seoData?.description || '',
+      ogImage: seoData?.image || '',
       seoKeyword: seoData?.keywords || '',
     } as SeoFormTypes;
   }, [currentLang, productData]);
@@ -206,6 +213,7 @@ const ProductDetail: React.FC = () => {
         [currentLang]: {
           title: dataSeoForm?.seoTitle,
           description: dataSeoForm?.seoIntro,
+          image: dataSeoForm?.ogImage,
           keywords: dataSeoForm?.seoKeyword,
         }
       },
@@ -477,7 +485,7 @@ const ProductDetail: React.FC = () => {
                             }) => (
                               <DropdownElement
                                 type="productCategories"
-                                placeholder="Please select"
+                                placeholder={t('system.pleaseSelect')}
                                 locale="vi"
                                 value={value}
                                 onChange={onChange}
@@ -489,6 +497,53 @@ const ProductDetail: React.FC = () => {
                             )}
                           />
                         </div>
+                      </Col>
+                      <Col span={24}>
+                        <Row className="u-mt-16" gutter={16} style={{ alignItems: 'center' }}>
+                          <Col span={12}>
+                            <div className="p-editPageTemplate_input">
+                              <Typography.Text strong>
+                                {t('product.relatedProduct')}
+                              </Typography.Text>
+                              <Controller
+                                name="relatedIds"
+                                render={({
+                                  field: { value, onChange },
+                                }) => (
+                                  <DropdownElement
+                                    type="products"
+                                    placeholder={t('system.pleaseSelect')}
+                                    locale="vi"
+                                    value={value}
+                                    onChange={onChange}
+                                    multiple={{
+                                      allowClear: true,
+                                      defaultValue: []
+                                    }}
+                                  />
+                                )}
+                              />
+                            </div>
+                          </Col>
+                          <Col span={12}>
+                            <Controller
+                              name="featured"
+                              render={({
+                                field: { onChange, value, ref },
+                              }) => (
+                                <div className="u-mt-8">
+                                  <Checkbox
+                                    ref={ref}
+                                    checked={value}
+                                    onChange={onChange}
+                                  >
+                                    {t('product.featuredProduct')}
+                                  </Checkbox>
+                                </div>
+                              )}
+                            />
+                          </Col>
+                        </Row>
                       </Col>
                       <Col span={24}>
                         <ColorSizeNestedArray control={method.control} />
@@ -537,9 +592,9 @@ const ProductDetail: React.FC = () => {
                             }) => (
                               <Input
                                 className="u-mt-8"
-                                type="number"
-                                value={value}
-                                onChange={onChange}
+                                type="text"
+                                value={renderValue(String(value))}
+                                onChange={(e) => e.currentTarget.value && onChange(Number(e.currentTarget.value.replaceAll(',', '')))}
                                 error={error?.message}
                                 size="large"
                               />
@@ -557,16 +612,17 @@ const ProductDetail: React.FC = () => {
                             name="stock"
                             control={method.control}
                             render={({
-                              field: { value, onChange },
+                              field: { onChange },
                               fieldState: { error },
                             }) => (
                               <Input
                                 className="u-mt-8"
                                 type="number"
-                                value={value}
+                                value={stockWatch}
                                 onChange={onChange}
                                 error={error?.message}
                                 size="large"
+                                readOnly
                               />
                             )}
                           />
@@ -587,9 +643,9 @@ const ProductDetail: React.FC = () => {
                             }) => (
                               <Input
                                 className="u-mt-8"
-                                type="number"
-                                value={value}
-                                onChange={onChange}
+                                type="text"
+                                value={renderValue(String(value))}
+                                onChange={(e) => e.currentTarget.value && onChange(Number(e.currentTarget.value.replaceAll(',', '')))}
                                 error={error?.message}
                                 size="large"
                               />

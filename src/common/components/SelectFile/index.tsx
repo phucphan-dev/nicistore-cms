@@ -242,7 +242,7 @@ export const SelectMultipleFile: React.FC<SelectMultipleFileProps> = ({
 
   /* Effects */
   useEffect(() => {
-    if (value && !initRef.current) {
+    if (value && value.length > 0 && !initRef.current) {
       setFiles(value.map((ele, idx) => ({
         id: `select-file-item-${idx}-${new Date().getTime()}`,
         ...ele,

@@ -32,7 +32,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
   });
 
   return (
-    <div className="site-card-border-less-wrapper">
+    <div className="site-card-border-less-wrapper u-mt-16">
       <Space
         direction="horizontal"
         size={12}
@@ -54,22 +54,26 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                     size="small"
                     onClick={(e) => {
                       if (e.stopPropagation) e.stopPropagation();
-                      Modal.confirm({
-                        className: 't-pagetable_deleteLanguageModal',
-                        autoFocusButton: 'cancel',
-                        okText: t('system.ok'),
-                        cancelText: t('system.cancel'),
-                        cancelButtonProps: {
-                          type: 'primary',
-                        },
-                        okButtonProps: {
-                          type: 'default',
-                        },
-                        title: t('message.confirmDeleteRecord'),
-                        onOk: () => {
-                          remove(i);
-                        },
-                      });
+                      if (!fields[i].colorId && !fields[i].sizeId && !fields[i].quantity) {
+                        remove(i);
+                      } else {
+                        Modal.confirm({
+                          className: 't-pagetable_deleteLanguageModal',
+                          autoFocusButton: 'cancel',
+                          okText: t('system.ok'),
+                          cancelText: t('system.cancel'),
+                          cancelButtonProps: {
+                            type: 'primary',
+                          },
+                          okButtonProps: {
+                            type: 'default',
+                          },
+                          title: t('message.confirmDeleteRecord'),
+                          onOk: () => {
+                            remove(i);
+                          },
+                        });
+                      }
                     }}
                     icon={(<DeleteOutlined />)}
                   />
@@ -77,7 +81,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
               )}
             >
               <Row gutter={16}>
-                <Col xxl={8} xl={12}>
+                <Col xxl={8} xl={9}>
                   <div className="p-editPageTemplate_input">
                     <Typography.Text strong>
                       {t('product.colors')}
@@ -93,7 +97,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                       }) => (
                         <DropdownElement
                           type="colors"
-                          placeholder="Please select"
+                          placeholder={t('system.pleaseSelect')}
                           locale="vi"
                           value={value}
                           onChange={onChange}
@@ -102,7 +106,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                     />
                   </div>
                 </Col>
-                <Col xxl={8} xl={6}>
+                <Col xxl={8} xl={9}>
                   <div className="p-editPageTemplate_input">
                     <Typography.Text strong>
                       {t('product.sizes')}
@@ -118,7 +122,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                       }) => (
                         <DropdownElement
                           type="sizes"
-                          placeholder="Please select"
+                          placeholder={t('system.pleaseSelect')}
                           locale="vi"
                           value={value}
                           onChange={onChange}

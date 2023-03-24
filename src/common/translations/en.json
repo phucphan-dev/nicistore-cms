@@ -107,7 +107,8 @@
     "outOf": "out of",
     "create301Redirect": "Create 301 Redirect",
     "edit301Redirect": "Edit 301 Redirect",
-    "edit": "Edit"
+    "edit": "Edit",
+    "pleaseSelect": "Please select"
   },
   "login": {
     "title": "LOG IN TO MANAGE SYSTEM",
@@ -674,6 +675,8 @@
     "thumbnail": "Thumbnail",
     "galeries": "Galeries",
     "quantity": "Quantity",
-    "code": "Product code"
+    "code": "Product code",
+    "featuredProduct": "Featured product",
+    "relatedProduct": "Related products"
   }
 }

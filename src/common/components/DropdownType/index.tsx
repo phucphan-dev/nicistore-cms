@@ -20,6 +20,7 @@ export enum DropDownType {
   productCategories = 'product-categories',
   colors = 'colors',
   sizes = 'sizes',
+  products = 'products',
 }
 
 export type DropdownTypeKey = keyof typeof DropDownType;

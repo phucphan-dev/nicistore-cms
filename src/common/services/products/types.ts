@@ -42,7 +42,7 @@ export type ProductItemTypes = {
     stock: number;
     totalInit: number;
     thumbnail: string;
-    galleries: string[];
+    galleries: SelectImageData[];
     price: number;
     priceInit: number;
     salePercent: number;
@@ -94,7 +94,7 @@ export type CreateUpdateProductTypes = {
   stock: number;
   totalInit: number;
   thumbnail: string;
-  galleries: string[];
+  galleries: SelectImageData[];
   price: number;
   priceInit: number;
   salePercent: number;

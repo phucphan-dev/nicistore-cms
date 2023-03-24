@@ -724,7 +724,7 @@ const RenderElement: React.FC<RenderElementProps> = ({
                 }) => (
                   <DropdownElement
                     type="newsCategory"
-                    placeholder="Please select"
+                    placeholder={t('system.pleaseSelect')}
                     locale={locale || 'vi'}
                     value={value}
                     onChange={onChange}

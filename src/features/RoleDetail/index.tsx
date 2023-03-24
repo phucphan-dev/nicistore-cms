@@ -204,7 +204,7 @@ const RoleDetail: React.FC<ActiveRoles> = () => {
               size="middle"
               allowClear
               style={{ width: '100%' }}
-              placeholder="Please select"
+              placeholder={t('system.pleaseSelect')}
               value={value}
               onChange={onChange}
               tagRender={tagRender}
