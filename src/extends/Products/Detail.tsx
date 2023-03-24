@@ -379,72 +379,6 @@ const ProductDetail: React.FC = () => {
                   </Card>
                   <Card type="inner">
                     <Row gutter={16}>
-                      <Col span={24}>
-                        <div className="p-editPageTemplate_input">
-                          <Typography.Text strong>
-                            {t('product.short_description')}
-                            {' '}
-                          </Typography.Text>
-                          <Typography.Text strong type="danger">
-                            *
-                          </Typography.Text>
-                          <Controller
-                            name="shortDescription"
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange },
-                            }) => (
-                              <SimpleEditor
-                                value={value || ''}
-                                handleChange={(_event: any, editor: any) => {
-                                  const data = editor.getData();
-                                  onChange(data);
-                                }}
-                              />
-                            )}
-                          />
-                        </div>
-                      </Col>
-                      <Col span={24}>
-                        <div className="p-editPageTemplate_input u-mt-16">
-                          <Typography.Text strong>
-                            {t('product.description')}
-                          </Typography.Text>
-                          <Typography.Text strong type="danger">
-                            {' '}
-                            *
-                          </Typography.Text>
-                          <Controller
-                            name="description"
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange },
-                              fieldState
-                            }) => (
-                              <>
-                                <Editor
-                                  value={value}
-                                  handleChange={(_event: any, editor: any) => {
-                                    const data = editor.getData();
-                                    onChange(data);
-                                  }}
-                                />
-                                {fieldState.error && (
-                                  <span
-                                    className="a-input_errorMessage"
-                                  >
-                                    {fieldState.error.message}
-                                  </span>
-                                )}
-                              </>
-                            )}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Card>
-                  <Card type="inner">
-                    <Row gutter={16}>
                       <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
@@ -674,6 +608,72 @@ const ProductDetail: React.FC = () => {
                                 error={error?.message}
                                 size="large"
                               />
+                            )}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </Card>
+                  <Card type="inner">
+                    <Row gutter={16}>
+                      <Col span={24}>
+                        <div className="p-editPageTemplate_input">
+                          <Typography.Text strong>
+                            {t('product.short_description')}
+                            {' '}
+                          </Typography.Text>
+                          <Typography.Text strong type="danger">
+                            *
+                          </Typography.Text>
+                          <Controller
+                            name="shortDescription"
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange },
+                            }) => (
+                              <SimpleEditor
+                                value={value || ''}
+                                handleChange={(_event: any, editor: any) => {
+                                  const data = editor.getData();
+                                  onChange(data);
+                                }}
+                              />
+                            )}
+                          />
+                        </div>
+                      </Col>
+                      <Col span={24}>
+                        <div className="p-editPageTemplate_input u-mt-16">
+                          <Typography.Text strong>
+                            {t('product.description')}
+                          </Typography.Text>
+                          <Typography.Text strong type="danger">
+                            {' '}
+                            *
+                          </Typography.Text>
+                          <Controller
+                            name="description"
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange },
+                              fieldState
+                            }) => (
+                              <>
+                                <Editor
+                                  value={value}
+                                  handleChange={(_event: any, editor: any) => {
+                                    const data = editor.getData();
+                                    onChange(data);
+                                  }}
+                                />
+                                {fieldState.error && (
+                                  <span
+                                    className="a-input_errorMessage"
+                                  >
+                                    {fieldState.error.message}
+                                  </span>
+                                )}
+                              </>
                             )}
                           />
                         </div>
