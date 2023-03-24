@@ -3,7 +3,8 @@ const LOCAL_STORAGE = {
   REFRESH_TOKEN: 'NICICMS_RefreshToken',
   ABILITIES: 'NICICMS_Abilities',
   LANGUAGE: 'NICICMS_Language',
-  PREVIEW_DATA: 'NICICMS_PreviewData'
+  PREVIEW_DATA: 'NICICMS_PreviewData',
+  FINDER_TREE_SELECTED: 'NICICMS_TreeSelected',
 };
 
 export const BASE_URL = process.env.REACT_APP_BASE_URL;

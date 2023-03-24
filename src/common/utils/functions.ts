@@ -166,7 +166,7 @@ export const formatDateHHMMSS = () => {
 
 export const getImageURL = (imgUrl?: string) => `${BASE_URL || ''}${imgUrl || ''}`;
 
-export const generateImageFileName = () => `OREO_SCAN_BILL_${formatDateYYYYMMDD()}_${formatDateHHMMSS()}.jpeg`;
+export const generateImageFileName = () => `nicistore_${formatDateYYYYMMDD()}_${formatDateHHMMSS()}.jpeg`;
 
 export const compressImage = async (url: string): Promise<string> => {
   const canvas = document.createElement('canvas');
@@ -377,4 +377,11 @@ export const dateRangeFromTo = (dFrom: string, dTo: string, format = 'YYYY-MM-DD
 
   return allDate;
   // TODO: example: dateRangeFromTo('2022-09-05', '2022-10-20', 'DD/MM');
+};
+
+export const renderValue = (val?: string) => {
+  if (!val) return '';
+  const convertedVal = val.replaceAll(',', '');
+  const converted = convertedVal.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return converted;
 };

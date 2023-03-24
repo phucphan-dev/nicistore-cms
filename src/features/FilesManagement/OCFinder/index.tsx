@@ -30,6 +30,8 @@ import OCFInderItem, { OCFinderData } from './OCFInderItem';
 import styles from './index.module.css';
 
 import useDebounce from 'common/hooks/useDebounce';
+import useDidMount from 'common/hooks/useDidMount';
+import LOCAL_STORAGE from 'common/utils/constant';
 
 export type OCFinderRoles = {
   createFolder: boolean;
@@ -135,7 +137,9 @@ export default function OCFinder({
   onRestoreTrash
 }: IProps) {
   const [searchMode, setSearchMode] = useState(false);
-  const [currentId, setCurrentId] = useState(rootId);
+  const [currentId, setCurrentId] = useState(Number(localStorage.getItem(
+    LOCAL_STORAGE.FINDER_TREE_SELECTED
+  )) || rootId);
   const [treeSelectedId, setTreeSelectedId] = useState(currentId);
   const [selected, setSelected] = useState(new Set<number>());
   const [selectedFiles, setSelectedFiles] = useState(new Set<number>());
@@ -305,6 +309,14 @@ export default function OCFinder({
       onRenameDirectory();
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE.FINDER_TREE_SELECTED, String(treeSelectedId));
+  }, [treeSelectedId]);
+
+  useDidMount(() => {
+    setTreeSelectedId(localStorage.getItem(LOCAL_STORAGE.FINDER_TREE_SELECTED) || rootId);
+  });
 
   return (
     <div className={styles.container}>

@@ -107,7 +107,8 @@
     "outOf": "trên",
     "create301Redirect": "Tạo 301 Redirect",
     "edit301Redirect": "Chỉnh sửa 301 Redirect",
-    "edit": "Chỉnh sửa"
+    "edit": "Chỉnh sửa",
+    "pleaseSelect": "Vui lòng chọn"
   },
   "login": {
     "title": "ĐĂNG NHẬP ĐỂ QUẢN LÝ HỆ THỐNG",
@@ -674,6 +675,8 @@
     "thumbnail": "Hình đại diện",
     "galeries": "Hình ảnh",
     "quantity": "Số lượng",
-    "code": "Mã sản phẩm"
+    "code": "Mã sản phẩm",
+    "featuredProduct": "Sản phẩm nổi bật",
+    "relatedProduct": "Sản phẩm liên quan"
   }
 }
