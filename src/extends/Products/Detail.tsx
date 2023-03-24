@@ -186,7 +186,7 @@ const ProductDetail: React.FC = () => {
 
     const params: CreateUpdateProductTypes = {
       status: formData.status,
-      displayOrder: formData.displayOrder,
+      displayOrder: Number(formData.displayOrder),
       code: formData.code,
       featured: formData.featured,
       stock: formData.stock,

@@ -6,6 +6,7 @@ export type ProductCategoryItemTypes = {
     status: number;
     createdAt: string;
     updatedAt: string;
+    displayOrder: number;
   };
   translations: {
     [language: string]: {

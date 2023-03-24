@@ -138,7 +138,7 @@ const ProductCategoriesDetail: React.FC = () => {
     const dataSeoForm = await seoSectionRef.current?.handleForm();
 
     const params: CreateUpdateProductCategoryTypes = {
-      displayOrder: formData.displayOrder,
+      displayOrder: Number(formData.displayOrder),
       parentId: formData.parentId,
       status: formData.status,
       translations: {
@@ -198,7 +198,7 @@ const ProductCategoriesDetail: React.FC = () => {
       const objDefault: ProductCategoriesFormTypes = {
         name,
         slug,
-        displayOrder: 1,
+        displayOrder: productCategoryData.categoryData.displayOrder,
         parentId: productCategoryData.categoryData.parentId,
         status: productCategoryData.categoryData.status,
       };

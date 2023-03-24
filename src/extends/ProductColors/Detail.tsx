@@ -116,7 +116,7 @@ const ProductColorsDetail: React.FC = () => {
     const formData = method.getValues();
 
     const params: CreateUpdateProductColorTypes = {
-      displayOrder: formData.displayOrder,
+      displayOrder: Number(formData.displayOrder),
       status: formData.status,
       code: formData.code,
       name: formData.name
