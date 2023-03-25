@@ -34,6 +34,20 @@ export type CreateUpdateProductCategoryTypes = {
 };
 
 /* Products */
+export type ColorSizeData = {
+  color: {
+    id: number;
+    name: string;
+    code: string;
+  },
+  size: {
+    id: number;
+    name: string;
+    code: string;
+  },
+  quantity: number;
+};
+
 export type ProductItemTypes = {
   productData: {
     id: number;
@@ -56,19 +70,7 @@ export type ProductItemTypes = {
     name: string;
     slug: string;
   }[],
-  colorSize: {
-    color: {
-      id: number;
-      name: string;
-      code: string;
-    },
-    size: {
-      id: number;
-      name: string;
-      code: string;
-    },
-    quantity: number;
-  }[],
+  colorSize: ColorSizeData[],
   relatedIds: number[];
   translations: {
     [language: string]: {

@@ -113,10 +113,6 @@ const ProductDetail: React.FC = () => {
   const [confirm, setConfirm] = useState<string | undefined>(undefined);
 
   const colorSizeWatch = method.watch('colorSize');
-  const stockWatch = useMemo(() => colorSizeWatch.reduce((
-    prev: number,
-    curr
-  ) => prev + curr.quantity, 0), [colorSizeWatch]);
 
   /* Queries */
   const { data: productData, isLoading } = useQuery(
@@ -286,6 +282,17 @@ const ProductDetail: React.FC = () => {
       method.reset(defaultValues);
     }
   }, [productData, currentLang, method]);
+
+  useEffect(() => {
+    if (!idParams) {
+      const value = colorSizeWatch.reduce((
+        prev: number,
+        curr
+      ) => prev + curr.quantity, 0);
+      method.setValue('stock', value);
+      method.setValue('totalInit', value);
+    }
+  }, [colorSizeWatch, idParams, method]);
 
   return (
     <>
@@ -546,13 +553,13 @@ const ProductDetail: React.FC = () => {
                             name="stock"
                             control={method.control}
                             render={({
-                              field: { onChange },
+                              field: { value, onChange },
                               fieldState: { error },
                             }) => (
                               <Input
                                 className="u-mt-8"
                                 type="number"
-                                value={stockWatch}
+                                value={value}
                                 onChange={onChange}
                                 error={error?.message}
                                 size="large"

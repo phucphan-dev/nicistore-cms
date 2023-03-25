@@ -38,6 +38,15 @@ const initialState: SystemState = {
       numbersOfRows: [{
         numbers: 10,
         isDefault: true
+      }, {
+        numbers: 20,
+        isDefault: true
+      }, {
+        numbers: 50,
+        isDefault: true
+      }, {
+        numbers: 100,
+        isDefault: true
       }]
     },
     importTemplates: {

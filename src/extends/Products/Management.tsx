@@ -9,19 +9,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'app/store';
 import HeaderPage from 'common/components/HeaderPage';
 import PageTable from 'common/components/PageTable';
+import PriceSale from 'common/components/PriceSale';
 import StatusLabel from 'common/components/StatusLabel';
 import { deleteProductService, getAllProductService } from 'common/services/products';
-import { ProductItemTypes } from 'common/services/products/types';
+import { ColorSizeData, ProductItemTypes } from 'common/services/products/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { formatDateTime } from 'common/utils/functions';
 
 export type ProductTypes = {
   id: number;
   name: string;
-  stock: number;
+  colorSize: ColorSizeData[];
   createdAt: string;
   updatedAt: string;
   status: number;
+  price: {
+    original: number;
+    salePercent?: number;
+  };
   locale: ProductItemTypes['translations'];
 };
 
@@ -30,10 +35,14 @@ const convertProduct = (data: ProductItemTypes[]): ProductTypes[] => {
   return data.map((val) => ({
     id: val.productData.id,
     name: val.translations.vi ? val.translations.vi.name : val.translations.en.name,
-    stock: val.productData.stock,
+    colorSize: val.colorSize,
     status: val.productData.status,
     createdAt: val.productData.createdAt,
     updatedAt: val.productData.createdAt,
+    price: {
+      original: val.productData.price,
+      salePercent: val.productData.salePercent > 0 ? val.productData.salePercent : undefined
+    },
     locale: Object.fromEntries(
       Object
         .entries(val.translations)
@@ -91,6 +100,32 @@ const ProductManagement: React.FC = () => {
     return [];
   }, [products]);
 
+  const stockDetail = (colorSize: ColorSizeData[]) => {
+    const reduceData = colorSize.reduce((prev: any, curr) => ({
+      ...prev,
+      [curr.color.name]: prev[curr.color.name] ? [...prev[curr.color.name],
+      { size: curr.size.name, quantity: curr.quantity }]
+        : [{ size: curr.size.name, quantity: curr.quantity }]
+    }), {});
+    return (
+      <>
+        {Object.keys(reduceData).map((item) => (
+          <>
+            <Typography.Title level={5}>
+              Màu:
+              {' '}
+              {item}
+              <br />
+            </Typography.Title>
+            <ul>
+              {reduceData[item].map((it: any) => <li>{`Size: ${it.size} --- SL: ${it.quantity}`}</li>)}
+            </ul>
+          </>
+        ))}
+      </>
+    );
+  };
+
   /* Variables */
   const columns: ColumnsType<ProductTypes> = [
     {
@@ -121,7 +156,7 @@ const ProductManagement: React.FC = () => {
         ) => a.name.localeCompare(b.name)
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: ProductTypes) => (
         <Typography.Text
           onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
@@ -132,22 +167,16 @@ const ProductManagement: React.FC = () => {
     },
     {
       title: t('product.stock'),
-      dataIndex: 'stock',
-      key: 'stock',
-      sorter: {
-        compare: (
-          a: ProductTypes,
-          b: ProductTypes
-        ) => a.stock - b.stock
-      },
-      sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
-        <Typography.Text
-          style={{ color: '#4a4a4a', cursor: 'pointer' }}
-        >
-          {data.stock}
-        </Typography.Text>
-      ),
+      dataIndex: 'colorSize',
+      key: 'colorSize',
+      render: (_: string, data: ProductTypes) => stockDetail(data.colorSize),
+    },
+    {
+      title: t('product.price'),
+      dataIndex: 'price',
+      key: 'price',
+      align: 'center',
+      render: (_: string, data: ProductTypes) => <PriceSale promo={data.price.salePercent} price={data.price.original} unit="VNĐ" />,
     },
     {
       title: t('system.status'),
@@ -170,7 +199,7 @@ const ProductManagement: React.FC = () => {
         },
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: ProductTypes) => (
         <Typography.Text
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
@@ -240,7 +269,7 @@ const ProductManagement: React.FC = () => {
             navigate(`${ROUTE_PATHS.PRODUCT_DETAIL}?id=${id}&locale=${locale}`);
           }}
           tableProps={{
-            initShowColumns: ['id', 'name', 'stock', 'status'],
+            initShowColumns: ['id', 'name', 'colorSize', 'price'],
             columns,
             pageData: productData,
             currentPage,

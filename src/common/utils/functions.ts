@@ -385,3 +385,10 @@ export const renderValue = (val?: string) => {
   const converted = convertedVal.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return converted;
 };
+
+export const renderPrice = (val?: number, isPrice?: boolean, prefix?: string) => {
+  const converted = val?.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  if (prefix) return `${converted} ${prefix}`;
+  if (isPrice) return converted;
+  return val;
+};

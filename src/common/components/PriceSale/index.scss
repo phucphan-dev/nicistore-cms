@@ -1,0 +1,10 @@
+.m-priceSale {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &_sale {
+        margin-left: rem(8);
+    }
+}
