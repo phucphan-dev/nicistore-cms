@@ -62,6 +62,7 @@ export type ProductItemTypes = {
     priceInit: number;
     salePercent: number;
     featured: boolean;
+    isBestSeller: boolean;
     createdAt: string;
     updatedAt: string;
   };
@@ -94,6 +95,7 @@ export type CreateUpdateProductTypes = {
   displayOrder: number;
   code: string;
   featured: boolean;
+  isBestSeller: boolean;
   stock: number;
   totalInit: number;
   thumbnail: string;

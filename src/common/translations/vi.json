@@ -677,6 +677,7 @@
     "quantity": "Số lượng",
     "code": "Mã sản phẩm",
     "featuredProduct": "Sản phẩm nổi bật",
-    "relatedProduct": "Sản phẩm liên quan"
+    "relatedProduct": "Sản phẩm liên quan",
+    "isBestSeller": "Sản phẩm bán chạy"
   }
 }

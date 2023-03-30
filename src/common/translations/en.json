@@ -677,6 +677,7 @@
     "quantity": "Quantity",
     "code": "Product code",
     "featuredProduct": "Featured product",
-    "relatedProduct": "Related products"
+    "relatedProduct": "Related products",
+    "isBestSeller": "Best seller"
   }
 }

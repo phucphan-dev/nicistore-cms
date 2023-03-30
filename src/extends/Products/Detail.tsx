@@ -43,6 +43,7 @@ export type ProductFormTypes = {
   displayOrder: number;
   code: string;
   featured: boolean;
+  isBestSeller: boolean;
   stock: number;
   totalInit: number;
   thumbnail: string;
@@ -64,6 +65,7 @@ const defaultValues: ProductFormTypes = {
   displayOrder: 1,
   code: '',
   featured: false,
+  isBestSeller: false,
   stock: 0,
   totalInit: 0,
   thumbnail: '',
@@ -185,6 +187,7 @@ const ProductDetail: React.FC = () => {
       displayOrder: Number(formData.displayOrder),
       code: formData.code,
       featured: formData.featured,
+      isBestSeller: formData.isBestSeller,
       stock: Number(formData.stock),
       totalInit: Number(formData.totalInit),
       thumbnail: formData.thumbnail,
@@ -254,7 +257,7 @@ const ProductDetail: React.FC = () => {
       } = productData.translations[currentLang];
       const {
         displayOrder, code, totalInit, stock,
-        galleries, thumbnail, price, salePercent, priceInit, featured,
+        galleries, thumbnail, price, salePercent, priceInit, featured, isBestSeller
       } = productData.productData;
       const objDefault: ProductFormTypes = {
         name,
@@ -265,6 +268,7 @@ const ProductDetail: React.FC = () => {
         displayOrder,
         code,
         featured,
+        isBestSeller,
         stock,
         totalInit,
         thumbnail,
@@ -466,7 +470,7 @@ const ProductDetail: React.FC = () => {
                               />
                             </div>
                           </Col>
-                          <Col span={12}>
+                          <Col span={6}>
                             <Controller
                               name="featured"
                               render={({
@@ -479,6 +483,24 @@ const ProductDetail: React.FC = () => {
                                     onChange={onChange}
                                   >
                                     {t('product.featuredProduct')}
+                                  </Checkbox>
+                                </div>
+                              )}
+                            />
+                          </Col>
+                          <Col span={6}>
+                            <Controller
+                              name="isBestSeller"
+                              render={({
+                                field: { onChange, value, ref },
+                              }) => (
+                                <div className="u-mt-8">
+                                  <Checkbox
+                                    ref={ref}
+                                    checked={value}
+                                    onChange={onChange}
+                                  >
+                                    {t('product.isBestSeller')}
                                   </Checkbox>
                                 </div>
                               )}
