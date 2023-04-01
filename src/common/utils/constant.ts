@@ -152,6 +152,8 @@ export const ROUTE_PATHS = {
   PRODUCT_COLORS_DETAIL: '/product-color-detail',
   PRODUCT_SIZES_MANAGEMENT: '/product-size',
   PRODUCT_SIZES_DETAIL: '/product-size-detail',
+  ORDERS_MANAGEMENT: '/orders',
+  ORDERS_DETAIL: '/order-detail',
 };
 
 export const videoTypes: OptionType[] = [

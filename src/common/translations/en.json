@@ -157,7 +157,8 @@
     "productList": "List",
     "productCategories": "Categories",
     "productColor": "Colors",
-    "productSize": "Sizes"
+    "productSize": "Sizes",
+    "orders": "Orders"
   },
   "role": {
     "index": "View list",
@@ -679,5 +680,16 @@
     "featuredProduct": "Featured product",
     "relatedProduct": "Related products",
     "isBestSeller": "Best seller"
+  },
+  "order": {
+    "customer": "Customer",
+    "code": "Order code",
+    "products": "Products",
+    "total": "Total order",
+    "new": "New",
+    "processing": "Processing",
+    "delevering": "Delevering",
+    "done": "Done",
+    "cancel": "Cancel"
   }
 }

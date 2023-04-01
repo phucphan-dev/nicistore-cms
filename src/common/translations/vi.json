@@ -157,7 +157,8 @@
     "productList": "Danh sách",
     "productCategories": "Danh mục",
     "productColor": "Màu sắc",
-    "productSize": "Kích thước"
+    "productSize": "Kích thước",
+    "orders": "Đơn hàng"
   },
   "role": {
     "index": "Xem danh sách",
@@ -679,5 +680,16 @@
     "featuredProduct": "Sản phẩm nổi bật",
     "relatedProduct": "Sản phẩm liên quan",
     "isBestSeller": "Sản phẩm bán chạy"
+  },
+  "order": {
+    "customer": "Khách hàng",
+    "code": "Mã đơn hàng",
+    "products": "Sản phẩm",
+    "total": "Tổng đơn hàng",
+    "new": "Mới tạo",
+    "processing": "Đang xử lý",
+    "delevering": "Đang giao hàng",
+    "done": "Hoàn tất",
+    "cancel": "Đã hủy"
   }
 }

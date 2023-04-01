@@ -1,6 +1,8 @@
 import roles from './roles';
 
 import { ROUTE_PATHS } from 'common/utils/constant';
+import OrderDetail from 'extends/Orders/Detail';
+import OrdersManagement from 'extends/Orders/Management';
 import ProductCategoriesDetail from 'extends/ProductCategories/Detail';
 import ProductCategoriesManagement from 'extends/ProductCategories/Management';
 import ProductColorsDetail from 'extends/ProductColors/Detail';
@@ -529,16 +531,28 @@ const routes: RouteProps[] = [
     element: ProductColorsDetail,
   },
   {
-    id: 41,
+    id: 43,
     name: 'ProductSizes',
     path: ROUTE_PATHS.PRODUCT_SIZES_MANAGEMENT,
     element: ProductSizesManagement,
   },
   {
-    id: 42,
+    id: 44,
     name: 'ProductSizeDetail',
     path: ROUTE_PATHS.PRODUCT_SIZES_DETAIL,
     element: ProductSizesDetail,
+  },
+  {
+    id: 45,
+    name: 'Orders',
+    path: ROUTE_PATHS.ORDERS_MANAGEMENT,
+    element: OrdersManagement,
+  },
+  {
+    id: 46,
+    name: 'OrderDetail',
+    path: ROUTE_PATHS.ORDERS_DETAIL,
+    element: OrderDetail,
   },
 ];
 

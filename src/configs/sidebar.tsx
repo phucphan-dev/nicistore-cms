@@ -11,6 +11,7 @@ import {
   FormOutlined,
   ProjectOutlined,
   GoldOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons';
 
 import roles from './roles';
@@ -55,6 +56,12 @@ const menuSidebar: MenuItem[] = [
         childrens: [ROUTE_PATHS.PRODUCT_SIZES_DETAIL]
       },
     ],
+  },
+  {
+    key: 'orders',
+    title: 'sidebar.orders',
+    icon: <ShoppingCartOutlined />,
+    path: ROUTE_PATHS.ORDERS_MANAGEMENT,
   },
   // {
   //   key: 'page_management',

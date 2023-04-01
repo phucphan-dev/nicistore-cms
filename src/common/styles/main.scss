@@ -81,3 +81,8 @@ input {
     transform: translate(-50%, -50%);
     z-index: 9;
 }
+
+ul,
+li {
+    padding-left: rem(12);
+}

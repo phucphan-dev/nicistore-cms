@@ -7,6 +7,7 @@ import { useAppSelector } from 'app/store';
 import mapModifiers from 'common/utils/functions';
 
 export type StatusLabelType = 'draft' | 'waiting' | 'approved';
+export type StatusOrderLabelType = 'new' | 'processing' | 'delivering' | 'done' | 'cancel';
 
 export const returnModifier = (status: number): StatusLabelType => {
   switch (status) {
@@ -16,6 +17,21 @@ export const returnModifier = (status: number): StatusLabelType => {
       return 'waiting';
     default:
       return 'approved';
+  }
+};
+
+export const returnModifierOrder = (status: number): StatusOrderLabelType => {
+  switch (status) {
+    case 0:
+      return 'new';
+    case 1:
+      return 'processing';
+    case 2:
+      return 'delivering';
+    case 3:
+      return 'done';
+    default:
+      return 'cancel';
   }
 };
 
@@ -51,6 +67,55 @@ const StatusLabel: React.FC<StatusLabelProps> = ({ status, bigger, type }) => {
                 <>
                   <span>{bigger ? `${t('system.status')}: ` : ''}</span>
                   <b>{t('system.approved')}</b>
+                </>
+              );
+          }
+        })()}
+      </div>
+    </div>
+  );
+};
+
+export const StatusOrderLabel: React.FC<StatusLabelProps> = ({ status, bigger, type }) => {
+  const { t } = useTranslation();
+  return (
+    <div className={mapModifiers('m-statusLabel', type)}>
+      <div className={mapModifiers('m-statusLabel_wrapper', returnModifierOrder(status), bigger && 'bigger')}>
+        {(() => {
+          switch (status) {
+            case 0:
+              return (
+                <>
+                  <span>{bigger ? `${t('system.status')}: ` : ''}</span>
+                  <b>{t('order.new')}</b>
+                </>
+              );
+            case 1:
+              return (
+                <>
+                  {bigger ? `${t('system.status')}: ` : ''}
+                  <b>{t('order.processing')}</b>
+                </>
+              );
+            case 2:
+              return (
+                <>
+                  {bigger ? `${t('system.status')}: ` : ''}
+                  <b>{t('order.delevering')}</b>
+                </>
+              );
+            case 3:
+              return (
+                <>
+                  {bigger ? `${t('system.status')}: ` : ''}
+                  <b>{t('order.done')}</b>
+                </>
+              );
+            default:
+              return (
+                <>
+                  <span>{bigger ? `${t('system.status')}: ` : ''}</span>
+                  <b>{t('order.cancel')}</b>
                 </>
               );
           }

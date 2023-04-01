@@ -21,6 +21,31 @@
             background-color: $honeydew;
         }
 
+        &-new {
+            color: $white;
+            background-color: $neon-carrot;
+        }
+
+        &-processing {
+            color: $white;
+            background-color: $carolina-blue;
+        }
+
+        &-delivering {
+            color: $white;
+            background-color: $cyan-cornflower-blue;
+        }
+
+        &-done {
+            color: $white;
+            background-color: $green;
+        }
+
+        &-cancel {
+            color: $black;
+            background-color: $timberwolf;
+        }
+
         &-bigger {
             display: block;
             padding: rem(16);
