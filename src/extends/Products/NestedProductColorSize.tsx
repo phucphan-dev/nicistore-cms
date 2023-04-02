@@ -13,6 +13,7 @@ import { ProductFormTypes } from './Detail';
 
 import { DropdownElement } from 'common/components/DropdownType';
 import Input from 'common/components/Input';
+import SelectFile from 'common/components/SelectFile';
 
 type NestedFieldArrayTypes = {
   control: Control<ProductFormTypes, any>;
@@ -81,7 +82,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
               )}
             >
               <Row gutter={16}>
-                <Col xxl={8} xl={9}>
+                <Col span={12}>
                   <div className="p-editPageTemplate_input">
                     <Typography.Text strong>
                       {t('product.colors')}
@@ -106,7 +107,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                     />
                   </div>
                 </Col>
-                <Col xxl={8} xl={9}>
+                <Col span={12}>
                   <div className="p-editPageTemplate_input">
                     <Typography.Text strong>
                       {t('product.sizes')}
@@ -131,8 +132,8 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                     />
                   </div>
                 </Col>
-                <Col xxl={8} xl={6}>
-                  <div className="p-editPageTemplate_input">
+                <Col span={12}>
+                  <div className="p-editPageTemplate_input u-mt-16">
                     <Typography.Text strong>
                       {t('product.quantity')}
                     </Typography.Text>
@@ -149,6 +150,46 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           size="middle"
                           type="number"
                         />
+                      )}
+                    />
+                  </div>
+                </Col>
+                <Col span={12}>
+                  <div className="p-editPageTemplate_input u-mt-16">
+                    <Controller
+                      name={`colorSize.${i}.image`}
+                      render={({
+                        field: { value, onChange },
+                        fieldState
+                      }) => (
+                        <>
+                          <SelectFile
+                            value={value}
+                            name={`colorSize.${i}.image`}
+                            handleSelect={(url) => {
+                              onChange(url);
+                            }}
+                            handleDelete={() => onChange(undefined)}
+                            title={(
+                              <>
+                                <Typography.Text strong>
+                                  {t('product.thumbnail')}
+                                  {' '}
+                                </Typography.Text>
+                                <Typography.Text strong type="danger">
+                                  *
+                                </Typography.Text>
+                              </>
+                            )}
+                          />
+                          {fieldState.error && (
+                            <span
+                              className="a-input_errorMessage"
+                            >
+                              {fieldState.error.message}
+                            </span>
+                          )}
+                        </>
                       )}
                     />
                   </div>

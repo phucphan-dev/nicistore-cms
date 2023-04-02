@@ -278,7 +278,9 @@ const ProductDetail: React.FC = () => {
         salePercent,
         categories: productData.categories.map((item) => item.id),
         colorSize: productData.colorSize.map((item) => (
-          { colorId: item.color.id, sizeId: item.size.id, quantity: item.quantity })),
+          {
+            colorId: item.color.id, sizeId: item.size.id, quantity: item.quantity, image: item.image
+          })),
         relatedIds: productData.relatedIds
       };
       method.reset(objDefault);

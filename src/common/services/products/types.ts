@@ -46,6 +46,7 @@ export type ColorSizeData = {
     code: string;
   },
   quantity: number;
+  image: string;
 };
 
 export type ProductItemTypes = {
@@ -88,6 +89,7 @@ export type ProductColorSizeTypes = {
   sizeId: number | null;
   colorId: number | null;
   quantity: number;
+  image: string;
 };
 
 export type CreateUpdateProductTypes = {

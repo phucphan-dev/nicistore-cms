@@ -27,6 +27,12 @@
         &-sub {
             background-color: $cool-black !important;
         }
+
+        &-submenu {
+            &-title {
+                padding-left: rem(12) !important;
+            }
+        }
     }
 
     &-switch {
