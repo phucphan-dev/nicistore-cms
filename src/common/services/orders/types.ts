@@ -45,3 +45,43 @@ export interface ProductProperties {
   name: string
   code: string
 }
+
+export interface OrderRequestItem {
+  productId: number
+  sizeId: number
+  colorId: number
+  quantity: number
+}
+
+export interface OrderDataRequest {
+  cityId: number
+  districtId: number
+  wardId: number
+  shippingAddressId?: number
+  name: string
+  phone: string
+  email: string
+  address: string
+  note: string
+  status: number;
+  items: OrderRequestItem[];
+}
+
+export interface OrderCustomer {
+  id: number
+  email: string
+  fullName: string
+  phone: string
+  active: boolean
+}
+
+export interface CustomerShippingAddress {
+  id: number
+  customerId: number
+  city: LocaltionType
+  district: LocaltionType
+  ward: LocaltionType
+  address: string
+  phone: string
+  name: string
+}
