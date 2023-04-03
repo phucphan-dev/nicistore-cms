@@ -1,5 +1,7 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Typography } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  Button, message, Modal, Space, Typography
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +13,6 @@ import HeaderPage from 'common/components/HeaderPage';
 import PageTable from 'common/components/PageTable';
 import { deleteCustomerService, getAllCustomerServices } from 'common/services/customer';
 import { CustomerData } from 'common/services/customer/types';
-import { deleteProductCategoriesService } from 'common/services/products';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { formatDateTime } from 'common/utils/functions';
 
@@ -100,7 +101,7 @@ const CustomerManagement: React.FC = () => {
     },
     // --- Tiêu đề
     {
-      title: t('system.title'),
+      title: t('customer.name'),
       dataIndex: 'fullName',
       key: 'fullName',
       sorter: {
@@ -120,13 +121,23 @@ const CustomerManagement: React.FC = () => {
       ),
     },
     {
+      title: t('customer.phone'),
+      dataIndex: 'phone',
+      key: 'phone',
+      render: (_: string, data: any) => (
+        <Typography.Text>
+          {data.phone}
+        </Typography.Text>
+      ),
+    },
+    {
       title: t('system.status'),
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'active',
+      key: 'active',
       width: 160,
       render: (_name: string, data: CustomerTypes) => (
         <Typography.Text>
-          {data.active ? 'Đã xác minh' : 'Chưa xác minh'}
+          {data.active ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
         </Typography.Text>
       ),
     },
@@ -142,7 +153,7 @@ const CustomerManagement: React.FC = () => {
         },
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: CustomerTypes) => (
         <Typography.Text
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
@@ -162,7 +173,7 @@ const CustomerManagement: React.FC = () => {
         },
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: CustomerTypes) => (
         <Typography.Text
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
@@ -170,14 +181,44 @@ const CustomerManagement: React.FC = () => {
         </Typography.Text>
       ),
     },
+    {
+      title: t('system.action'),
+      key: 'action',
+      width: 100,
+      align: 'center',
+      render: (_name: string, data: CustomerTypes) => (
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => navigate(`${ROUTE_PATHS.CUSTOMER_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            onClick={() => {
+              Modal.confirm({
+                className: 't-pagetable_deleteRecordModal',
+                autoFocusButton: 'cancel',
+                title: t('message.confirmDeleteRecord'),
+                okText: t('system.ok'),
+                cancelText: t('system.cancel'),
+                cancelButtonProps: {
+                  type: 'primary',
+                },
+                okButtonProps: {
+                  type: 'default',
+                },
+                onOk: () => {
+                  deleteMutate([data.id]);
+                },
+              });
+            }}
+          />
+        </Space>
+      ),
+    },
   ];
 
   /* Functions */
-  const onDelete = async (data: CustomerTypes[], lang?: string) => {
-    if (lang === 'all' || lang === 'allRow') {
-      deleteMutate(data.map((val) => val.id));
-    }
-  };
 
   const handleSetCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -202,17 +243,10 @@ const CustomerManagement: React.FC = () => {
       />
       <div className="t-mainlayout_wrapper">
         <PageTable
-          handleDelete={onDelete}
           handleSearch={setKeyword}
           isLoading={isLoading || deleteLoading}
-          handleEditPage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.CUSTOMER_DETAIL}?id=${id}&locale=${locale}`);
-          }}
-          handleCreatePage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.CUSTOMER_DETAIL}?id=${id}&locale=${locale}`);
-          }}
           tableProps={{
-            initShowColumns: ['id', 'name', 'status'],
+            initShowColumns: ['id', 'fullName', 'phone', 'active', 'action'],
             columns,
             pageData: categoriesData,
             currentPage,
@@ -221,10 +255,9 @@ const CustomerManagement: React.FC = () => {
             handleSetCurrentView,
             total: customers?.meta.total || 1,
             noDeleteLanguage: true,
+            noBaseCol: true
           }}
-          statusDataTable={{
-            canChangeStatusApprove: false,
-          }}
+          noCheckbox
         />
       </div>
     </>

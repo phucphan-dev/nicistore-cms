@@ -700,5 +700,11 @@
     "address": "Address",
     "name": "Fullname",
     "phone": "Phone"
+  },
+  "customer": {
+    "name": "Fullname",
+    "phone": "Phone",
+    "active": "Active",
+    "password": "Password"
   }
 }

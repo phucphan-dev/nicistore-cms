@@ -1,6 +1,7 @@
 import roles from './roles';
 
 import { ROUTE_PATHS } from 'common/utils/constant';
+import CustomerDetail from 'extends/Customer/Detail';
 import CustomerManagement from 'extends/Customer/Management';
 import OrderDetail from 'extends/Orders/Detail';
 import OrdersManagement from 'extends/Orders/Management';
@@ -565,7 +566,7 @@ const routes: RouteProps[] = [
     id: 46,
     name: 'CustomerDetail',
     path: ROUTE_PATHS.CUSTOMER_DETAIL,
-    element: OrderDetail,
+    element: CustomerDetail,
   },
 ];
 

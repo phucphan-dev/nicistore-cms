@@ -44,7 +44,7 @@ export const contactStatusDummy = [
   },
 ];
 
-export const StatusOrderDummy = [
+export const statusOrderDummy = [
   {
     label: 'Mới',
     value: 0,

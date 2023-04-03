@@ -16,7 +16,7 @@ export const getOrderDetailService = async (id: number): Promise<OrderDataTypes>
 };
 
 export const createOrderService = async (data: OrderDataRequest): Promise<OrderDataTypes> => {
-  const res = await axiosInstance.post('orders', { data });
+  const res = await axiosInstance.post('orders', data);
   return res.data.data;
 };
 
@@ -24,7 +24,7 @@ export const updateOrderService = async (
   id: number,
   data: OrderDataRequest
 ): Promise<OrderDataTypes> => {
-  const res = await axiosInstance.put(`orders/${id}`, { data });
+  const res = await axiosInstance.put(`orders/${id}`, data);
   return res.data.data;
 };
 

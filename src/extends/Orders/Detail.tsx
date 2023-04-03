@@ -16,13 +16,13 @@ import * as yup from 'yup';
 
 import NestedOrderItem from './NestedOrderItem';
 
-import { StatusOrderDummy } from 'common/assets/dummyData/system';
+import { statusOrderDummy } from 'common/assets/dummyData/system';
 import { DropdownElement } from 'common/components/DropdownType';
 import HeaderPage from 'common/components/HeaderPage';
 import Input from 'common/components/Input';
 import ManagementInfo from 'common/components/ManagementInfo';
 import ModalConfirm from 'common/components/ModalConfirm';
-import StatusLabel from 'common/components/StatusLabel';
+import { StatusOrderLabel } from 'common/components/StatusLabel';
 import useDidMount from 'common/hooks/useDidMount';
 import { getLocationCitiesService, getLocationDistrictsService, getLocationWardsService } from 'common/services/location';
 import {
@@ -545,7 +545,7 @@ const OrderDetail: React.FC = () => {
               <Col xxl={6} xl={8} lg={8}>
                 {orderDetailData && (
                   <div className="u-mb-16">
-                    <StatusLabel status={orderDetailData.status} bigger />
+                    <StatusOrderLabel status={orderDetailData.status} bigger />
                   </div>
                 )}
                 <Card className="u-mb-16">
@@ -560,7 +560,7 @@ const OrderDetail: React.FC = () => {
                         control={method.control}
                         render={({ field }) => (
                           <DropdownElement
-                            options={StatusOrderDummy}
+                            options={statusOrderDummy}
                             placeholder={`${t('system.select')} ${t('system.status')}`}
                             locale="vi"
                             filterParams={idParams.toString()}

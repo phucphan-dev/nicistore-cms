@@ -18,4 +18,5 @@ export interface CustomerDataRequest {
   password: string
   phone: string
   active: boolean
+  address: string
 }

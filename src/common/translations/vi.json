@@ -700,5 +700,11 @@
     "address": "Địa chỉ",
     "name": "Họ và tên",
     "phone": "Số điện thoại"
+  },
+  "customer": {
+    "name": "Họ và tên",
+    "phone": "Số điện thoại",
+    "active": "Kích hoạt",
+    "password": "Mật khẩu"
   }
 }

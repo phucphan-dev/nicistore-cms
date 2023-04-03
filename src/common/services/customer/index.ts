@@ -14,14 +14,14 @@ export const getCustomerDetailService = async (id: number): Promise<CustomerData
 };
 
 export const createCustomerService = async (data: CustomerDataRequest): Promise<void> => {
-  await axiosInstance.post('customers', { data });
+  await axiosInstance.post('customers', data);
 };
 
 export const updateCustomerService = async (
   id: number,
   data: CustomerDataRequest
 ): Promise<void> => {
-  await axiosInstance.put(`customers/${id}`, { data });
+  await axiosInstance.put(`customers/${id}`, data);
 };
 
 export const deleteCustomerService = async (params: { ids: number[] })
