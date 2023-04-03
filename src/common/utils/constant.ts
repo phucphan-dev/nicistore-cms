@@ -154,6 +154,8 @@ export const ROUTE_PATHS = {
   PRODUCT_SIZES_DETAIL: '/product-size-detail',
   ORDERS_MANAGEMENT: '/orders',
   ORDERS_DETAIL: '/order-detail',
+  CUSTOMER_MANAGEMENT: '/customers',
+  CUSTOMER_DETAIL: '/customer-detail',
 };
 
 export const videoTypes: OptionType[] = [

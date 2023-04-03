@@ -158,7 +158,8 @@
     "productCategories": "Danh mục",
     "productColor": "Màu sắc",
     "productSize": "Kích thước",
-    "orders": "Đơn hàng"
+    "orders": "Đơn hàng",
+    "customers": "Khách hàng"
   },
   "role": {
     "index": "Xem danh sách",
@@ -690,6 +691,14 @@
     "processing": "Đang xử lý",
     "delevering": "Đang giao hàng",
     "done": "Hoàn tất",
-    "cancel": "Đã hủy"
+    "cancel": "Đã hủy",
+    "shippingAddress": "Địa chỉ giao hàng",
+    "note": "Ghi chú",
+    "city": "Tỉnh / Thành phố",
+    "district": "Quận / Huyện",
+    "ward": "Phường / Xã",
+    "address": "Địa chỉ",
+    "name": "Họ và tên",
+    "phone": "Số điện thoại"
   }
 }

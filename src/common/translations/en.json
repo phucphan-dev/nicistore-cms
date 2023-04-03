@@ -158,7 +158,8 @@
     "productCategories": "Categories",
     "productColor": "Colors",
     "productSize": "Sizes",
-    "orders": "Orders"
+    "orders": "Orders",
+    "customers": "Customers"
   },
   "role": {
     "index": "View list",
@@ -690,6 +691,14 @@
     "processing": "Processing",
     "delevering": "Delevering",
     "done": "Done",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "shippingAddress": "Shipping address",
+    "note": "Note",
+    "city": "City",
+    "district": "District",
+    "ward": "Ward",
+    "address": "Address",
+    "name": "Fullname",
+    "phone": "Phone"
   }
 }

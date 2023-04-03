@@ -43,3 +43,26 @@ export const contactStatusDummy = [
     value: 13,
   },
 ];
+
+export const StatusOrderDummy = [
+  {
+    label: 'Mới',
+    value: 0,
+  },
+  {
+    label: 'Đang xử lý',
+    value: 1,
+  },
+  {
+    label: 'Đang giao hàng',
+    value: 2,
+  },
+  {
+    label: 'Đã hoàn thành',
+    value: 3,
+  },
+  {
+    label: 'Đã huỷ',
+    value: 4,
+  },
+];

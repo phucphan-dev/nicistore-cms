@@ -434,6 +434,7 @@ const ProductDetail: React.FC = () => {
                                 type="productCategories"
                                 placeholder={t('system.pleaseSelect')}
                                 locale="vi"
+                                filterParams={String(value)}
                                 value={value}
                                 onChange={onChange}
                                 multiple={{
@@ -461,6 +462,7 @@ const ProductDetail: React.FC = () => {
                                     type="products"
                                     placeholder={t('system.pleaseSelect')}
                                     locale="vi"
+                                    filterParams={String(value)}
                                     value={value}
                                     onChange={onChange}
                                     multiple={{
