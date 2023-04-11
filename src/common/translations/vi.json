@@ -159,7 +159,8 @@
     "productColor": "Màu sắc",
     "productSize": "Kích thước",
     "orders": "Đơn hàng",
-    "customers": "Khách hàng"
+    "customers": "Khách hàng",
+    "coupon": "Mã giảm giá"
   },
   "role": {
     "index": "Xem danh sách",
@@ -706,5 +707,17 @@
     "phone": "Số điện thoại",
     "active": "Kích hoạt",
     "password": "Mật khẩu"
+  },
+  "coupon": {
+    "code": "Mã giảm giá",
+    "type": "Giảm giá theo",
+    "startDate": "Ngày bắt đầu",
+    "endDate": "Ngày kết thúc",
+    "active": "Kích hoạt",
+    "applyProducts": "Áp dùng cho sản phẩm",
+    "discountValue ": "Giá trị",
+    "maxQuantityUsed": "Lượt dùng tối đa",
+    "minPriceApply": "Giá tối thiếu để sử dụng",
+    "maxValuePromotion": "Giảm giá tối đa"
   }
 }

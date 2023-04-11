@@ -159,7 +159,8 @@
     "productColor": "Colors",
     "productSize": "Sizes",
     "orders": "Orders",
-    "customers": "Customers"
+    "customers": "Customers",
+    "coupont": "Coupons"
   },
   "role": {
     "index": "View list",
@@ -706,5 +707,17 @@
     "phone": "Phone",
     "active": "Active",
     "password": "Password"
+  },
+  "coupon": {
+    "code": "Coupon code",
+    "type": "Coupon type",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "active": "Active",
+    "applyProducts": "Apply for products",
+    "discountValue ": "Value",
+    "maxQuantityUsed": "Maximun quantity used",
+    "minPriceApply": "Minimum price apply",
+    "maxValuePromotion": "Maximun value promotion"
   }
 }

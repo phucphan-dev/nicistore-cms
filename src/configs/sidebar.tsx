@@ -13,6 +13,7 @@ import {
   GoldOutlined,
   ShoppingCartOutlined,
   UserOutlined,
+  TagOutlined,
 } from '@ant-design/icons';
 
 import roles from './roles';
@@ -140,6 +141,12 @@ const menuSidebar: MenuItem[] = [
     title: 'sidebar.customers',
     icon: <UserOutlined />,
     path: ROUTE_PATHS.CUSTOMER_MANAGEMENT,
+  },
+  {
+    key: 'coupon',
+    title: 'sidebar.coupon',
+    icon: <TagOutlined />,
+    path: ROUTE_PATHS.COUPON_MANAGEMENT,
   },
   // {
   //   key: 'faq',

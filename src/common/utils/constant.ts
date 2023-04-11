@@ -156,6 +156,8 @@ export const ROUTE_PATHS = {
   ORDERS_DETAIL: '/order-detail',
   CUSTOMER_MANAGEMENT: '/customers',
   CUSTOMER_DETAIL: '/customer-detail',
+  COUPON_MANAGEMENT: '/coupons',
+  COUPON_DETAIL: '/coupon-detail',
 };
 
 export const videoTypes: OptionType[] = [

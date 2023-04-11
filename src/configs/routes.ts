@@ -1,6 +1,8 @@
 import roles from './roles';
 
 import { ROUTE_PATHS } from 'common/utils/constant';
+import CouponDetail from 'extends/Coupon/Detail';
+import CouponManagement from 'extends/Coupon/Management';
 import CustomerDetail from 'extends/Customer/Detail';
 import CustomerManagement from 'extends/Customer/Management';
 import OrderDetail from 'extends/Orders/Detail';
@@ -557,16 +559,28 @@ const routes: RouteProps[] = [
     element: OrderDetail,
   },
   {
-    id: 45,
+    id: 47,
     name: 'Customer',
     path: ROUTE_PATHS.CUSTOMER_MANAGEMENT,
     element: CustomerManagement,
   },
   {
-    id: 46,
+    id: 48,
     name: 'CustomerDetail',
     path: ROUTE_PATHS.CUSTOMER_DETAIL,
     element: CustomerDetail,
+  },
+  {
+    id: 49,
+    name: 'Coupons',
+    path: ROUTE_PATHS.COUPON_MANAGEMENT,
+    element: CouponManagement,
+  },
+  {
+    id: 50,
+    name: 'CouponDetail',
+    path: ROUTE_PATHS.COUPON_DETAIL,
+    element: CouponDetail,
   },
 ];
 
