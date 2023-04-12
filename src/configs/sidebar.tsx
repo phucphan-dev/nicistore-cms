@@ -134,19 +134,34 @@ const menuSidebar: MenuItem[] = [
     key: 'orders',
     title: 'sidebar.orders',
     icon: <ShoppingCartOutlined />,
-    path: ROUTE_PATHS.ORDERS_MANAGEMENT,
+    items: [
+      {
+        key: 'orderList_list',
+        title: 'sidebar.ordersList',
+        path: ROUTE_PATHS.ORDERS_MANAGEMENT,
+        childrens: [ROUTE_PATHS.ORDERS_DETAIL]
+      },
+      {
+        key: 'pre-order',
+        title: 'sidebar.preOrder',
+        path: ROUTE_PATHS.PREORDER_MANAGEMENT,
+        childrens: [ROUTE_PATHS.PREORDER_DETAIL]
+      },
+    ],
   },
   {
     key: 'customers',
     title: 'sidebar.customers',
     icon: <UserOutlined />,
     path: ROUTE_PATHS.CUSTOMER_MANAGEMENT,
+    childrens: [ROUTE_PATHS.CUSTOMER_DETAIL]
   },
   {
     key: 'coupon',
     title: 'sidebar.coupon',
     icon: <TagOutlined />,
     path: ROUTE_PATHS.COUPON_MANAGEMENT,
+    childrens: [ROUTE_PATHS.COUPON_DETAIL]
   },
   // {
   //   key: 'faq',

@@ -159,8 +159,10 @@
     "productColor": "Màu sắc",
     "productSize": "Kích thước",
     "orders": "Đơn hàng",
+    "ordersList": "Danh sách",
     "customers": "Khách hàng",
-    "coupon": "Mã giảm giá"
+    "coupon": "Mã giảm giá",
+    "preOrder": "Đơn mua hộ"
   },
   "role": {
     "index": "Xem danh sách",
@@ -700,7 +702,15 @@
     "ward": "Phường / Xã",
     "address": "Địa chỉ",
     "name": "Họ và tên",
-    "phone": "Số điện thoại"
+    "phone": "Số điện thoại",
+    "guestNote": "Ghi chú của khách hàng",
+    "customerImages": "Hình ảnh từ khách hàng",
+    "price": "Giá",
+    "deposit": "Đặt cọc",
+    "depositImage": "Ảnh đặt cọc",
+    "adminNote": "Ghi chú của kiểm duyệt",
+    "orderedAt": "Đặt hàng lúc",
+    "depositedAt": "Đặt cọc lúc"
   },
   "customer": {
     "name": "Họ và tên",

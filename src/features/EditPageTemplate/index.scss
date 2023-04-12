@@ -210,6 +210,19 @@
         }
     }
 
+    &_images {
+        display: flex;
+        flex-wrap: wrap;
+
+        .ant-image {
+            margin-left: rem(8);
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
     .t-repeatersection {
         position: relative;
 

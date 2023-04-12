@@ -1,7 +1,9 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Typography } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  Button, message, Modal, Space, Typography
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -9,39 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'app/store';
 import HeaderPage from 'common/components/HeaderPage';
 import PageTable from 'common/components/PageTable';
-import StatusLabel from 'common/components/StatusLabel';
-import { deleteProductCategoriesService, getAllProductCategories } from 'common/services/products';
-import { ProductCategoryItemTypes } from 'common/services/products/types';
+import { StatusOrderLabel } from 'common/components/StatusLabel';
+import { deletePreOrderService, getAllPreOrderService } from 'common/services/preOrder';
+import { PreOrderItemData } from 'common/services/preOrder/types';
 import { ROUTE_PATHS } from 'common/utils/constant';
 import { formatDateTime } from 'common/utils/functions';
 
-export type ProductCategoryTypes = {
-  id: number;
-  name: string;
-  category?: number[];
-  createdAt: string;
-  updatedAt: string;
-  status: number;
-  locale: ProductCategoryItemTypes['translations'];
-};
-
-const convertProductCategory = (data: ProductCategoryItemTypes[]): ProductCategoryTypes[] => {
-  if (!data.length) return [];
-  return data.map((val) => ({
-    id: val.categoryData.id,
-    name: val.translations.vi ? val.translations.vi.name : val.translations.en.name,
-    status: val.categoryData.status,
-    createdAt: val.categoryData.createdAt,
-    updatedAt: val.categoryData.updatedAt,
-    locale: Object.fromEntries(
-      Object
-        .entries(val.translations)
-        .map(([k, o]) => [k, { ...o, id: val.categoryData.id }])
-    )
-  }));
-};
-
-const ProductCategoriesManagement: React.FC = () => {
+const PreOrderManagement: React.FC = () => {
   /* Hooks */
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -57,19 +33,19 @@ const ProductCategoriesManagement: React.FC = () => {
   const [currentView, setCurrentView] = useState(defaultPageSize);
   const [keyword, setKeyword] = useState('');
 
-  const queryKey = ['product-category-getall', keyword, currentPage, currentView];
+  const queryKey = ['getAllPreOrder', keyword, currentPage, currentView];
 
   /* Queries */
-  const { data: productCategories, isLoading } = useQuery(
+  const { data: preOrders, isLoading } = useQuery(
     queryKey,
-    () => getAllProductCategories({
+    () => getAllPreOrderService({
       keyword, page: currentPage, limit: currentView
     }),
   );
 
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
     ['product-category-delete'],
-    async (ids: number[]) => deleteProductCategoriesService({ ids }),
+    async (ids: number[]) => deletePreOrderService({ ids }),
     {
       onSuccess: () => {
         message.success(t('message.deleteSuccess'));
@@ -82,16 +58,8 @@ const ProductCategoriesManagement: React.FC = () => {
     }
   );
 
-  /* Datas */
-  const categoriesData = useMemo(() => {
-    if (productCategories) {
-      return convertProductCategory(productCategories.data);
-    }
-    return [];
-  }, [productCategories]);
-
   /* Variables */
-  const columns: ColumnsType<ProductCategoryTypes> = [
+  const columns: ColumnsType<PreOrderItemData> = [
     {
       title: 'ID',
       key: 'id',
@@ -99,10 +67,10 @@ const ProductCategoriesManagement: React.FC = () => {
       align: 'center',
       fixed: 'left',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => a.id - b.id,
+        compare: (a: PreOrderItemData, b: PreOrderItemData) => a.id - b.id,
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_name: string, data: ProductCategoryTypes) => (
+      render: (_name: string, data: PreOrderItemData) => (
         <Typography.Text>
           {data.id}
         </Typography.Text>
@@ -110,22 +78,46 @@ const ProductCategoriesManagement: React.FC = () => {
     },
     // --- Tiêu đề
     {
-      title: t('system.title'),
-      dataIndex: 'name',
-      key: 'name',
+      title: t('order.code'),
+      dataIndex: 'code',
+      key: 'code',
       sorter: {
         compare: (
-          a: ProductCategoryTypes,
-          b: ProductCategoryTypes
-        ) => a.name.localeCompare(b.name)
+          a: PreOrderItemData,
+          b: PreOrderItemData
+        ) => a.code.localeCompare(b.code)
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: PreOrderItemData) => (
         <Typography.Text
-          onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          onClick={() => navigate(`${ROUTE_PATHS.PREORDER_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
-          {data.name}
+          {data.code}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: t('order.customer'),
+      dataIndex: 'fullname',
+      key: 'fullname',
+      render: (_: string, data: PreOrderItemData) => (
+        <Typography.Text>
+          {data.fullname}
+          <br />
+          {data.phone}
+          <br />
+          {data.email}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: t('order.guestNote'),
+      dataIndex: 'guestNote',
+      key: 'guestNote',
+      render: (_: string, data: PreOrderItemData) => (
+        <Typography.Text>
+          {data.guestNote}
         </Typography.Text>
       ),
     },
@@ -134,8 +126,8 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'status',
       key: 'status',
       width: 160,
-      render: (_name: string, data: ProductCategoryTypes) => (
-        <StatusLabel status={data.status} />
+      render: (_name: string, data: PreOrderItemData) => (
+        <StatusOrderLabel status={data.status} />
       ),
     },
     {
@@ -143,14 +135,14 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: PreOrderItemData, b: PreOrderItemData) => {
           const aDate = new Date(a.createdAt);
           const bDate = new Date(b.createdAt);
           return Number(aDate) - Number(bDate);
         },
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: PreOrderItemData) => (
         <Typography.Text
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
@@ -163,14 +155,14 @@ const ProductCategoriesManagement: React.FC = () => {
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       sorter: {
-        compare: (a: ProductCategoryTypes, b: ProductCategoryTypes) => {
+        compare: (a: PreOrderItemData, b: PreOrderItemData) => {
           const aDate = new Date(a.updatedAt);
           const bDate = new Date(b.updatedAt);
           return Number(aDate) - Number(bDate);
         },
       },
       sortDirections: ['descend', 'ascend'],
-      render: (_: string, data: any) => (
+      render: (_: string, data: PreOrderItemData) => (
         <Typography.Text
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
@@ -178,14 +170,44 @@ const ProductCategoriesManagement: React.FC = () => {
         </Typography.Text>
       ),
     },
+    {
+      title: t('system.action'),
+      key: 'action',
+      width: 100,
+      align: 'center',
+      render: (_name: string, data: PreOrderItemData) => (
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => navigate(`${ROUTE_PATHS.PREORDER_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            onClick={() => {
+              Modal.confirm({
+                className: 't-pagetable_deleteRecordModal',
+                autoFocusButton: 'cancel',
+                title: t('message.confirmDeleteRecord'),
+                okText: t('system.ok'),
+                cancelText: t('system.cancel'),
+                cancelButtonProps: {
+                  type: 'primary',
+                },
+                okButtonProps: {
+                  type: 'default',
+                },
+                onOk: () => {
+                  deleteMutate([data.id]);
+                },
+              });
+            }}
+          />
+        </Space>
+      ),
+    },
   ];
 
   /* Functions */
-  const onDelete = async (data: ProductCategoryTypes[], lang?: string) => {
-    if (lang === 'all' || lang === 'allRow') {
-      deleteMutate(data.map((val) => val.id));
-    }
-  };
 
   const handleSetCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -202,7 +224,7 @@ const ProductCategoriesManagement: React.FC = () => {
         fixed
         title={t('sidebar.productCategories')}
         rightHeader={(
-          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
+          <Button type="primary" onClick={() => navigate(`${ROUTE_PATHS.PREORDER_DETAIL}?locale=${defaultWebsiteLanguage}`)}>
             <PlusOutlined />
             {t('system.create')}
           </Button>
@@ -210,33 +232,31 @@ const ProductCategoriesManagement: React.FC = () => {
       />
       <div className="t-mainlayout_wrapper">
         <PageTable
-          handleDelete={onDelete}
           handleSearch={setKeyword}
           isLoading={isLoading || deleteLoading}
-          handleEditPage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
-          }}
           handleCreatePage={(id, _, locale) => {
-            navigate(`${ROUTE_PATHS.PRODUCT_CATEGORIES_DETAIL}?id=${id}&locale=${locale}`);
+            navigate(`${ROUTE_PATHS.PREORDER_DETAIL}?id=${id}&locale=${locale}`);
           }}
           tableProps={{
-            initShowColumns: ['id', 'name', 'status'],
+            initShowColumns: ['id', 'code', 'fullname', 'guestNote', 'status', 'action'],
             columns,
-            pageData: categoriesData,
+            pageData: preOrders?.data || [],
             currentPage,
             pageSize: currentView,
             handleSetCurrentPage,
             handleSetCurrentView,
-            total: productCategories?.meta.total || 1,
+            total: preOrders?.meta.total || 1,
             noDeleteLanguage: true,
+            noBaseCol: true
           }}
           statusDataTable={{
             canChangeStatusApprove: false,
           }}
+          noCheckbox
         />
       </div>
     </>
   );
 };
 
-export default ProductCategoriesManagement;
+export default PreOrderManagement;

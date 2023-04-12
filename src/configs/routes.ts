@@ -7,6 +7,8 @@ import CustomerDetail from 'extends/Customer/Detail';
 import CustomerManagement from 'extends/Customer/Management';
 import OrderDetail from 'extends/Orders/Detail';
 import OrdersManagement from 'extends/Orders/Management';
+import PreOrderDetail from 'extends/PreOrder/Detail';
+import PreOrderManagement from 'extends/PreOrder/Management';
 import ProductCategoriesDetail from 'extends/ProductCategories/Detail';
 import ProductCategoriesManagement from 'extends/ProductCategories/Management';
 import ProductColorsDetail from 'extends/ProductColors/Detail';
@@ -581,6 +583,18 @@ const routes: RouteProps[] = [
     name: 'CouponDetail',
     path: ROUTE_PATHS.COUPON_DETAIL,
     element: CouponDetail,
+  },
+  {
+    id: 51,
+    name: 'PreOrder',
+    path: ROUTE_PATHS.PREORDER_MANAGEMENT,
+    element: PreOrderManagement,
+  },
+  {
+    id: 52,
+    name: 'PreOrderDetail',
+    path: ROUTE_PATHS.PREORDER_DETAIL,
+    element: PreOrderDetail,
   },
 ];
 

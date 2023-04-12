@@ -159,8 +159,10 @@
     "productColor": "Colors",
     "productSize": "Sizes",
     "orders": "Orders",
+    "ordersList": "List",
     "customers": "Customers",
-    "coupont": "Coupons"
+    "coupont": "Coupons",
+    "preOrder": "Pre-Orders"
   },
   "role": {
     "index": "View list",
@@ -700,7 +702,15 @@
     "ward": "Ward",
     "address": "Address",
     "name": "Fullname",
-    "phone": "Phone"
+    "phone": "Phone",
+    "guestNote": "Guest note",
+    "customerImages": "Customer images",
+    "price": "Price",
+    "deposit": "Deposit",
+    "depositImage": "Deposit image",
+    "adminNote": "Admin note",
+    "orderedAt": "Ordered at",
+    "depositedAt": "Deposited at"
   },
   "customer": {
     "name": "Fullname",

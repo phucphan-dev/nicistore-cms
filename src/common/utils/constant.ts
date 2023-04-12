@@ -158,6 +158,8 @@ export const ROUTE_PATHS = {
   CUSTOMER_DETAIL: '/customer-detail',
   COUPON_MANAGEMENT: '/coupons',
   COUPON_DETAIL: '/coupon-detail',
+  PREORDER_MANAGEMENT: '/preorders',
+  PREORDER_DETAIL: '/preorder-detail',
 };
 
 export const videoTypes: OptionType[] = [

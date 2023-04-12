@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import {
-  Button, Card, Col, Modal, Row, Space, Typography
+  Button, Card, Col, Image, Modal, Row, Space, Typography
 } from 'antd';
 import React from 'react';
 import {
@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { OrderDataFormType } from './Detail';
 
 import { DropdownElement } from 'common/components/DropdownType';
-import Image from 'common/components/Image';
 import Input from 'common/components/Input';
 
 type NestedFieldArrayTypes = {
@@ -209,7 +208,9 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                   </div>
                 </Col>
                 <Col span={12}>
-                  <div className="u-mt-16"><Image src={itemField.thumbnail} ratio="3x2" /></div>
+                  <div className="u-mt-16">
+                    <Image src={itemField.thumbnail} preview />
+                  </div>
                 </Col>
               </Row>
             </Card>
