@@ -53,6 +53,8 @@ const defaultValues = {
       sizeId: undefined,
       colorId: undefined,
       quantity: 0,
+      code: undefined,
+      thumbnail: undefined
     }
   ]
 };
@@ -198,7 +200,9 @@ const OrderDetail: React.FC = () => {
           productId: it.product.id,
           sizeId: it.size.id,
           colorId: it.color.id,
-          quantity: it.quantity
+          quantity: it.quantity,
+          code: it.product.code,
+          thumbnail: it.product.thumbnail
         }))
       };
       method.reset(objDefault);

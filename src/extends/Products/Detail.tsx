@@ -436,6 +436,7 @@ const ProductDetail: React.FC = () => {
                                 locale="vi"
                                 filterParams={String(value)}
                                 value={value}
+                                ids={value}
                                 onChange={onChange}
                                 multiple={{
                                   allowClear: true,
@@ -464,6 +465,7 @@ const ProductDetail: React.FC = () => {
                                     locale="vi"
                                     filterParams={String(value)}
                                     value={value}
+                                    ids={value}
                                     onChange={onChange}
                                     multiple={{
                                       allowClear: true,

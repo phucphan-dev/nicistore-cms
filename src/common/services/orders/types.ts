@@ -34,6 +34,7 @@ export interface OrderItem {
 
 export interface OrderProduct {
   id: number
+  code: string
   thumbnail: string
   name: string
   slug: string
@@ -51,6 +52,8 @@ export interface OrderRequestItem {
   sizeId: number
   colorId: number
   quantity: number
+  code: string;
+  thumbnail: string;
 }
 
 export interface OrderDataRequest {

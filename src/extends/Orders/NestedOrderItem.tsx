@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { OrderDataFormType } from './Detail';
 
 import { DropdownElement } from 'common/components/DropdownType';
+import Image from 'common/components/Image';
 import Input from 'common/components/Input';
 
 type NestedFieldArrayTypes = {
@@ -23,6 +24,8 @@ const nestedFieldArrayDefaultData = {
   sizeId: undefined,
   colorId: undefined,
   quantity: 0,
+  code: undefined,
+  thumbnail: undefined
 };
 
 const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
@@ -111,23 +114,23 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                 <Col span={12}>
                   <div className="p-editPageTemplate_input">
                     <Typography.Text strong>
-                      {t('product.colors')}
+                      {t('product.code')}
                     </Typography.Text>
                     <Typography.Text strong type="danger">
                       {' '}
                       *
                     </Typography.Text>
                     <Controller
-                      name={`items.${i}.colorId`}
+                      name={`items.${i}.sizeId`}
                       render={({
                         field: { value, onChange },
                       }) => (
-                        <DropdownElement
-                          type="colors"
-                          placeholder={t('system.pleaseSelect')}
-                          locale="vi"
+                        <Input
+                          className="u-mt-8"
                           value={value}
+                          readOnly
                           onChange={onChange}
+                          size="middle"
                         />
                       )}
                     />
@@ -157,8 +160,29 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                       )}
                     />
                   </div>
-                </Col>
-                <Col span={12}>
+                  <div className="p-editPageTemplate_input u-mt-16">
+                    <Typography.Text strong>
+                      {t('product.colors')}
+                    </Typography.Text>
+                    <Typography.Text strong type="danger">
+                      {' '}
+                      *
+                    </Typography.Text>
+                    <Controller
+                      name={`items.${i}.colorId`}
+                      render={({
+                        field: { value, onChange },
+                      }) => (
+                        <DropdownElement
+                          type="colors"
+                          placeholder={t('system.pleaseSelect')}
+                          locale="vi"
+                          value={value}
+                          onChange={onChange}
+                        />
+                      )}
+                    />
+                  </div>
                   <div className="p-editPageTemplate_input u-mt-16">
                     <Typography.Text strong>
                       {t('product.quantity')}
@@ -183,6 +207,9 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                       )}
                     />
                   </div>
+                </Col>
+                <Col span={12}>
+                  <div className="u-mt-16"><Image src={itemField.thumbnail} ratio="3x2" /></div>
                 </Col>
               </Row>
             </Card>

@@ -44,6 +44,8 @@ export type DropdownElementProps = {
     defaultValue?: any;
   },
   error?: string;
+  ids?: string;
+  slugs?: string;
 };
 
 export function getDropdownTypeKey(value: string) {
@@ -66,6 +68,8 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
   isGetOption,
   multiple,
   error,
+  ids,
+  slugs
 }) => {
   const dropdownType = useMemo(() => (type ? DropDownType[type] || '' : ''), [type]);
   const [txtSearch, setTxtSearch] = useState('');
@@ -89,6 +93,8 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
         keyword: searchDebounce,
         limit: 10,
         page: pageParam,
+        ids,
+        slugs
       }
     }),
     {

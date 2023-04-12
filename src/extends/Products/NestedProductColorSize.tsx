@@ -100,6 +100,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           type="colors"
                           placeholder={t('system.pleaseSelect')}
                           filterParams={String(value)}
+                          ids={value}
                           locale="vi"
                           value={value}
                           onChange={onChange}
@@ -126,6 +127,7 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           type="sizes"
                           placeholder={t('system.pleaseSelect')}
                           filterParams={String(value)}
+                          ids={value}
                           locale="vi"
                           value={value}
                           onChange={onChange}

@@ -10,6 +10,8 @@ type BaseFilterParams = {
   keyword?: string;
   limit?: number;
   page?: number;
+  ids?: string;
+  slugs?: string;
 };
 
 type PaginationLinks = {
