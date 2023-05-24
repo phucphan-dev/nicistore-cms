@@ -314,8 +314,8 @@ const ProductCategoriesDetail: React.FC = () => {
                                 type="productCategories"
                                 placeholder={`${t('system.select')} ${t('faqCategoryDetail.parentCategory')}`}
                                 locale={currentLang}
-                                filterParams={idParams.toString()}
                                 value={field.value}
+                                ids={String(field.value)}
                                 onChange={field.onChange}
                               />
                             )}

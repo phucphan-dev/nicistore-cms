@@ -94,7 +94,7 @@ export const DropdownElement: React.FC<DropdownElementProps> = ({
         keyword: searchDebounce,
         limit: 10,
         page: pageParam,
-        ids,
+        ids: ids?.toString(),
         slugs
       }
     }),

@@ -179,7 +179,6 @@ const PreOrderDetail: React.FC = () => {
                                 type="users"
                                 placeholder={t('system.pleaseSelect')}
                                 locale="vi"
-                                filterParams={String(value)}
                                 value={value}
                                 ids={String(value)}
                                 onChange={onChange}

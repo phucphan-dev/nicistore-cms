@@ -104,6 +104,7 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           placeholder={t('system.pleaseSelect')}
                           locale="vi"
                           value={value}
+                          ids={value}
                           onChange={onChange}
                         />
                       )}
@@ -154,6 +155,7 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           placeholder={t('system.pleaseSelect')}
                           locale="vi"
                           value={value}
+                          ids={value}
                           onChange={onChange}
                         />
                       )}
@@ -177,6 +179,7 @@ const NestedOrderItem: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                           placeholder={t('system.pleaseSelect')}
                           locale="vi"
                           value={value}
+                          ids={value}
                           onChange={onChange}
                         />
                       )}

@@ -299,7 +299,6 @@ const ProductDetail: React.FC = () => {
       method.setValue('totalInit', value);
     }
   }, [colorSizeWatch, idParams, method]);
-
   return (
     <>
       <HeaderPage
@@ -434,7 +433,6 @@ const ProductDetail: React.FC = () => {
                                 type="productCategories"
                                 placeholder={t('system.pleaseSelect')}
                                 locale="vi"
-                                filterParams={String(value)}
                                 value={value}
                                 ids={value}
                                 onChange={onChange}

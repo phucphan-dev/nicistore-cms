@@ -351,7 +351,7 @@ const CouponDetail: React.FC = () => {
                             type="products"
                             placeholder={t('system.pleaseSelect')}
                             locale="vi"
-                            filterParams={String(value)}
+                            ids={value}
                             value={value}
                             onChange={onChange}
                             multiple={{

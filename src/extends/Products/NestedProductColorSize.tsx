@@ -99,7 +99,6 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                         <DropdownElement
                           type="colors"
                           placeholder={t('system.pleaseSelect')}
-                          filterParams={String(value)}
                           ids={value}
                           locale="vi"
                           value={value}
@@ -126,7 +125,6 @@ const ColorSizeNestedArray: React.FC<NestedFieldArrayTypes> = ({ control }) => {
                         <DropdownElement
                           type="sizes"
                           placeholder={t('system.pleaseSelect')}
-                          filterParams={String(value)}
                           ids={value}
                           locale="vi"
                           value={value}
