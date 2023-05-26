@@ -116,7 +116,24 @@ const CustomerManagement: React.FC = () => {
           onClick={() => navigate(`${ROUTE_PATHS.CUSTOMER_DETAIL}?id=${data.id}&locale=${defaultWebsiteLanguage}`)}
           style={{ color: '#4a4a4a', cursor: 'pointer' }}
         >
-          {data.name}
+          {data.fullName}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: t('system.email'),
+      dataIndex: 'email',
+      key: 'email',
+      sorter: {
+        compare: (
+          a: CustomerTypes,
+          b: CustomerTypes
+        ) => a.email.localeCompare(b.email)
+      },
+      sortDirections: ['descend', 'ascend'],
+      render: (_: string, data: any) => (
+        <Typography.Text>
+          {data.email}
         </Typography.Text>
       ),
     },
@@ -246,7 +263,7 @@ const CustomerManagement: React.FC = () => {
           handleSearch={setKeyword}
           isLoading={isLoading || deleteLoading}
           tableProps={{
-            initShowColumns: ['id', 'fullName', 'phone', 'active', 'action'],
+            initShowColumns: ['id', 'fullName', 'email', 'phone', 'active', 'action'],
             columns,
             pageData: categoriesData,
             currentPage,
