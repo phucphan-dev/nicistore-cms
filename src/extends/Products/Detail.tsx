@@ -44,7 +44,6 @@ export type ProductFormTypes = {
   code: string;
   featured: boolean;
   isBestSeller: boolean;
-  stock: number;
   totalInit: number;
   thumbnail: string;
   galleries: SelectImageData[];
@@ -66,7 +65,6 @@ const defaultValues: ProductFormTypes = {
   code: '',
   featured: false,
   isBestSeller: false,
-  stock: 0,
   totalInit: 0,
   thumbnail: '',
   galleries: [],
@@ -188,7 +186,6 @@ const ProductDetail: React.FC = () => {
       code: formData.code,
       featured: formData.featured,
       isBestSeller: formData.isBestSeller,
-      stock: Number(formData.stock),
       totalInit: Number(formData.totalInit),
       thumbnail: formData.thumbnail,
       galleries: formData.galleries,
@@ -256,7 +253,7 @@ const ProductDetail: React.FC = () => {
         name, slug, shortDescription, description
       } = productData.translations[currentLang];
       const {
-        displayOrder, code, totalInit, stock,
+        displayOrder, code, totalInit,
         galleries, thumbnail, price, salePercent, priceInit, featured, isBestSeller
       } = productData.productData;
       const objDefault: ProductFormTypes = {
@@ -269,7 +266,6 @@ const ProductDetail: React.FC = () => {
         code,
         featured,
         isBestSeller,
-        stock,
         totalInit,
         thumbnail,
         galleries,
@@ -295,7 +291,6 @@ const ProductDetail: React.FC = () => {
         prev: number,
         curr
       ) => prev + curr.quantity, 0);
-      method.setValue('stock', value);
       method.setValue('totalInit', value);
     }
   }, [colorSizeWatch, idParams, method]);
@@ -519,7 +514,7 @@ const ProductDetail: React.FC = () => {
                   </Card>
                   <Card type="inner">
                     <Row gutter={16}>
-                      <Col span={8}>
+                      <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
                             {t('product.totalInit')}
@@ -544,7 +539,7 @@ const ProductDetail: React.FC = () => {
                           />
                         </div>
                       </Col>
-                      <Col span={8}>
+                      <Col span={12}>
                         <div className="p-editPageTemplate_input">
                           <Typography.Text strong>
                             {t('product.priceInit')}
@@ -564,32 +559,6 @@ const ProductDetail: React.FC = () => {
                                 onChange={(e) => e.currentTarget.value && onChange(Number(e.currentTarget.value.replaceAll(',', '')))}
                                 error={error?.message}
                                 size="large"
-                              />
-                            )}
-                          />
-                        </div>
-                      </Col>
-                      <Col span={8}>
-                        <div className="p-editPageTemplate_input">
-                          <Typography.Text strong>
-                            {t('product.stock')}
-                            {' '}
-                          </Typography.Text>
-                          <Controller
-                            name="stock"
-                            control={method.control}
-                            render={({
-                              field: { value, onChange },
-                              fieldState: { error },
-                            }) => (
-                              <Input
-                                className="u-mt-8"
-                                type="number"
-                                value={value}
-                                onChange={onChange}
-                                error={error?.message}
-                                size="large"
-                                readOnly
                               />
                             )}
                           />

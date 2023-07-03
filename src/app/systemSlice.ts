@@ -18,6 +18,7 @@ interface SystemState {
 
 const initialState: SystemState = {
   showModalError: false,
+  defaultPageSize: 15,
   defaultWebsiteLanguage: 'vi',
   languageOptions: [{ label: 'Vietnamese', value: 'vi' }, { label: 'English', value: 'en' }],
   initialData: {

@@ -98,7 +98,6 @@ export type CreateUpdateProductTypes = {
   code: string;
   featured: boolean;
   isBestSeller: boolean;
-  stock: number;
   totalInit: number;
   thumbnail: string;
   galleries: SelectImageData[];
